@@ -3,8 +3,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.icia</groupId>
-	<artifactId>mjcinema</artifactId>
-	<name>mjcinema</name>
+	<artifactId>test</artifactId>
+	<name>SpringTest20210602</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
