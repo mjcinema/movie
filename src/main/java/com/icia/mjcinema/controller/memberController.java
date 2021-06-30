@@ -12,20 +12,4 @@ import com.icia.mjcinema.service.memberService;
 @Controller
 public class memberController {
 
-	@Autowired
-	private memberService memberservice;
-	
-	private ModelAndView mav;
-	
-	@Autowired
-	private HttpSession session;
-		
-	@RequestMapping (value="/Members/MemberJoinForm.jsp")
-	public String member() {
-		return "memberjoin";
-	}
-	
-	
-	
-	
 }
