@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ 
+ <mapper namespace="ms"> 
+	<insert id="memberjoin" parameterType="mdto">
+		INSERT INTO MJMEMBER (MID , MPW , MNAME , MBIRTH , MEMAIL , MADDR , MFILENAME)
+		VALUES (#{mid} , #{mpw} , #{mname} , #{mbirth} , #{memail} , #{maddr} , #{mfilename})
+	</insert>
+	
+	<select id="memberlogin" parameterType="mdto" resultType="String">
+		SELECT MID FROM MJMEMBER WHERE MID=#{mid} AND MPW=#{mpw}
+	</select>
+	
+ </mapper>
+ 

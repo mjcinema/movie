@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -10,7 +11,7 @@
         <meta name="author" content="" />
         <title>MJ Movie</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-        <link href="${pageContext.request.contextPath}/css/styles.css" rel="stylesheet" />
+        <link href="${pageContext.request.contextPath}/resources/css/styles.css" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
    		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
@@ -49,7 +50,7 @@
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Join</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active" style="font-family: 'GmarketSansMedium';">MJ Movie의 멤버가 되세유 ;> </li>
+                            <li class="breadcrumb-item active" style="font-family: 'GmarketSansMedium';">MJ Movie의 멤버가 되세유 :> </li>
                         </ol>
                         
                         <div class="container" style="font-family: 'GmarketSansMedium';">
@@ -104,7 +105,7 @@
                                                 <label for="inputEmail">주소</label>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="mProfile" name="mprofile" type="file" placeholder="프로필이미지" />
+                                                <input class="form-control" id="mProfile" name="mfile" type="file" placeholder="프로필이미지" />
                                                 <label for="inputEmail">프로필이미지</label>
                                             </div>
                                             <div class="mt-4 mb-0">
@@ -124,7 +125,7 @@
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; 0joo's Movie </div>
+                            <div class="text-muted">Copyright &copy; MJ MOVIE </div>
                        
                         </div>
                     </div>
