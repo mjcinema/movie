@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <!-- TopBar.jsp -->
 
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark" style="font-family: 'GmarketSansMedium';">
@@ -21,10 +21,9 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <c:choose>
-                    <c:when test="${sessionScope.loginId != null }">
-                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope.loginId}</span>
-                                <img style="height: 2rem; width: 2rem; border-radius: 50% !important;"
-                                    src="${pageContext.request.contextPath}/img/memProfile/${sessionScope.loginPf }">
+                    <c:when test="${sessionScope.loginMember != null }">
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope.loginMember}</span>
+                    
                     </c:when>
                     <c:otherwise>
                     	<span class="mr-2 d-none d-lg-inline text-gray-600 small">로그인 해주세요</span>
@@ -35,17 +34,17 @@
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                     
                     <c:choose>     
-                    	<c:when test="${sessionScope.loginId != null }">
-                    	<li><a class="dropdown-item" href="${pageContext.request.contextPath}/Members/memberView?memId=${sessionScope.loginId}"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> 내정보</a></li>
-                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/Movies/MovieReList?loginId=${sessionScope.loginId}"> <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i> 예매 내역</a></li>
+                    	<c:when test="${sessionScope.loginMember != null }">
+                    	<li><a class="dropdown-item" href="${pageContext.request.contextPath}/Members/memberView?memId=${sessionScope.loginMember}"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> 내정보</a></li>
+                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/Movies/MovieReList?loginId=${sessionScope.loginMember}"> <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i> 예매 내역</a></li>
                         <li><hr class="dropdown-divider" /></li>
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/Members/memberLogout">
                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> 로그아웃</a>
                        	</c:when>
                        	
                        	<c:otherwise>
-                      	<li><a class="dropdown-item" href="${pageContext.request.contextPath}/Members/Login.jsp">로그인</a></li>
-                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/Members/MemberJoinForm.jsp">회원가입</a></li>
+                      	<li><a class="dropdown-item" href="${pageContext.request.contextPath}/Members/Login">로그인</a></li>
+                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/Members/MemberJoinForm">회원가입</a></li>
                         </c:otherwise>
                     </c:choose>    
                     </ul>
