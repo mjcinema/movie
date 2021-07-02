@@ -53,7 +53,7 @@
                                     <div class="card-body" style="text-align:center;">
                                     	<div class="form-floating mb-3">
                                         			 <img style="height: 150px; width: 150px; border-radius: 50% !important;"
-                                    					src="${pageContext.request.contextPath}/img/memProfile/${member.mProfile }"> 
+                                    					src="${pageContext.request.contextPath}/img/memProfile/${member.mProfile}"> 
                                         </div>
                                         <div class="form-floating mb-3">
                                           	    <button class="btn btn-primary btn-block" onclick="viewMprofileForm()">
