@@ -7,7 +7,7 @@
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu" style="font-family: 'GmarketSansMedium';">
                         <div class="nav">
-                            <a class="nav-link" href="${pageContext.request.contextPath}/MovieMain.jsp">
+                            <a class="nav-link" href="/">
                                 <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
                                 <span>메인으로</span>
                             </a>
@@ -77,7 +77,7 @@
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
-                        <div class="small">:)</div>
+                        <div class="small">MJ Movie</div>
                         
                     </div>
                 </nav>

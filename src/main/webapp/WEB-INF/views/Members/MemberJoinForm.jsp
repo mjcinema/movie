@@ -10,7 +10,7 @@
         <meta name="author" content="" />
         <title>MJ Movie</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-        <link href="${pageContext.request.contextPath}/css/styles.css" rel="stylesheet" />
+        <link href="${pageContext.request.contextPath}/resources/css/styles.css" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
    		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
@@ -113,7 +113,7 @@
                                         </form>
                                     </div>
                                     <div class="card-footer text-center py-3">
-                                        <div class="small"><a href="Login.jsp">이미 가입이 되어있쥬?</a></div>
+                                        <div class="small"><a href="Login">이미 가입이 되어있쥬?</a></div>
                                     </div>
                                 </div>
                             </div>
@@ -124,7 +124,7 @@
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; 0joo's Movie </div>
+                            <div class="text-muted">Copyright &copy; MJ Moive </div>
                        
                         </div>
                     </div>

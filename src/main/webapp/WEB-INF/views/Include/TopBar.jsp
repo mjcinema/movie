@@ -27,7 +27,7 @@
                                     src="${pageContext.request.contextPath}/img/memProfile/${sessionScope.loginPf }">
                     </c:when>
                     <c:otherwise>
-                    	<span class="mr-2 d-none d-lg-inline text-gray-600 small">로그인 해주세요</span>
+                    	<span class="mr-2 d-none d-lg-inline text-gray-600 small">로그인 해주라우!</span>
                     </c:otherwise>                
                     </c:choose>
                     </a>
@@ -44,8 +44,8 @@
                        	</c:when>
                        	
                        	<c:otherwise>
-                      	<li><a class="dropdown-item" href="${pageContext.request.contextPath}/Members/Login.jsp">로그인</a></li>
-                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/Members/MemberJoinForm.jsp">회원가입</a></li>
+                      	<li><a class="dropdown-item" href="${pageContext.request.contextPath}/Members/Login">로그인</a></li>
+                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/Members/MemberJoinForm">회원가입</a></li>
                         </c:otherwise>
                     </c:choose>    
                     </ul>
