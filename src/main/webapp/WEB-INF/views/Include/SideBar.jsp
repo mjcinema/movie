@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
     <!-- SideBar.jsp -->
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>    
     
 <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
@@ -30,14 +31,14 @@
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                 	<c:choose>
-                                	<c:when test="${sessionScope.loginId != null }">
-                                		<a class="nav-link" href="${pageContext.request.contextPath}/Members/memberView?memId=${sessionScope.loginId}">내정보</a>
-                                		<a class="nav-link" href="${pageContext.request.contextPath}/Movies/MovieReList?loginId=${sessionScope.loginId}">예매내역</a>
+                                	<c:when test="${sessionScope.loginMember != null }">
+                                		<a class="nav-link" href="${pageContext.request.contextPath}/Members/memberView?memId=${sessionScope.loginMember}">내정보</a>
+                                		<a class="nav-link" href="${pageContext.request.contextPath}/Movies/MovieReList?loginId=${sessionScope.loginMember}">예매내역</a>
                                 	</c:when>
                                 	
                                 	<c:otherwise>
-                                	<a class="nav-link" href="${pageContext.request.contextPath}/Members/Login.jsp">로그인</a>
-                                    <a class="nav-link" href="${pageContext.request.contextPath}/Members/MemberJoinForm.jsp">회원가입</a>
+                                	<a class="nav-link" href="${pageContext.request.contextPath}/Members/Login">로그인</a>
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/Members/MemberJoinForm">회원가입</a>
                                 	</c:otherwise>
                                     
                                 	</c:choose>

@@ -13,7 +13,7 @@
         <title>MJ Moive</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="${pageContext.request.contextPath}/resources/css/styles.css" rel="stylesheet" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+
    		<style>
    		@font-face {
    			font-family: 'GmarketSansMedium';
@@ -26,6 +26,7 @@
     <body class="sb-nav-fixed">
         
          <%@ include file = "../Include/TopBar.jsp" %>
+         
         
         <div id="layoutSidenav">
              
@@ -35,6 +36,7 @@
                 <main>
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Login</h1>
+                        
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">Nice to meet you. Please login :)</li>
                         </ol>
@@ -42,15 +44,16 @@
                             <div class="col-lg-5">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4 mt-4">로그인하라우!</h3></div>
+                                    
                                     <div class="card-body" style="font-family: 'GmarketSansMedium';">
                                         <form action="memberLogin" method="post" onsubmit="return loginCheck()">
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="loginId" name="loginId" type="text"  />
+                                                <input class="form-control" id="loginId" name="mid" type="text"  />
                                                 <label for="inputEmail" id="idLabel">아이디 입력</label>
                                                
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="loginPw" name="loginPw" type="password" />
+                                                <input class="form-control" id="loginPw" name="mpw" type="password" />
                                                 <label for="inputPassword" id="pwLabel">비밀번호 입력</label>
                                                 
                                             </div>
@@ -71,8 +74,8 @@
                 </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
-                        <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Mj Movie </div>
+                         <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted" href="./">Copyright &copy; MJ Movie </div>
                        
                         </div>
                     </div>
