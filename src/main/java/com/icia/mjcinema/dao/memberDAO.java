@@ -20,4 +20,8 @@ public class memberDAO {
 		return sql.selectOne("ms.memberlogin" , member);
 	}
 
+	public String idCheck(String mid) {		
+		return sql.selectOne("ms.idcheck" , mid);
+	}
+
 }

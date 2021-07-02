@@ -13,5 +13,11 @@
 		SELECT MID FROM MJMEMBER WHERE MID=#{mid} AND MPW=#{mpw}
 	</select>
 	
+	<select id="idcheck" parameterType="String" resultType="mdto">
+		SELECT MID FROM MJMEMBER WHERE MID=#{mid}
+	</select>
+	
+	
+	
  </mapper>
  

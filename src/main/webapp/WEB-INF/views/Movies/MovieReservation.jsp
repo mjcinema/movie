@@ -57,7 +57,7 @@
 								
 										<div class="card shadow mb-4">
                               			  <div class="card-header bg-primary">
-                                 		 	  <h6 class="m-0 text-white" ><i class="fas fa-video"></i> 영화 선택 ${param.mvCode }</h6>
+                                 		 	  <h6 class="m-0 text-white" ><i class="fas fa-video"></i> 영화 선택 ${param.mvCode}</h6>
                                 		  </div>
                                			    <div class="list-group list-group-flush small" id="movieListArea" style="height:200px;  overflow:auto;" >
                                       		  <c:forEach items="${mvList}" var="movie">
@@ -183,7 +183,7 @@
     <script type="text/javascript">
     
     	$(document).ready(function(){
-    		if("${sessionScope.loginId }" == ""){
+    		if("${sessionScope.loginMember}" == ""){
     			alert("로그인 후 이용해주세요");
     			location.href = "${pageContext.request.contextPath}/Members/Login";
     		}

@@ -56,4 +56,17 @@ public class memberService {
 		return mav;
 	}
 
+	public String idCheck(String mid) {
+		String checkResult = memberdao.idCheck(mid);
+		String result = "";
+		
+		if(checkResult == null) {
+			result = "x";
+		} else {
+			result = "ok";
+		}
+		
+		return result;
+	}
+
 }
