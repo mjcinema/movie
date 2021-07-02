@@ -26,7 +26,7 @@
                     
                     </c:when>
                     <c:otherwise>
-                    	<span class="mr-2 d-none d-lg-inline text-gray-600 small">로그인 해주세요</span>
+                    	<span class="mr-2 d-none d-lg-inline text-gray-600 small">로그인 해주라우!</span>
                     </c:otherwise>                
                     </c:choose>
                     </a>
