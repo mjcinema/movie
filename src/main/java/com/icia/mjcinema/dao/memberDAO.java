@@ -4,7 +4,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.icia.mjcinema.dto.memberDTO;
+import com.icia.mjcinema.dto.Member;
 
 @Repository
 public class memberDAO {
@@ -12,11 +12,11 @@ public class memberDAO {
 	@Autowired
 	private SqlSessionTemplate sql;
 	
-	public void memberjoin(memberDTO member) {
+	public void memberjoin(Member member) {
 		sql.insert("ms.memberjoin" , member);		
 	}
 
-	public String memberlogin(memberDTO member) {	
+	public String memberlogin(Member member) {	
 		return sql.selectOne("ms.memberlogin" , member);
 	}
 

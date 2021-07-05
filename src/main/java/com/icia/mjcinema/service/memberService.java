@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.icia.mjcinema.dao.memberDAO;
-import com.icia.mjcinema.dto.memberDTO;
+import com.icia.mjcinema.dto.Member;
 
 @Service
 public class memberService {
@@ -24,7 +24,7 @@ public class memberService {
 	
 	private ModelAndView mav;
 	
-	public ModelAndView memberjoin(memberDTO member) throws IllegalStateException, IOException {
+	public ModelAndView memberjoin(Member member) throws IllegalStateException, IOException {
 		mav = new ModelAndView();
 		MultipartFile mfile = member.getMfile();
 		String mfilename = mfile.getOriginalFilename();
@@ -42,7 +42,7 @@ public class memberService {
 		return mav;
 	}
 
-	public ModelAndView memberlogin(memberDTO member) {
+	public ModelAndView memberlogin(Member member) {
 		mav = new ModelAndView();
 		String loginId = memberdao.memberlogin(member);
 		
