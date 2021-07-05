@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.icia.mjcinema.dao.memberDAO;
-import com.icia.mjcinema.dto.memberDTO;
+import com.icia.mjcinema.domain.Member;
 import com.icia.mjcinema.dto.pageDTO;
 
 @Service
@@ -26,7 +26,7 @@ public class memberService {
 	
 	private ModelAndView mav;
 	
-	public ModelAndView memberjoin(memberDTO member) throws IllegalStateException, IOException {
+	public ModelAndView memberjoin(Member member) throws IllegalStateException, IOException {
 		mav = new ModelAndView();
 		MultipartFile mfile = member.getMfile();
 		String mfilename = mfile.getOriginalFilename();
@@ -44,7 +44,7 @@ public class memberService {
 		return mav;
 	}
 
-	public ModelAndView memberlogin(memberDTO member) {
+	public ModelAndView memberlogin(Member member) {
 		mav = new ModelAndView();
 		String loginId = memberdao.memberlogin(member);
 		
@@ -73,7 +73,7 @@ public class memberService {
 
 	public ModelAndView memberview(String mid) {
 		mav = new ModelAndView();
-		memberDTO member = memberdao.memberview(mid);
+		Member member = memberdao.memberview(mid);
 		mav.addObject("member" , member);
 		mav.setViewName("/Members/MemberView");
 		return mav;
@@ -81,7 +81,7 @@ public class memberService {
 
 	public ModelAndView memberlist() {
 		mav = new ModelAndView();
-		List<memberDTO> member = memberdao.memberlist();
+		List<Member> member = memberdao.memberlist();
 		mav.addObject("memberlist", member);
 		mav.setViewName("/Members/memberlist");
 		return mav;
