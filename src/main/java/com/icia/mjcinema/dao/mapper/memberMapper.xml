@@ -4,16 +4,16 @@
 
  
  <mapper namespace="ms"> 
-	<insert id="memberjoin" parameterType="mdto">
+	<insert id="memberjoin" parameterType="member">
 		INSERT INTO MJMEMBER (MID , MPW , MNAME , MBIRTH , MEMAIL , MADDR , MFILENAME)
 		VALUES (#{mid} , #{mpw} , #{mname} , #{mbirth} , #{memail} , #{maddr} , #{mfilename})
 	</insert>
 	
-	<select id="memberlogin" parameterType="mdto" resultType="String">
+	<select id="memberlogin" parameterType="member" resultType="String">
 		SELECT MID FROM MJMEMBER WHERE MID=#{mid} AND MPW=#{mpw}
 	</select>
 	
-	<select id="idcheck" parameterType="String" resultType="mdto">
+	<select id="idcheck" parameterType="String" resultType="member">
 		SELECT MID FROM MJMEMBER WHERE MID=#{mid}
 	</select>
 	
