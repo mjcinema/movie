@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.icia.mjcinema.dao.memberDAO;
 import com.icia.mjcinema.domain.Member;
+import com.icia.mjcinema.dto.JoinMemberForm;
 
 @Service
 public class memberService {
@@ -24,19 +25,29 @@ public class memberService {
 	
 	private ModelAndView mav;
 	
-	public ModelAndView memberjoin(Member member) throws IllegalStateException, IOException {
+	public ModelAndView memberjoin(JoinMemberForm dto) throws IllegalStateException, IOException {
 		mav = new ModelAndView();
-		MultipartFile mfile = member.getMfile();
-		String mfilename = mfile.getOriginalFilename();
-		mfilename = System.currentTimeMillis() + "-" + mfilename;
-		String savePath = "D:\\source_BJH\\spring\\mjcinema\\src\\main\\webapp\\WEB-INF\\views\\img\\memProfile\\" + mfilename;
+		String mfilename = "default.png";
+//		MultipartFile mfile = dto.getMfile();
+//		String mfilename = mfile.getOriginalFilename();
+//		mfilename = System.currentTimeMillis() + "-" + mfilename;
+//		String savePath = "D:\\source_BJH\\spring\\mjcinema\\src\\main\\webapp\\WEB-INF\\views\\img\\memProfile\\" + mfilename;
+//		
+//		if(!mfile.isEmpty()) {
+//			mfile.transferTo(new File(savePath));
+//		}
 		
-		if(!mfile.isEmpty()) {
-			mfile.transferTo(new File(savePath));
-		}
-		
+		Member member = new Member();
+		member.setMid(dto.getMid());
+		member.setMname(dto.getMname());
+		member.setMpw(dto.getMpw());
+		member.setMbirth(dto.getMbirth());
+		member.setMemail(dto.getMemail());
+		member.setMaddr(dto.getMaddr());
 		member.setMfilename(mfilename);
+		
 		memberdao.memberjoin(member);
+		
 		mav.setViewName("redirect:/.");
 		
 		return mav;
