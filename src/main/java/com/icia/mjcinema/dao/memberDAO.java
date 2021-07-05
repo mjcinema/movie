@@ -4,7 +4,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.icia.mjcinema.dto.Member;
+import com.icia.mjcinema.domain.Member;
 
 @Repository
 public class memberDAO {

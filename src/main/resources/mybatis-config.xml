@@ -3,6 +3,6 @@
  "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias type="com.icia.mjcinema.dto.Member" alias="member"/>
+		<typeAlias type="com.icia.mjcinema.domain.Member" alias="member"/>
 	</typeAliases>
 </configuration>

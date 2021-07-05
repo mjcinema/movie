@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.icia.mjcinema.dao.memberDAO;
-import com.icia.mjcinema.dto.Member;
+import com.icia.mjcinema.domain.Member;
 
 @Service
 public class memberService {

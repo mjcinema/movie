@@ -1,4 +1,4 @@
-package com.icia.mjcinema.dto;
+package com.icia.mjcinema.domain;
 
 import org.springframework.web.multipart.MultipartFile;
 

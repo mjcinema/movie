@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.icia.mjcinema.dto.Member;
+import com.icia.mjcinema.domain.Member;
 import com.icia.mjcinema.service.memberService;
 
 @Controller
