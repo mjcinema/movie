@@ -32,7 +32,7 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                 	<c:choose>
                                 	<c:when test="${sessionScope.loginMember != null }">
-                                		<a class="nav-link" href="${pageContext.request.contextPath}/Members/memberView?memId=${sessionScope.loginMember}">내정보</a>
+                                		<a class="nav-link" href="${pageContext.request.contextPath}/Members/memberView?mid=${sessionScope.loginMember}">내정보</a>
                                 		<a class="nav-link" href="${pageContext.request.contextPath}/Movies/MovieReList?loginId=${sessionScope.loginMember}">예매내역</a>
                                 	</c:when>
                                 	
@@ -57,7 +57,7 @@
                                     </a>
                                     <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="${pageContext.request.contextPath}/Movies/AddMovieForm.jsp">영화등록</a>
+                                            <a class="nav-link" href="${pageContext.request.contextPath}/Movies/AddMovieForm">영화등록</a>
                                             <a class="nav-link" href="#">영화관등록</a>
                                             <a class="nav-link" href="${pageContext.request.contextPath}/Movies/addScheduleForm">스케쥴등록</a>
                                         </nav>
@@ -68,8 +68,8 @@
                                     </a>
                                     <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="#">회원목록</a>
-                                            <a class="nav-link" href="#">회원등록</a>
+                                            <a class="nav-link" href="/Members/memberlist">회원목록</a>
+                                            
                                             <a class="nav-link" href="#">회원삭제</a>
                                         </nav>
                                     </div>

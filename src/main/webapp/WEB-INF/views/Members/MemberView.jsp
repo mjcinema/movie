@@ -9,7 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>MJ Movie</title>
+        <title>0joo's Movie</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="${pageContext.request.contextPath}/resources/css/styles.css" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
@@ -53,7 +53,7 @@
                                     <div class="card-body" style="text-align:center;">
                                     	<div class="form-floating mb-3">
                                         			 <img style="height: 150px; width: 150px; border-radius: 50% !important;"
-                                    					src="${pageContext.request.contextPath}../img/memProfile/${member.mProfile}"> 
+                                    					src="${pageContext.request.contextPath}/img/memProfile/${member.mfilename}"> 
                                         </div>
                                         <div class="form-floating mb-3">
                                           	    <button class="btn btn-primary btn-block" onclick="viewMprofileForm()">
@@ -63,8 +63,8 @@
                         				<div class="form-floating mb-3 show-hide"  id="modifyPfArea">
                         				<form action="modifyMemberProfile" method="post" enctype="multipart/form-data">
 											<input type="file" name="newProfile" class="form-control" id="inputProfile">
-											<input type="hidden" name="memberProfile" value="${member.mProfile }">
-											<input type="hidden" name="profileId" value="${member.mId }">
+											<input type="hidden" name="memberProfile" value="${member.mfile}">
+											<input type="hidden" name="profileId" value="${member.mid}">
 											<br>
 											<input type="submit" class="btn btn-primary btn-block"  value="프로필변경">
                         				</form>
@@ -87,12 +87,12 @@
                                         	<div class="row mb-6" >
                                         		 <div class="col-md-6" >
                                             		<div class="form-floating mb-3">
-                                               		 <input class="form-control" style="height:40px;" type="text" name="mid" value="${member.mId }" disabled="disabled" />
+                                               		 <input class="form-control" style="height:40px;" type="text" name="mid" value="${member.mid}" disabled="disabled" />
                                                	 	</div>
                                                	 </div>
                                                	 <div class="col-md-6">
                                                	 	<div class="form-floating mb-3">
-                                               	 	<input class="form-control" style="height:40px;" type="text" value="${member.mPw }" disabled="disabled" />
+                                               	 	<input class="form-control" style="height:40px;" type="text" value="${member.mpw}" disabled="disabled" />
                                                		 </div>
                                         		</div>
                                             </div>	
@@ -100,26 +100,25 @@
                                             <div class="row mb-3">
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" style="height:40px;" type="text" value="${member.mName }" disabled="disabled"  />
+                                                        <input class="form-control" style="height:40px;" type="text" value="${member.mname}" disabled="disabled"  />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" style="height:40px;" type="text" value="${member.mBritn }" disabled="disabled" />
+                                                        <input class="form-control" style="height:40px;" type="text" value="${member.mbirth}" disabled="disabled" />
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row mb-3">
-                                            <div class="col-md-10">
-                                            <input class="form-control" type="text" style="height:40px;" id="Memail" value="${member.mEamil }" disabled  />
+                                            <div class="form-floating mb-3">
+                                            <input class="form-control" type="text" style="height:40px;" id="Memail" value="${member.memail}" disabled  />
                                             </div>
                                             <div class="col-md-2">
-                                            <button class="btn btn-primary btn-block" type="button" id="btnMemail">수정</button>
-                                            <button class="btn btn-primary btn-block" type="button" id="ModifyMemail" style="display:none;">확인</button>
+                                            
                                             </div>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" type="text" style="height:40px;" value="${member.mAddr }" disabled="disabled"  />
+                                                <input class="form-control" type="text" style="height:40px;" value="${member.maddr}" disabled="disabled"  />
                                             </div>
                                           
                                         </form>
@@ -152,7 +151,7 @@
     </body>
     <script>
     $(document).ready(function() {
-    console.log("세션 아이디: "+"${sessionScope.loginId}")
+    console.log("세션 아이디: "+"${sessionScope.loginMember}")
     console.log("세션 프로필: "+"${sessionScope.loginPf}")	
     	
 		$("#btnMemail").click(function(){
@@ -163,8 +162,8 @@
 		
 		
 		$("#ModifyMemail").click(function(){
-			var memId = "${sessionScope.loginId }";
-			var newEmail = "${member.mEamil}";	
+			var memId = "${sessionScope.loginMember }";
+			var newEmail = "${member.memail}";	
 			
 			$.ajax({
 				type : "get",
@@ -180,7 +179,7 @@
 						$("#ModifyMemail").css("display","none"); 
 					}else{
 						alert("이메일 수정 실패");
-						$("#Memail").val("${member.mEamil}");
+						$("#Memail").val("${member.memail}");
 					}
 				}
 				

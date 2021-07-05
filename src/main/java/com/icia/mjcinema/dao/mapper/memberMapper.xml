@@ -17,7 +17,13 @@
 		SELECT MID FROM MJMEMBER WHERE MID=#{mid}
 	</select>
 	
+	<select id="memberview" parameterType="String" resultType="mdto">
+		SELECT * FROM MJMEMBER WHERE MID=#{mid}
+	</select>
 	
+	<select id="memberlist" resultType="mdto">
+		SELECT * FROM MJMEMBER
+	</select>
 	
  </mapper>
  

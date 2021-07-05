@@ -2,6 +2,7 @@ package com.icia.mjcinema.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.icia.mjcinema.dao.memberDAO;
 import com.icia.mjcinema.dto.memberDTO;
+import com.icia.mjcinema.dto.pageDTO;
 
 @Service
 public class memberService {
@@ -68,5 +70,24 @@ public class memberService {
 		
 		return result;
 	}
+
+	public ModelAndView memberview(String mid) {
+		mav = new ModelAndView();
+		memberDTO member = memberdao.memberview(mid);
+		mav.addObject("member" , member);
+		mav.setViewName("/Members/MemberView");
+		return mav;
+	}
+
+	public ModelAndView memberlist() {
+		mav = new ModelAndView();
+		List<memberDTO> member = memberdao.memberlist();
+		mav.addObject("memberlist", member);
+		mav.setViewName("/Members/memberlist");
+		return mav;
+	}
+	
+	
+	
 
 }

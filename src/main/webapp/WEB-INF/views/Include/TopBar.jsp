@@ -35,7 +35,7 @@
                     
                     <c:choose>     
                     	<c:when test="${sessionScope.loginMember != null }">
-                    	<li><a class="dropdown-item" href="${pageContext.request.contextPath}/Members/memberView?memId=${sessionScope.loginMember}"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> 내정보</a></li>
+                    	<li><a class="dropdown-item" href="${pageContext.request.contextPath}/Members/memberView?mid=${sessionScope.loginMember}"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> 내정보</a></li>
                         <li><a class="dropdown-item" href="${pageContext.request.contextPath}/Movies/MovieReList?loginId=${sessionScope.loginMember}"> <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i> 예매 내역</a></li>
                         <li><hr class="dropdown-divider" /></li>
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/Members/memberLogout">

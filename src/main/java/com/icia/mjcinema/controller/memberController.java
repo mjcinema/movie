@@ -48,10 +48,7 @@ public class memberController {
 		return mav;
 	}
 	
-	@RequestMapping (value="/Members/memberView")
-	public String memberview() {
-		return "/Members/MemberView";
-	}
+	
 		
 	@RequestMapping (value="/Members/memberLogout")
 	public String logout() {
@@ -64,10 +61,24 @@ public class memberController {
 		String result = memberservice.idCheck(mid);
 		return result;
 	}
+		
 	
-	@RequestMapping (value="/Movies/MovieReservation")
-	public String moviereservation () {
-		return "/Movies/MovieReservation";
+	@RequestMapping (value="/Members/memberView")
+	public ModelAndView memberview(@RequestParam("mid") String mid) {
+		mav = memberservice.memberview(mid);
+		return mav;
 	}
+	
+	@RequestMapping (value="/Members/memberlist")
+	public ModelAndView memberlist() {
+		mav = memberservice.memberlist();
+		return mav;
+	}
+	
+
+	
+	
+	
+	
 	
 }

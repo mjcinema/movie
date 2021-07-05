@@ -4,5 +4,7 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.icia.mjcinema.dto.memberDTO" alias="mdto"/>
+		<typeAlias type="com.icia.mjcinema.dto.pageDTO" alias="pagedto"/>
+		<typeAlias type="com.icia.mjcinema.dto.movieDTO" alias="moviedto"/>
 	</typeAliases>
 </configuration>
