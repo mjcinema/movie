@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -69,6 +70,7 @@
                                         	<div class="row mb-3">
                                         		<div class="col-md-9">
                                             	<div class="form-floating mb-3">
+												 
                                                	 <input class="form-control" id="mId" name="mid" type="text" placeholder="아이디" />
                                                	 <label for="inputEmail">아이디</label>
                                                	 </div>
@@ -76,7 +78,12 @@
                                                	 <div class="col-md-3" id="idCheakArea">
                                                	 <span class="small" id="idCheck"> *영문/숫자 4~15자 </span>
                                                	 </div>
-                                              </div> 	 
+                                              </div>
+												<spring:hasBindErrors name="joinMemberForm">
+													<c:if test="${errors.hasFieldErrors('mid')}">                                     
+														<strong>${errors.getFieldError('mid').defaultMessage }</strong>
+													 </c:if>
+												 </spring:hasBindErrors>	 
                                             	<div class="form-floating mb-3">
                                                	 <input class="form-control" id="mPw" name="mpw" type="password" placeholder="비밀번호" />
                                                	 <label for="inputEmail">비밀번호</label>

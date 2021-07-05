@@ -3,16 +3,15 @@ package com.icia.mjcinema.service;
 import java.io.File;
 import java.io.IOException;
 
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.icia.mjcinema.dao.memberDAO;
 import com.icia.mjcinema.domain.Member;
 import com.icia.mjcinema.dto.JoinMemberForm;
+import com.icia.mjcinema.dto.LoginForm;
 
 @Service
 public class memberService {
@@ -20,22 +19,10 @@ public class memberService {
 	@Autowired
 	private memberDAO memberdao;
 	
-	@Autowired
-	private HttpSession session;
-	
-	private ModelAndView mav;
-	
-	public ModelAndView memberjoin(JoinMemberForm dto) throws IllegalStateException, IOException {
-		mav = new ModelAndView();
-		String mfilename = "default.png";
-//		MultipartFile mfile = dto.getMfile();
-//		String mfilename = mfile.getOriginalFilename();
-//		mfilename = System.currentTimeMillis() + "-" + mfilename;
-//		String savePath = "D:\\source_BJH\\spring\\mjcinema\\src\\main\\webapp\\WEB-INF\\views\\img\\memProfile\\" + mfilename;
-//		
-//		if(!mfile.isEmpty()) {
-//			mfile.transferTo(new File(savePath));
-//		}
+
+	public Member memberjoin(JoinMemberForm dto) throws IllegalStateException, IOException {
+		
+		String filename = uploadImage(dto.getMfile());
 		
 		Member member = new Member();
 		member.setMid(dto.getMid());
@@ -44,27 +31,35 @@ public class memberService {
 		member.setMbirth(dto.getMbirth());
 		member.setMemail(dto.getMemail());
 		member.setMaddr(dto.getMaddr());
-		member.setMfilename(mfilename);
+		
+		member.setMfilename(filename);
 		
 		memberdao.memberjoin(member);
-		
-		mav.setViewName("redirect:/.");
-		
-		return mav;
+		Member joinedUser = memberdao.memberlogin(member.getMid());
+		return joinedUser;
 	}
-
-	public ModelAndView memberlogin(Member member) {
-		mav = new ModelAndView();
-		String loginId = memberdao.memberlogin(member);
+	
+	private String uploadImage(MultipartFile image) throws IllegalStateException, IOException {
+		MultipartFile mfile = image;
+		String mfilename = mfile.getOriginalFilename();
+		mfilename = System.currentTimeMillis() + "-" + mfilename;
+		String savePath = "C:\\Users\\LeeMinYong\\git\\movie\\src\\main\\webapp\\WEB-INF\\views\\img\\memProfile\\" + mfilename;
 		
-		if(loginId != null) {
-			session.setAttribute("loginMember", loginId);
-			mav.setViewName("redirect:/.");
-		} else {
-			mav.setViewName("memberlogin");
+		if(!mfile.isEmpty()) {
+			mfile.transferTo(new File(savePath));
 		}
 		
-		return mav;
+		return mfilename;
+	}
+	
+	// Spring-validation
+	public Member memberlogin(LoginForm loginForm) {
+		Member member = memberdao.memberlogin(loginForm.getMid());
+		if(member == null || !loginForm.getMpw().equals(member.getMpw())) {
+			throw new IllegalStateException("아이디나 비밀번호가 일치하지 않습니다.");
+		}
+		
+		return member;
 	}
 
 	public String idCheck(String mid) {

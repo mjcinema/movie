@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -57,6 +57,11 @@
                                                 <label for="inputPassword" id="pwLabel">비밀번호 입력</label>
                                                 
                                             </div>
+											<spring:hasBindErrors name="loginForm">
+												<c:if test="${errors.hasFieldErrors('invalidIdOrPassword')}">                                     
+													<strong>${errors.getFieldError('invalidIdOrPassword').defaultMessage }</strong>
+												 </c:if>
+											</spring:hasBindErrors>	
                                             <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                                                 <a class="small" href="#">Forgot Password?</a>
                                                 <button class="btn btn-primary" style="font-family: 'GmarketSansMedium';" >로그인</button>

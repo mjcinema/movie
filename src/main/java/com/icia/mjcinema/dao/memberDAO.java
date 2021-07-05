@@ -16,8 +16,8 @@ public class memberDAO {
 		sql.insert("ms.memberjoin" , member);		
 	}
 
-	public String memberlogin(Member member) {	
-		return sql.selectOne("ms.memberlogin" , member);
+	public Member memberlogin(String mid) {	
+		return sql.selectOne("ms.memberlogin" , mid);
 	}
 
 	public String idCheck(String mid) {		
