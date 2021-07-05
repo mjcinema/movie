@@ -1,6 +1,5 @@
 package com.icia.mjcinema.domain;
 
-import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Data;
 
@@ -22,9 +21,5 @@ public class Member {
 	private String memail;
 	private String maddr;
 	private String mfilename;
-	
-	private MultipartFile mfile;
-	
-	
 	
 }
