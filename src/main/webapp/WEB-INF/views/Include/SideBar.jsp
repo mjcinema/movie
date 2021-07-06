@@ -61,6 +61,7 @@
                                         <nav class="sb-sidenav-menu-nested nav">
                                             <a class="nav-link" href="${pageContext.request.contextPath}/Movies/AddMovieForm">영화등록</a>
                                             <a class="nav-link" href="#">영화관등록</a>
+                                            <a class="nav-link" href="/Movies/MovieReList">영화목록</a>
                                             <a class="nav-link" href="${pageContext.request.contextPath}/Movies/addScheduleForm">스케쥴등록</a>
                                         </nav>
                                     </div>

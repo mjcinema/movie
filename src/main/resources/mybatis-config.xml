@@ -4,7 +4,7 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.icia.mjcinema.domain.Member" alias="Member"/>
-		<typeAlias type="com.icia.mjcinema.dto.LoginForm" alias="loginForm"/>
-		<typeAlias type="com.icia.mjcinema.dto.MovieDTO" alias="Moviedto"/>
+		<typeAlias type="com.icia.mjcinema.domain.Movie" alias="Movie"/>
+		<typeAlias type="com.icia.mjcinema.dto.LoginForm" alias="loginForm"/>			
 	</typeAliases>
 </configuration>

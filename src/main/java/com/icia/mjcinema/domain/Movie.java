@@ -1,11 +1,11 @@
-package com.icia.mjcinema.dto;
+package com.icia.mjcinema.domain;
 
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Data;
 
 @Data
-public class MovieDTO {
+public class Movie {
 
 	private String mcode;
 	private String mtitle;
