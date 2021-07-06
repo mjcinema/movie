@@ -5,7 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 import lombok.Data;
 
 @Data
-public class movieDTO {
+public class MovieDTO {
 
 	private String mcode;
 	private String mtitle;

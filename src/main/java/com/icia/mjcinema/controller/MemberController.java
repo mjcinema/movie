@@ -24,7 +24,7 @@ import com.icia.mjcinema.dto.UpdateMemberForm;
 import com.icia.mjcinema.service.MemberService;
 
 @Controller
-public class memberController {
+public class MemberController {
 	
 	@Autowired
 	private MemberService memberservice;

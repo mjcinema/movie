@@ -8,10 +8,10 @@ import org.springframework.stereotype.Repository;
 
 import com.icia.mjcinema.domain.Member;
 import com.icia.mjcinema.dto.LoginForm;
-import com.icia.mjcinema.dto.pageDTO;
+
 
 @Repository
-public class memberDAO {
+public class MemberDAO {
 
 	@Autowired
 	private SqlSessionTemplate sql;

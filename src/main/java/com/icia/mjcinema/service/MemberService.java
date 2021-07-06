@@ -10,18 +10,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 
-import com.icia.mjcinema.dao.memberDAO;
+import com.icia.mjcinema.dao.MemberDAO;
 import com.icia.mjcinema.domain.Member;
 import com.icia.mjcinema.dto.LoginForm;
 import com.icia.mjcinema.dto.RegistrationForm;
 import com.icia.mjcinema.dto.UpdateMemberForm;
-import com.icia.mjcinema.dto.pageDTO;
+
 
 @Service
 public class MemberService {
 
 	@Autowired
-	private memberDAO memberdao;
+	private MemberDAO memberdao;
 	
 
 	
@@ -49,7 +49,7 @@ public class MemberService {
 		MultipartFile mfile = image;
 		String mfilename = mfile.getOriginalFilename();
 		mfilename = System.currentTimeMillis() + "-" + mfilename;
-		String savePath = "D:\\source_BJH\\spring\\mjcinema\\src\\main\\webapp\\WEB-INF\\views\\img\\memProfile\\" + mfilename;
+		String savePath = "D:\\source_BJH\\spring\\mjcinema\\src\\main\\webapp\\resources\\img\\memProfile\\" + mfilename;
 		
 		if(!mfile.isEmpty()) {
 			mfile.transferTo(new File(savePath));

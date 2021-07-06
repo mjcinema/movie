@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.icia.mjcinema.dto.movieDTO;
-import com.icia.mjcinema.service.movieService;
+import com.icia.mjcinema.dto.MovieDTO;
+import com.icia.mjcinema.service.MovieService;
 
 @Controller
-public class movieController {
+public class MovieController {
 	
 	@Autowired
-	private movieService movieservice;
+	private MovieService movieservice;
 	
 	private ModelAndView mav;
 	
@@ -33,7 +33,7 @@ public class movieController {
 	
 	// 영화 추가
 	@RequestMapping (value="/Movies/addMovie")
-	public ModelAndView addmovie(@ModelAttribute movieDTO movie) throws IllegalStateException, IOException {
+	public ModelAndView addmovie(@ModelAttribute MovieDTO movie) throws IllegalStateException, IOException {
 		mav = movieservice.addmovie(movie);
 	return mav;
 	}

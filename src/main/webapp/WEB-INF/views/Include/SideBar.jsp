@@ -8,7 +8,7 @@
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu" style="font-family: 'GmarketSansMedium';">
                         <div class="nav">
-                            <a class="nav-link" href="./">
+                            <a class="nav-link" href="/">
                                 <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
                                 <span>메인으로</span>
                             </a>
