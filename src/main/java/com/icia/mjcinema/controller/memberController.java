@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.icia.mjcinema.domain.Member;
+import com.icia.mjcinema.dto.RegistrationForm;
 import com.icia.mjcinema.service.memberService;
 
 @Controller
@@ -37,8 +38,8 @@ public class memberController {
 	}
 	
 	@RequestMapping (value="/Members/memberJoin")
-	public ModelAndView memberjoin(@ModelAttribute Member member) throws IllegalStateException, IOException {
-		mav = memberservice.memberjoin(member);
+	public ModelAndView memberjoin(@ModelAttribute RegistrationForm registrationForm) throws IllegalStateException, IOException {
+		mav = memberservice.memberjoin(registrationForm);
 		return mav;
 	}
 	

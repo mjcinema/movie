@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.icia.mjcinema.dao.memberDAO;
 import com.icia.mjcinema.domain.Member;
+import com.icia.mjcinema.dto.RegistrationForm;
 import com.icia.mjcinema.dto.pageDTO;
 
 @Service
@@ -26,9 +27,12 @@ public class memberService {
 	
 	private ModelAndView mav;
 	
-	public ModelAndView memberjoin(Member member) throws IllegalStateException, IOException {
+	public ModelAndView memberjoin(RegistrationForm registrationForm) throws IllegalStateException, IOException {
+		
+		Member member = registrationForm.toMember();
+		
 		mav = new ModelAndView();
-		MultipartFile mfile = member.getMfile();
+		MultipartFile mfile = registrationForm.getMfile();
 		String mfilename = mfile.getOriginalFilename();
 		mfilename = System.currentTimeMillis() + "-" + mfilename;
 		String savePath = "D:\\source_BJH\\spring\\mjcinema\\src\\main\\webapp\\WEB-INF\\views\\img\\memProfile\\" + mfilename;
