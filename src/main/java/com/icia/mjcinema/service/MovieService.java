@@ -9,32 +9,47 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.icia.mjcinema.dao.MovieDAO;
-import com.icia.mjcinema.dto.MovieDTO;
+import com.icia.mjcinema.domain.Movie;
+import com.icia.mjcinema.dto.MovieRegistrationForm;
 
 @Service
 public class MovieService {
 
 	@Autowired
-	private MovieDAO moviedao;
-	
-	private ModelAndView mav;
-	
-	public ModelAndView addmovie(MovieDTO movie) throws IllegalStateException, IOException {
-		mav = new ModelAndView();
-		MultipartFile mvfile = movie.getMvfile();
-		String mvfilename = mvfile.getOriginalFilename();
-		mvfilename = System.currentTimeMillis() + "-" + mvfilename;
-		String savePath = "D:\\source_BJH\\spring\\mjcinema\\src\\main\\webapp\\WEB-INF\\views\\img\\mvPoster" + mvfilename;
+	private MovieDAO Moviedao;
 		
-		if(!mvfile.isEmpty()) {
-			mvfile.transferTo(new File(savePath));
+	public Movie addmovie(MovieRegistrationForm movieRegistrationForm) throws IllegalStateException, IOException {
+		
+		String filename = uploadImage(movieRegistrationForm.getMvfile());
+		
+		Movie movie = new Movie();
+		movie.setMcode(movieRegistrationForm.getMcode());
+		movie.setMtitle(movieRegistrationForm.getMtitle());
+		movie.setMdirector(movieRegistrationForm.getMdirector());
+		movie.setMdate(movieRegistrationForm.getMdate());
+		movie.setMgenre(movieRegistrationForm.getMgenre());
+		movie.setMgrade(movieRegistrationForm.getMgrade());
+		
+		movie.setMvfilename(filename);
+		
+		Moviedao.addmovie(movie);
+		
+		return movie;
+
+		}
+	
+	private String uploadImage(MultipartFile image) throws IllegalStateException, IOException {
+		MultipartFile mfile = image;
+		String mvfilename = mfile.getOriginalFilename();
+		mvfilename = System.currentTimeMillis() + "-" + mvfilename;
+		String savePath = "D:\\source_BJH\\spring\\mjcinema\\src\\main\\webapp\\resources\\img\\mvPoster\\" + mvfilename;
+		
+		if(!mfile.isEmpty()) {
+			mfile.transferTo(new File(savePath));
 		}
 		
-		movie.setMvfilename(mvfilename);
-		moviedao.addmovie(movie);
-		mav.setViewName("MovieMain");
-		
-		return mav;
+		return mvfilename;
 	}
+	
 
 }
