@@ -9,5 +9,9 @@
 		VALUES (MOVIE_SEQ.NEXTVAL , #{mtitle} , #{mdirector} , #{mdate} , #{mgenre} , #{mgrade} , #{mvfilename})
 	</insert>
 	
+	<select id="movielist" resultType="Movie">
+		SELECT * FROM MJMOVIE
+	</select>
+	
  </mapper>
  

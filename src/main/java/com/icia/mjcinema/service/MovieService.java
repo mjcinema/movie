@@ -2,6 +2,7 @@ package com.icia.mjcinema.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,6 +50,11 @@ public class MovieService {
 		}
 		
 		return mvfilename;
+	}
+
+	public List<Movie> movielist() {
+		List<Movie> movies = Moviedao.movielist();
+		return movies;
 	}
 	
 

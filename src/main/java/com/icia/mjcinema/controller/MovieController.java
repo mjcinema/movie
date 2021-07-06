@@ -1,12 +1,14 @@
 package com.icia.mjcinema.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,6 +50,14 @@ public class MovieController {
 		session.setAttribute("joinmovie", movie);
 		return "redirect:/";
 		
+	}
+	
+	// 영화 목록
+	@RequestMapping (value="/Movies/MovieReList")
+	public String MovieList(Model model) {
+		List<Movie> movies = MovieService.movielist();
+		model.addAttribute("movielist" , movies);
+		return "/Movies/MovieReList";
 	}
 	
 	
