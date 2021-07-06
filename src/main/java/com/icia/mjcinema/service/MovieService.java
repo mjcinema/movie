@@ -8,18 +8,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.icia.mjcinema.dao.movieDAO;
-import com.icia.mjcinema.dto.movieDTO;
+import com.icia.mjcinema.dao.MovieDAO;
+import com.icia.mjcinema.dto.MovieDTO;
 
 @Service
-public class movieService {
+public class MovieService {
 
 	@Autowired
-	private movieDAO moviedao;
+	private MovieDAO moviedao;
 	
 	private ModelAndView mav;
 	
-	public ModelAndView addmovie(movieDTO movie) throws IllegalStateException, IOException {
+	public ModelAndView addmovie(MovieDTO movie) throws IllegalStateException, IOException {
 		mav = new ModelAndView();
 		MultipartFile mvfile = movie.getMvfile();
 		String mvfilename = mvfile.getOriginalFilename();

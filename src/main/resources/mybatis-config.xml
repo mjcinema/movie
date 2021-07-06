@@ -5,7 +5,6 @@
 	<typeAliases>
 		<typeAlias type="com.icia.mjcinema.domain.Member" alias="Member"/>
 		<typeAlias type="com.icia.mjcinema.dto.LoginForm" alias="loginForm"/>
-		<typeAlias type="com.icia.mjcinema.dto.pageDTO" alias="pagedto"/>
-		<typeAlias type="com.icia.mjcinema.dto.movieDTO" alias="moviedto"/>
+		<typeAlias type="com.icia.mjcinema.dto.MovieDTO" alias="Moviedto"/>
 	</typeAliases>
 </configuration>
