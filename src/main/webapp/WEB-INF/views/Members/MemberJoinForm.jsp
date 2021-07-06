@@ -71,7 +71,7 @@
                                         		<div class="col-md-9">
                                             	<div class="form-floating mb-3">
 												 
-                                               	 <input class="form-control" id="mId" name="mid" type="text" placeholder="아이디" />
+                                               	 <input class="form-control" id="mId" name="mid" type="text" value="${joinMemberForm.mid}" placeholder="아이디" />
                                                	 <label for="inputEmail">아이디</label>
                                                	 </div>
                                                	 </div>
@@ -79,7 +79,7 @@
                                                	 <span class="small" id="idCheck"> *영문/숫자 4~15자 </span>
                                                	 </div>
                                               </div>
-												<spring:hasBindErrors name="joinMemberForm">
+												<spring:hasBindErrors name="registrationForm">
 													<c:if test="${errors.hasFieldErrors('mid')}">                                     
 														<strong>${errors.getFieldError('mid').defaultMessage }</strong>
 													 </c:if>

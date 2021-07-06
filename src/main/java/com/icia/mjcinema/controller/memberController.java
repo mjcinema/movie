@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.icia.mjcinema.domain.Member;
-import com.icia.mjcinema.dto.JoinMemberForm;
+import com.icia.mjcinema.dto.RegistrationForm;
 import com.icia.mjcinema.dto.LoginForm;
 import com.icia.mjcinema.service.memberService;
 
@@ -35,13 +36,17 @@ public class memberController {
 	}
 	
 	@RequestMapping (value="/Members/MemberJoinForm")
-	public String joinform() {
+	public String joinform(Model model) {
+		log.debug("member joinForm!!!시발 좇같당.앙ㄹ머ㅏㅇㄻㄹㅇㅁ!!");
+		model.addAttribute("joinMemberForm", new RegistrationForm());
 		return "Members/MemberJoinForm";
 	}
 	
 	@RequestMapping (value="/Members/memberJoin")
-	public String memberjoin(@ModelAttribute @Valid JoinMemberForm joinMemberForm, HttpSession session, BindingResult result) throws IllegalStateException, IOException {
+	public String memberjoin(@ModelAttribute @Valid RegistrationForm joinMemberForm, BindingResult result, HttpSession session) throws IllegalStateException, IOException {
+		log.debug("member join!!!시발 좇같당.앙ㄹ머ㅏㅇㄻㄹㅇㅁ!!");
 		if (result.hasErrors()) {
+			log.debug("시발 좇같당.앙ㄹ머ㅏㅇㄻㄹㅇㅁ");
 			return "Members/MemberJoinForm";
 		}
 		Member member = memberservice.memberjoin(joinMemberForm);
@@ -50,7 +55,7 @@ public class memberController {
 	}
 	
 	@RequestMapping (value="/Members/memberLogin")
-	public String memberlogin (@ModelAttribute LoginForm loginForm, HttpSession session, BindingResult result) {
+	public String memberlogin (@ModelAttribute LoginForm loginForm, BindingResult result, HttpSession session) {
 		Member member;
 		
 		try {

@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import lombok.Data;
 
 @Data
-public class JoinMemberForm {
+public class RegistrationForm {
 	
 	@NotEmpty(message="id를 입력해주세요")
 	private String mid;

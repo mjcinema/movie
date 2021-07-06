@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.icia.mjcinema.dao.memberDAO;
 import com.icia.mjcinema.domain.Member;
-import com.icia.mjcinema.dto.JoinMemberForm;
+import com.icia.mjcinema.dto.RegistrationForm;
 import com.icia.mjcinema.dto.LoginForm;
 
 @Service
@@ -20,7 +20,7 @@ public class memberService {
 	private memberDAO memberdao;
 	
 
-	public Member memberjoin(JoinMemberForm dto) throws IllegalStateException, IOException {
+	public Member memberjoin(RegistrationForm dto) throws IllegalStateException, IOException {
 		
 		String filename = uploadImage(dto.getMfile());
 		
