@@ -3,28 +3,30 @@ package com.icia.mjcinema.controller;
 import java.io.IOException;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
+
 
 import com.icia.mjcinema.domain.Member;
-import com.icia.mjcinema.service.memberService;
+import com.icia.mjcinema.dto.LoginForm;
+import com.icia.mjcinema.dto.RegistrationForm;
+import com.icia.mjcinema.service.MemberService;
 
 @Controller
 public class memberController {
 	
 	@Autowired
-	private memberService memberservice;
+	private MemberService memberservice;
 	
-	private ModelAndView mav;
 	
-	@Autowired
-	private HttpSession session;
 	
 	@RequestMapping (value="/Members/Login")
 	public String login() {
@@ -37,15 +39,30 @@ public class memberController {
 	}
 	
 	@RequestMapping (value="/Members/memberJoin")
-	public ModelAndView memberjoin(@ModelAttribute Member member) throws IllegalStateException, IOException {
-		mav = memberservice.memberjoin(member);
-		return mav;
+	public String memberjoin(@ModelAttribute @Valid RegistrationForm registrationForm , BindingResult result , HttpSession session) throws IllegalStateException, IOException {
+		if (result.hasErrors()) {
+			return "Member/MemberJoinForm";
+		}
+		Member member = memberservice.memberjoin(registrationForm);
+		session.setAttribute("loginMember", member);
+		return "redirect:/";
+		
 	}
 	
 	@RequestMapping (value="/Members/memberLogin")
-	public ModelAndView memberlogin (@ModelAttribute Member member) {
-		mav = memberservice.memberlogin(member);
-		return mav;
+	public String memberlogin (@ModelAttribute LoginForm loginForm , BindingResult result , HttpSession session) {
+		Member member;
+		
+		try {
+			member = memberservice.memberlogin(loginForm);
+		} catch (RuntimeException e) {
+			FieldError fieldError = new FieldError("loginForm" , "invalidIdOrPassword" , e.getMessage());
+			result.addError(fieldError);
+			return "Member/Login";
+		}
+		
+		session.setAttribute("loginMember", member);
+		return "redirect:/";
 	}
 	
 	
