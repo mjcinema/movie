@@ -9,7 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>0joo's Movie</title>
+        <title>MJ Movie</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="${pageContext.request.contextPath}/resources/css/styles.css" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
@@ -53,7 +53,7 @@
                                     <div class="card-body" style="text-align:center;">
                                     	<div class="form-floating mb-3">
                                         			 <img style="height: 150px; width: 150px; border-radius: 50% !important;"
-                                    					src="${pageContext.request.contextPath}/img/memProfile/${member.mfilename}"> 
+                                    					src="${pageContext.request.contextPath}/resources/img/memProfile/${member.mfilename}"> 
                                         </div>
                                         <div class="form-floating mb-3">
                                           	    <button class="btn btn-primary btn-block" onclick="viewMprofileForm()">
