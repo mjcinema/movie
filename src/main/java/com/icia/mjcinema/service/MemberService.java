@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.List;
 
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -71,23 +70,19 @@ public class MemberService {
 		return result;
 	}
 
-	public ModelAndView memberview(String mid) {
-		mav = new ModelAndView();
+	public UpdateMemberForm memberview(String mid) {
+		
 		Member member = memberdao.memberview(mid);
 		// 1. member -> UpdateMemberForm으로 변환
 		UpdateMemberForm updateMemberForm = UpdateMemberForm.fromMember(member);
-		// 2. UpdateMemberForm을 모델에 담기
-		mav.addObject("member" , updateMemberForm);
-		mav.setViewName("/Members/MemberView");
-		return mav;
+										
+		return updateMemberForm;
 	}
 
-	public ModelAndView memberlist() {
-		mav = new ModelAndView();
-		List<Member> member = memberdao.memberlist();
-		mav.addObject("memberlist", member);
-		mav.setViewName("/Members/memberlist");
-		return mav;
+	public List<Member> memberlist() {
+		List<Member> members = memberdao.memberlist();
+		
+		return members;
 	}
 	
 	

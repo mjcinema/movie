@@ -1,12 +1,14 @@
 package com.icia.mjcinema.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.icia.mjcinema.domain.Member;
 import com.icia.mjcinema.dto.LoginForm;
 import com.icia.mjcinema.dto.RegistrationForm;
+import com.icia.mjcinema.dto.UpdateMemberForm;
 import com.icia.mjcinema.service.MemberService;
 
 @Controller
@@ -26,7 +29,8 @@ public class memberController {
 	@Autowired
 	private MemberService memberservice;
 	
-	
+	@Autowired
+	private HttpSession session;
 	
 	@RequestMapping (value="/Members/Login")
 	public String login() {
@@ -81,15 +85,18 @@ public class memberController {
 		
 	
 	@RequestMapping (value="/Members/memberView")
-	public ModelAndView memberview(@RequestParam("mid") String mid) {
-		mav = memberservice.memberview(mid);
-		return mav;
+	public String memberview(@RequestParam("mid") String mid , Model model) {
+		UpdateMemberForm member = memberservice.memberview(mid);
+		model.addAttribute("member", member);
+		
+		return "Members/MemberView";
 	}
 	
 	@RequestMapping (value="/Members/memberlist")
-	public ModelAndView memberlist() {
-		mav = memberservice.memberlist();
-		return mav;
+	public String memberlist(Model model) {
+		List<Member> members = memberservice.memberlist();
+		model.addAttribute("memberlist", members);
+		return "Members/memberlist";
 	}
 	
 
