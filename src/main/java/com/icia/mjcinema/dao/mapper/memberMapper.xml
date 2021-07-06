@@ -9,8 +9,8 @@
 		VALUES (#{mid} , #{mpw} , #{mname} , #{mbirth} , #{memail} , #{maddr} , #{mfilename})
 	</insert>
 	
-	<select id="memberlogin" parameterType="Member" resultType="String">
-		SELECT MID FROM MJMEMBER WHERE MID=#{mid} AND MPW=#{mpw}
+	<select id="memberlogin" parameterType="String" resultType="Member">
+		SELECT MID , MPW , MNAME , MBIRTH , MEMAIL , MADDR , MFILENAME FROM MJMEMBER WHERE MID=#{mid}
 	</select>
 	
 	<select id="idcheck" parameterType="String" resultType="Member">

@@ -22,7 +22,7 @@
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <c:choose>
                     <c:when test="${sessionScope.loginMember != null }">
-                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope.loginMember}</span>
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope.loginMember.mid}</span>
                     
                     </c:when>
                     <c:otherwise>

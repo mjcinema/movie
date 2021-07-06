@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.icia.mjcinema.domain.Member;
+import com.icia.mjcinema.dto.LoginForm;
 import com.icia.mjcinema.dto.pageDTO;
 
 @Repository
@@ -19,8 +20,8 @@ public class memberDAO {
 		sql.insert("ms.memberjoin" , member);		
 	}
 
-	public String memberlogin(Member member) {	
-		return sql.selectOne("ms.memberlogin" , member);
+	public Member memberlogin(String memberId) {	
+		return sql.selectOne("ms.memberlogin" , memberId);
 	}
 
 	public String idCheck(String mid) {		
