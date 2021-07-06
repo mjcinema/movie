@@ -37,15 +37,25 @@ public class MemberService {
 		member.setMemail(registrationForm.getMemail());
 		member.setMaddr(registrationForm.getMaddr());
 		
+		member.setMfilename(filename);
+		
 		memberdao.memberjoin(member);
 		Member joinUser = memberdao.memberlogin(member.getMid());
 		return joinUser;
 		
 	}
 
-	private String uploadImage(MultipartFile mfile) {
-		// TODO Auto-generated method stub
-		return null;
+	private String uploadImage(MultipartFile image) throws IllegalStateException, IOException {
+		MultipartFile mfile = image;
+		String mfilename = mfile.getOriginalFilename();
+		mfilename = System.currentTimeMillis() + "-" + mfilename;
+		String savePath = "D:\\source_BJH\\spring\\mjcinema\\src\\main\\webapp\\WEB-INF\\views\\img\\memProfile\\" + mfilename;
+		
+		if(!mfile.isEmpty()) {
+			mfile.transferTo(new File(savePath));
+		}
+		
+		return mfilename;
 	}
 
 	public Member memberlogin(LoginForm loginForm) {
