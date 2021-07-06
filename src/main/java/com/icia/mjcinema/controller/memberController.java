@@ -43,14 +43,15 @@ public class memberController {
 	}
 	
 	@RequestMapping (value="/Members/memberJoin")
-	public String memberjoin(@ModelAttribute @Valid RegistrationForm registrationForm , BindingResult result , HttpSession session) throws IllegalStateException, IOException {
+	public String memberjoin(@ModelAttribute @Valid RegistrationForm joinMemberForm, BindingResult result, HttpSession session) throws IllegalStateException, IOException {
+		
 		if (result.hasErrors()) {
-			return "Member/MemberJoinForm";
+			
+			return "Members/MemberJoinForm";
 		}
-		Member member = memberservice.memberjoin(registrationForm);
+		Member member = memberservice.memberjoin(joinMemberForm);
 		session.setAttribute("loginMember", member);
 		return "redirect:/";
-		
 	}
 	
 	@RequestMapping (value="/Members/memberLogin")
@@ -62,7 +63,7 @@ public class memberController {
 		} catch (RuntimeException e) {
 			FieldError fieldError = new FieldError("loginForm" , "invalidIdOrPassword" , e.getMessage());
 			result.addError(fieldError);
-			return "Member/Login";
+			return "Members/Login";
 		}
 		
 		session.setAttribute("loginMember", member);
