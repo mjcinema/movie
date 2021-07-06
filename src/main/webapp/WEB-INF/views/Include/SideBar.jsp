@@ -32,7 +32,7 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                 	<c:choose>
                                 	<c:when test="${sessionScope.loginMember != null }">
-                                		<a class="nav-link" href="${pageContext.request.contextPath}/Members/memberView?mid=${sessionScope.loginMember}">내정보</a>
+                                		<a class="nav-link" href="${pageContext.request.contextPath}/Members/memberView?mid=${sessionScope.loginMember.mid}">내정보</a>
                                 		<a class="nav-link" href="${pageContext.request.contextPath}/Movies/MovieReList?loginId=${sessionScope.loginMember}">예매내역</a>
                                 	</c:when>
                                 	
