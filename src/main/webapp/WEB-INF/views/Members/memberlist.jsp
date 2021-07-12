@@ -127,7 +127,7 @@
                                     	<c:forEach items="${memberlist}" var="member">
                                         <tr onclick="movieInfo('${reInfo[7]}')">
                                         	<td>                              
-                                        	<span>${member.mid}</span>
+                                        	<span>${member.username}</span>
                                         	</td>
                                             <td>${member.mname}</td>
                                             <td>${member.mbirth}</td>

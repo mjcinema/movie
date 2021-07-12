@@ -30,8 +30,8 @@ public class MemberService {
 		String filename = uploadImage(registrationForm.getMfile());
 
 		Member member = new Member();
-		member.setMid(registrationForm.getMid());
-		member.setMpw(registrationForm.getMpw());
+		member.setUsername(registrationForm.getMid());
+		member.setPassword(registrationForm.getMpw());
 		member.setMname(registrationForm.getMname());
 		member.setMbirth(registrationForm.getMbirth());
 		member.setMemail(registrationForm.getMemail());
@@ -40,7 +40,7 @@ public class MemberService {
 		member.setMfilename(filename);
 		
 		memberdao.memberjoin(member);
-		Member joinUser = memberdao.memberlogin(member.getMid());
+		Member joinUser = memberdao.memberlogin(member.getUsername());
 		return joinUser;
 		
 	}
@@ -49,7 +49,7 @@ public class MemberService {
 		MultipartFile mfile = image;
 		String mfilename = mfile.getOriginalFilename();
 		mfilename = System.currentTimeMillis() + "-" + mfilename;
-		String savePath = "D:\\mjcinema\\src\\main\\webapp\\resources\\img\\memProfile\\" + mfilename;
+
 		
 		if(!mfile.isEmpty()) {
 			mfile.transferTo(new File(savePath));
@@ -60,7 +60,7 @@ public class MemberService {
 
 	public Member memberlogin(LoginForm loginForm) {
 		Member member = memberdao.memberlogin(loginForm.getMid());
-		if(member == null || !loginForm.getMpw().equals(member.getMpw())) {
+		if(member == null || !loginForm.getMpw().equals(member.getPassword())) {
 			throw new IllegalStateException("아이디나 비밀번호가 일치하지 않습니다.");
 		}
 		return member;
@@ -95,6 +95,7 @@ public class MemberService {
 		return members;
 	}
 
+
 	public void updateProfileImage(String mid, MultipartFile file) throws IllegalStateException, IOException {
 		try {
 			//1. 사용자 찾기
@@ -109,6 +110,6 @@ public class MemberService {
 
 		}
 	}
-	
+
 
 }

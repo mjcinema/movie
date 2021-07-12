@@ -42,7 +42,7 @@
                         <ol class="breadcrumb mb-4">
                         	<c:choose>
                         		<c:when test="${sessionScope.loginMember != null }">
-                        			<li class="breadcrumb-item active" style="font-family: 'GmarketSansMedium';">MJ Movie에 오신걸 환영합니다! <span>${sessionScope.loginMember.mid }</span>님 :)</li>
+                        			<li class="breadcrumb-item active" style="font-family: 'GmarketSansMedium';">MJ Movie에 오신걸 환영합니다! <span>${sessionScope.loginMember.username }</span>님 :)</li>
                         		</c:when>
                         		<c:otherwise>
                             		<li class="breadcrumb-item active" style="font-family: 'GmarketSansMedium';">Welcome to MJ Movie :)</li>

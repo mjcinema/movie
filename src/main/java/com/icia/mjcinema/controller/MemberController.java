@@ -35,7 +35,7 @@ public class MemberController {
 	
 	@RequestMapping (value="/Members/Login")
 	public String login() {
-		return "Members/Login";
+		return "login/Login";
 	}
 	
 	@RequestMapping (value="/Members/MemberJoinForm")
@@ -64,7 +64,7 @@ public class MemberController {
 		} catch (RuntimeException e) {
 			FieldError fieldError = new FieldError("loginForm" , "invalidIdOrPassword" , e.getMessage());
 			result.addError(fieldError);
-			return "Members/Login";
+			return "login/Login";
 		}
 		
 		session.setAttribute("loginMember", member);
@@ -80,8 +80,8 @@ public class MemberController {
 	}
 	
 	@RequestMapping (value="/Members/idCheck")
-	public @ResponseBody String idCheck(@RequestParam("mid") String mid) {
-		String result = memberservice.idCheck(mid);
+	public @ResponseBody String idCheck(@RequestParam("mid") String username) {
+		String result = memberservice.idCheck(username);
 		return result;
 	}
 		

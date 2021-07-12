@@ -32,7 +32,7 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                 	<c:choose>
                                 	<c:when test="${sessionScope.loginMember != null }">
-                                		<a class="nav-link" href="${pageContext.request.contextPath}/Members/memberView?mid=${sessionScope.loginMember.mid}">내정보</a>
+                                		<a class="nav-link" href="${pageContext.request.contextPath}/Members/memberView?mid=${sessionScope.loginMember.username}">내정보</a>
                                 		<a class="nav-link" href="${pageContext.request.contextPath}/Movies/MovieReList?loginId=${sessionScope.loginMember}">예매내역</a>
                                 	</c:when>
                                 	
@@ -44,7 +44,7 @@
                                 	</c:choose>
                                 </nav>
                             </div>
-                            <c:if test="${sessionScope.loginMember.mid eq 'admin'}">                             
+
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                                 <div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>
                                 <span>관리</span>
