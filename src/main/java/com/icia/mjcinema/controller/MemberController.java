@@ -11,11 +11,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
+import org.springframework.web.multipart.MultipartFile;
 
 import com.icia.mjcinema.domain.Member;
 import com.icia.mjcinema.dto.LoginForm;
@@ -101,9 +104,13 @@ public class MemberController {
 	}
 	
 
-	
-	
-	
-	
+	@RequestMapping (value="/Members/modifyMemberProfile" )
+	public String profileModify(@RequestParam("mid") String mid, @RequestParam("mfile") MultipartFile mfile, Model model) throws IllegalStateException, IOException {
+		
+		memberservice.updateProfileImage(mid, mfile);
+		model.addAttribute("mid", mid);
+		model.addAttribute("mfile", mfile);
+		return "redirect:/Members/memberView";
+	}
 	
 }

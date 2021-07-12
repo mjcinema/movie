@@ -36,6 +36,10 @@ public class MemberDAO {
 		return sql.selectList("ms.memberlist");
 	}
 
+	public void updateProfileImage(Member member) {
+		sql.update("ms.updateProfileImage", member);
+	}
+
 	
 
 }

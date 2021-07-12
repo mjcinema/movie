@@ -25,5 +25,12 @@
 		SELECT * FROM MJMEMBER
 	</select>
 	
+	<update id="profileModify" parameterType="Member">
+		UPDATE MJMEMBER SET MEMAIL=#{memail} WHERE MID=#{mid}
+	</update>
+	
+	<update id="updateProfileImage" parameterType="Member">
+		UPDATE MJMEMBER SET MFILENAME=#{mfilename} WHERE MID=#{mid}
+	</update>
  </mapper>
  

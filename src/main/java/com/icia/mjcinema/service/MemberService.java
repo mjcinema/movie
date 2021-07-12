@@ -25,6 +25,39 @@ public class MemberService {
 	
 
 	
+	public void updateProfileImage(String mid, MultipartFile file) throws IllegalStateException, IOException {
+		try {
+		//1. 사용자 찾기
+		Member member = memberdao.memberview(mid);
+		//2. 이미지 저장
+		String filename = uploadImage(file);
+		//3. 프로필 이미지 주소 변경
+		member.setMfilename(filename);
+		
+		memberdao.updateProfileImage(member); }
+		catch (Exception e) {
+			
+		}	
+	}
+	
+	public void updateMember(UpdateMemberForm updateForm) {
+		
+		Member member = memberdao.memberview(updateForm.getMid());
+		
+		member.setMid(updateForm.getMid());
+		member.setMpw(updateForm.getMpw());
+		member.setMname(updateForm.getMname());
+		member.setMbirth(updateForm.getMbirth());
+		member.setMemail(updateForm.getMemail());
+		member.setMaddr(updateForm.getMaddr());
+		
+		String filename = uploadImage(updateForm.getMfile());
+		member.setMfilename(filename);
+		
+		memberdao.updateMember(member);
+		
+	}
+	
 	public Member memberjoin(RegistrationForm registrationForm) throws IllegalStateException, IOException {
 		
 		String filename = uploadImage(registrationForm.getMfile());
@@ -44,12 +77,12 @@ public class MemberService {
 		return joinUser;
 		
 	}
-
+	// todo uploadImage -> saveImage
 	private String uploadImage(MultipartFile image) throws IllegalStateException, IOException {
 		MultipartFile mfile = image;
 		String mfilename = mfile.getOriginalFilename();
 		mfilename = System.currentTimeMillis() + "-" + mfilename;
-		String savePath = "D:\\source_BJH\\spring\\mjcinema\\src\\main\\webapp\\resources\\img\\memProfile\\" + mfilename;
+		String savePath = "C:\\Users\\LeeMinYong\\git\\movie\\src\\main\\webapp\\resources\\img\\memProfile\\" + mfilename;
 		
 		if(!mfile.isEmpty()) {
 			mfile.transferTo(new File(savePath));
@@ -57,6 +90,8 @@ public class MemberService {
 		
 		return mfilename;
 	}
+	
+
 
 	public Member memberlogin(LoginForm loginForm) {
 		Member member = memberdao.memberlogin(loginForm.getMid());
@@ -94,7 +129,6 @@ public class MemberService {
 		
 		return members;
 	}
-	
 	
 	
 
