@@ -53,7 +53,7 @@
                                     <div class="card-body" style="text-align:center;">
                                     	<div class="form-floating mb-3">
                                         			 <img style="height: 150px; width: 150px; border-radius: 50% !important;"
-                                    					src="${pageContext.request.contextPath}/resources/img/memProfile/${member.mfilename}"> 
+                                    					src="/resources/img/memProfile/${member.mfilename}">
                                         </div>
                                         <div class="form-floating mb-3">
                                           	    <button class="btn btn-primary btn-block" onclick="viewMprofileForm()">
@@ -61,10 +61,10 @@
                                         </div>
                         			
                         				<div class="form-floating mb-3 show-hide"  id="modifyPfArea">
-                        				<form action="modifyMemberProfile" method="post" enctype="multipart/form-data">
-											<input type="file" name="newProfile" class="form-control" id="inputProfile">
-										 <input type="hidden" name="memberProfile" value="${member.mfile}">
-											<input type="hidden" name="profileId" value="${member.mid}">
+                        				<form id="updateImage" action="modifyMemberProfile" method="post" enctype="multipart/form-data">
+                                            <input type="file" name="mfile" class="form-control" id="inputProfile">
+                                            <input type="hidden" name="memberProfile" value="${member.mfile}">
+                                            <input type="hidden" name="mid" value="${member.mid}">
 											<br>
 											<input type="submit" class="btn btn-primary btn-block"  value="프로필변경">
                         				</form>
