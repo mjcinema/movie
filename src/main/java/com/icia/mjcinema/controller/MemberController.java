@@ -22,6 +22,7 @@ import com.icia.mjcinema.dto.LoginForm;
 import com.icia.mjcinema.dto.RegistrationForm;
 import com.icia.mjcinema.dto.UpdateMemberForm;
 import com.icia.mjcinema.service.MemberService;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class MemberController {
@@ -99,8 +100,15 @@ public class MemberController {
 		model.addAttribute("memberlist", members);
 		return "Members/memberlist";
 	}
-	
 
+	@RequestMapping (value="/Members/modifyMemberProfile" )
+	public String profileModify(@RequestParam("mid") String mid, @RequestParam("mfile") MultipartFile mfile, Model model) throws IllegalStateException, IOException {
+
+		memberservice.updateProfileImage(mid, mfile);
+		model.addAttribute("mid", mid);
+		model.addAttribute("mfile", mfile);
+		return "redirect:/Members/memberView";
+	}
 	
 	
 	

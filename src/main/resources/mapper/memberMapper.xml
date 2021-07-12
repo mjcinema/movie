@@ -24,6 +24,9 @@
 	<select id="memberlist" resultType="Member">
 		SELECT * FROM MJMEMBER
 	</select>
-	
+
+	<update id="updateProfileImage" parameterType="Member">
+		UPDATE MJMEMBER SET MFILENAME=#{mfilename} WHERE MID=#{mid}
+	</update>
  </mapper>
  

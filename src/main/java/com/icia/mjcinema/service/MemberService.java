@@ -49,7 +49,7 @@ public class MemberService {
 		MultipartFile mfile = image;
 		String mfilename = mfile.getOriginalFilename();
 		mfilename = System.currentTimeMillis() + "-" + mfilename;
-		String savePath = "D:\\source_BJH\\spring\\mjcinema\\src\\main\\webapp\\resources\\img\\memProfile\\" + mfilename;
+		String savePath = "D:\\mjcinema\\src\\main\\webapp\\resources\\img\\memProfile\\" + mfilename;
 		
 		if(!mfile.isEmpty()) {
 			mfile.transferTo(new File(savePath));
@@ -94,8 +94,21 @@ public class MemberService {
 		
 		return members;
 	}
-	
-	
+
+	public void updateProfileImage(String mid, MultipartFile file) throws IllegalStateException, IOException {
+		try {
+			//1. 사용자 찾기
+			Member member = memberdao.memberview(mid);
+			//2. 이미지 저장
+			String filename = uploadImage(file);
+			//3. 프로필 이미지 주소 변경
+			member.setMfilename(filename);
+
+			memberdao.updateProfileImage(member); }
+		catch (Exception e) {
+
+		}
+	}
 	
 
 }
