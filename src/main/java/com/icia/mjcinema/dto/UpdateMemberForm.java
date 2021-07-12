@@ -22,9 +22,9 @@ public class UpdateMemberForm {
 	
 	public static UpdateMemberForm fromMember(Member member) {
 		UpdateMemberForm form = new UpdateMemberForm();
-		form.setMid(member.getMid());
+		form.setMid(member.getUsername());
 		form.setMname(member.getMname());
-		form.setMpw(member.getMpw());
+		form.setMpw(member.getPassword());
 		form.setMbirth(member.getMbirth());
 		form.setMaddr(member.getMaddr());
 		form.setMemail(member.getMemail());

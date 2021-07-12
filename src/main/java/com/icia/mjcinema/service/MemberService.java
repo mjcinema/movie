@@ -24,32 +24,14 @@ public class MemberService {
 	private MemberDAO memberdao;
 	
 
-	 
-	public void updateProfileImage(String mid, MultipartFile file) throws IllegalStateException, IOException {
-		try {
-		//1. 사용자 찾기
-		Member member = memberdao.memberview(mid);
-		//2. 이미지 저장
-		String filename = uploadImage(file);
-		//3. 프로필 이미지 주소 변경
-		member.setMfilename(filename);
-		
-		memberdao.updateProfileImage(member); }
-		catch (Exception e) {
-			
-		}	
-	}
-	
-
-	
 	
 	public Member memberjoin(RegistrationForm registrationForm) throws IllegalStateException, IOException {
 		
 		String filename = uploadImage(registrationForm.getMfile());
 
 		Member member = new Member();
-		member.setMid(registrationForm.getMid());
-		member.setMpw(registrationForm.getMpw());
+		member.setUsername(registrationForm.getMid());
+		member.setPassword(registrationForm.getMpw());
 		member.setMname(registrationForm.getMname());
 		member.setMbirth(registrationForm.getMbirth());
 		member.setMemail(registrationForm.getMemail());
@@ -58,16 +40,16 @@ public class MemberService {
 		member.setMfilename(filename);
 		
 		memberdao.memberjoin(member);
-		Member joinUser = memberdao.memberlogin(member.getMid());
+		Member joinUser = memberdao.memberlogin(member.getUsername());
 		return joinUser;
 		
 	}
-	// todo uploadImage -> saveImage
+
 	private String uploadImage(MultipartFile image) throws IllegalStateException, IOException {
 		MultipartFile mfile = image;
 		String mfilename = mfile.getOriginalFilename();
 		mfilename = System.currentTimeMillis() + "-" + mfilename;
-		String savePath = "C:\\Users\\LeeMinYong\\git\\movie\\src\\main\\webapp\\resources\\img\\memProfile\\" + mfilename;
+		String savePath = "D:\\source_BJH\\movie\\src\\main\\webapp\\resources\\img\\memProfile\\" + mfilename;
 		
 		if(!mfile.isEmpty()) {
 			mfile.transferTo(new File(savePath));
@@ -75,12 +57,10 @@ public class MemberService {
 		
 		return mfilename;
 	}
-	
-
 
 	public Member memberlogin(LoginForm loginForm) {
 		Member member = memberdao.memberlogin(loginForm.getMid());
-		if(member == null || !loginForm.getMpw().equals(member.getMpw())) {
+		if(member == null || !loginForm.getMpw().equals(member.getPassword())) {
 			throw new IllegalStateException("아이디나 비밀번호가 일치하지 않습니다.");
 		}
 		return member;
@@ -116,5 +96,21 @@ public class MemberService {
 	}
 	
 	
+
+	public void updateProfileImage(String mid, MultipartFile file) throws IllegalStateException, IOException {
+		try {
+			//1. 사용자 찾기
+			Member member = memberdao.memberview(mid);
+			//2. 이미지 저장
+			String filename = uploadImage(file);
+			//3. 프로필 이미지 주소 변경
+			member.setMfilename(filename);
+
+			memberdao.updateProfileImage(member); }
+		catch (Exception e) {
+
+		}
+	}
+
 
 }

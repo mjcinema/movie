@@ -22,7 +22,7 @@
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <c:choose>
                     <c:when test="${sessionScope.loginMember != null }">
-                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope.loginMember.mid}</span>
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope.loginMember.username}</span>
                     
                     </c:when>
                     <c:otherwise>
@@ -35,7 +35,7 @@
                     
                     <c:choose>     
                     	<c:when test="${sessionScope.loginMember != null }">
-                    	<li><a class="dropdown-item" href="${pageContext.request.contextPath}/Members/memberView?mid=${sessionScope.loginMember.mid}"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> 내정보</a></li>
+                    	<li><a class="dropdown-item" href="${pageContext.request.contextPath}/Members/memberView?mid=${sessionScope.loginMember.username}"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> 내정보</a></li>
                         <li><a class="dropdown-item" href="${pageContext.request.contextPath}/Movies/MovieReList?loginId=${sessionScope.loginMember}"> <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i> 예매 내역</a></li>
                         <li><hr class="dropdown-divider" /></li>
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/Members/memberLogout">

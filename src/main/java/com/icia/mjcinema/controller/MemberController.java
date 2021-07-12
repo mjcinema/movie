@@ -11,20 +11,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
+
 
 import com.icia.mjcinema.domain.Member;
 import com.icia.mjcinema.dto.LoginForm;
 import com.icia.mjcinema.dto.RegistrationForm;
 import com.icia.mjcinema.dto.UpdateMemberForm;
 import com.icia.mjcinema.service.MemberService;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class MemberController {
@@ -37,7 +35,7 @@ public class MemberController {
 	
 	@RequestMapping (value="/Members/Login")
 	public String login() {
-		return "Members/Login";
+		return "login/Login";
 	}
 	
 	@RequestMapping (value="/Members/MemberJoinForm")
@@ -66,7 +64,7 @@ public class MemberController {
 		} catch (RuntimeException e) {
 			FieldError fieldError = new FieldError("loginForm" , "invalidIdOrPassword" , e.getMessage());
 			result.addError(fieldError);
-			return "Members/Login";
+			return "login/Login";
 		}
 		
 		session.setAttribute("loginMember", member);
@@ -82,8 +80,8 @@ public class MemberController {
 	}
 	
 	@RequestMapping (value="/Members/idCheck")
-	public @ResponseBody String idCheck(@RequestParam("mid") String mid) {
-		String result = memberservice.idCheck(mid);
+	public @ResponseBody String idCheck(@RequestParam("mid") String username) {
+		String result = memberservice.idCheck(username);
 		return result;
 	}
 		
@@ -102,15 +100,18 @@ public class MemberController {
 		model.addAttribute("memberlist", members);
 		return "Members/memberlist";
 	}
-	
-    
+
 	@RequestMapping (value="/Members/modifyMemberProfile" )
 	public String profileModify(@RequestParam("mid") String mid, @RequestParam("mfile") MultipartFile mfile, Model model) throws IllegalStateException, IOException {
-		
+
 		memberservice.updateProfileImage(mid, mfile);
 		model.addAttribute("mid", mid);
 		model.addAttribute("mfile", mfile);
 		return "redirect:/Members/memberView";
 	}
+	
+	
+	
+	
 	
 }

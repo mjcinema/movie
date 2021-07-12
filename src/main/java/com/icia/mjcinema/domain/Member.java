@@ -12,10 +12,10 @@ public class Member {
 //			MEMAIL => 이메일
 //			MADDR => 주소
 //			MPROFILE => 프로필이미지
-	
-	private String mid;
-	private String mname;
-	private String mpw;
+	private Long id;
+	private String username;
+	private String password;
+	private String name;
 	private String mbirth;
 	private String memail;
 	private String maddr;

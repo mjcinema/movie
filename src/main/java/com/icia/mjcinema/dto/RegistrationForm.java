@@ -24,9 +24,9 @@ public class RegistrationForm {
 	
 	public Member toMember() {
 		Member member = new Member();
-		member.setMid(mid);
+		member.setUsername(mid);
 		member.setMname(mname);
-		member.setMpw(mpw);
+		member.setPassword(mpw);
 		member.setMbirth(mbirth);
 		member.setMemail(memail);
 		member.setMaddr(maddr);

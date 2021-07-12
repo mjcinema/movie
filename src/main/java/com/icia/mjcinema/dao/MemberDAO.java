@@ -20,8 +20,8 @@ public class MemberDAO {
 		sql.insert("ms.memberjoin" , member);		
 	}
 
-	public Member memberlogin(String memberId) {	
-		return sql.selectOne("ms.memberlogin" , memberId);
+	public Member memberlogin(String username) {
+		return sql.selectOne("ms.memberlogin" , username);
 	}
 
 	public String idCheck(String mid) {		
@@ -40,6 +40,5 @@ public class MemberDAO {
 		sql.update("ms.updateProfileImage", member);
 	}
 
-	
 
 }
