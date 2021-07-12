@@ -59,7 +59,7 @@
                                           	    <button class="btn btn-primary btn-block" onclick="viewMprofileForm()">
                                           	    프로필 사진 변경</button>
                                         </div>
-                        			
+                        			 
                         				<div class="form-floating mb-3 show-hide"  id="modifyPfArea">
                         				<form id="updateImage" action="/Members/modifyMemberProfile" method="post" enctype="multipart/form-data">
 											<input type="file" name="mfile" class="form-control" id="inputProfile">

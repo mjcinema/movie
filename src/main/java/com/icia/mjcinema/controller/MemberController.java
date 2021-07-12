@@ -103,7 +103,7 @@ public class MemberController {
 		return "Members/memberlist";
 	}
 	
-
+    
 	@RequestMapping (value="/Members/modifyMemberProfile" )
 	public String profileModify(@RequestParam("mid") String mid, @RequestParam("mfile") MultipartFile mfile, Model model) throws IllegalStateException, IOException {
 		

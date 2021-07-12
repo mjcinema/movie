@@ -24,7 +24,7 @@ public class MemberService {
 	private MemberDAO memberdao;
 	
 
-	
+	 
 	public void updateProfileImage(String mid, MultipartFile file) throws IllegalStateException, IOException {
 		try {
 		//1. 사용자 찾기
@@ -40,23 +40,8 @@ public class MemberService {
 		}	
 	}
 	
-	public void updateMember(UpdateMemberForm updateForm) {
-		
-		Member member = memberdao.memberview(updateForm.getMid());
-		
-		member.setMid(updateForm.getMid());
-		member.setMpw(updateForm.getMpw());
-		member.setMname(updateForm.getMname());
-		member.setMbirth(updateForm.getMbirth());
-		member.setMemail(updateForm.getMemail());
-		member.setMaddr(updateForm.getMaddr());
-		
-		String filename = uploadImage(updateForm.getMfile());
-		member.setMfilename(filename);
-		
-		memberdao.updateMember(member);
-		
-	}
+
+	
 	
 	public Member memberjoin(RegistrationForm registrationForm) throws IllegalStateException, IOException {
 		
