@@ -30,8 +30,8 @@ public class UserService {
 		String imageName = saveImage(registrationForm.getFile());
 		user.setImageName(imageName);
 
-		userDao.memberjoin(user);
-		User joinUser = userDao.memberlogin(user.getUsername());
+		userDao.save(user);
+		User joinUser = userDao.getUserByUsername(user.getUsername());
 		return joinUser;
 		
 	}
@@ -50,7 +50,7 @@ public class UserService {
 	}
 
 	public User login(LoginForm loginForm) {
-		User user = userDao.memberlogin(loginForm.getMid());
+		User user = userDao.getUserByUsername(loginForm.getMid());
 		if(user == null || !loginForm.getMpw().equals(user.getPassword())) {
 			throw new IllegalStateException("아이디나 비밀번호가 일치하지 않습니다.");
 		}

@@ -13,17 +13,24 @@ public class UserDao {
 
 	@Autowired
 	private SqlSessionTemplate sql;
-	
-	public void memberjoin(User user) {
-		sql.insert("ms.memberjoin" , user);
+
+	/*
+	 * CRUD
+	 * Create
+	 * Update
+	 * Delete
+	 * Read Select by ***;
+	 */
+	public void save(User user) {
+		sql.insert("UserMapper.save", user);
 	}
 
-	public User memberlogin(String username) {
-		return sql.selectOne("ms.memberlogin" , username);
+	public User getUserByUsername(String username) {
+		return sql.selectOne("UserMapper.getUserByUsername", username);
 	}
 
 	public String idCheck(String mid) {		
-		return sql.selectOne("ms.idcheck" , mid);
+		return sql.selectOne("UserMapper.idcheck" , mid);
 	}
 
 	public User memberview(String mid) {
