@@ -31,8 +31,8 @@ public class UserService {
 		user.setImageName(imageName);
 
 		userDao.save(user);
-		User joinUser = userDao.getUserByUsername(user.getUsername());
-		return joinUser;
+
+		return userDao.selectUserByUsername(user.getUsername());
 		
 	}
 
@@ -50,16 +50,16 @@ public class UserService {
 	}
 
 	public User login(LoginForm loginForm) {
-		User user = userDao.getUserByUsername(loginForm.getMid());
-		if(user == null || !loginForm.getMpw().equals(user.getPassword())) {
+		User user = userDao.selectUserByUsername(loginForm.getUsername());
+		if(user == null || !loginForm.getPassword().equals(user.getPassword())) {
 			throw new IllegalStateException("아이디나 비밀번호가 일치하지 않습니다.");
 		}
 		return user;
 		
 	}
 
-	public String idCheck(String mid) {
-		String checkResult = userDao.idCheck(mid);
+	public String idCheck(String username) {
+		User checkResult = userDao.selectUserByUsername(username);
 		String result = "";
 		
 		if(checkResult == null) {
@@ -71,26 +71,23 @@ public class UserService {
 		return result;
 	}
 
-	public UpdateUserForm memberview(String mid) {
+	public UpdateUserForm memberview(String username) {
 		
-		User user = userDao.memberview(mid);
-		// 1. member -> UpdateMemberForm으로 변환
-		UpdateUserForm updateUserForm = UpdateUserForm.fromMember(user);
-										
-		return updateUserForm;
+		User user = userDao.selectUserByUsername(username);
+
+		return UpdateUserForm.fromMember(user);
 	}
 
 	public List<User> getUsers() {
-		List<User> users = userDao.memberlist();
-		
-		return users;
+
+		return userDao.selectUsers();
 	}
 
 
-	public void updateProfileImage(String mid, MultipartFile file) throws IllegalStateException, IOException {
+	public void updateProfileImage(String username, MultipartFile file) throws IllegalStateException, IOException {
 		try {
 			//1. 사용자 찾기
-			User user = userDao.memberview(mid);
+			User user = userDao.selectUserByUsername(username);
 			//2. 이미지 저장
 			String filename = saveImage(file);
 			//3. 프로필 이미지 주소 변경
@@ -104,9 +101,8 @@ public class UserService {
 
 
 	public UpdateUserForm memberListView(String username) {
-		User user = userDao.memberListView(username);
-		UpdateUserForm updateUserForm = UpdateUserForm.fromMember(user);
-		return updateUserForm;
+		User user = userDao.selectUserByUsername(username);
+		return UpdateUserForm.fromMember(user);
 
 	}
 }
