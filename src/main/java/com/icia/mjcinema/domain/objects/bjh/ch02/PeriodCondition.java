@@ -1,6 +1,4 @@
-package com.icia.mjcinema.domain.objects;
-
-import org.apache.ibatis.annotations.Param;
+package com.icia.mjcinema.domain.objects.bjh.ch02;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
