@@ -14,8 +14,8 @@ public class Movie {
 	private String mgenre;
 	private String mgrade;
 	private String mvfilename;
+	private String fee;
 	
 	private MultipartFile mvfile;
-	
-	
+
 }

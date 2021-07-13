@@ -112,4 +112,10 @@ public class MemberService {
 	}
 
 
+	public UpdateMemberForm memberListView(String username) {
+		Member member = memberdao.memberListView(username);
+		UpdateMemberForm updateMemberForm = UpdateMemberForm.fromMember(member);
+		return 	updateMemberForm;
+
+	}
 }

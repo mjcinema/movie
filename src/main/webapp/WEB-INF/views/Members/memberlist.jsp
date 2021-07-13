@@ -125,7 +125,7 @@
                                     </tfoot>
                                     <tbody>
                                     	<c:forEach items="${memberlist}" var="member">
-                                        <tr onclick="movieInfo('${reInfo[7]}')">
+                                        <tr onclick="movieInfo('${member.username}')">
                                         	<td>                              
                                         	<span>${member.username}</span>
                                         	</td>
@@ -161,9 +161,9 @@
         <script src="${pageContext.request.contextPath}/resources/js/datatables-simple-demo.js"></script>
     </body>
 	<script>
-	function movieInfo(movCode){
-		console.log("movCode: "+movCode);
-		location.href="movieInfo?mvCode="+movCode;
+	function movieInfo(username){
+		console.log("username: "+username);
+		location.href="memberInfo?username="+username;
 	}
 	</script>    
 </html>

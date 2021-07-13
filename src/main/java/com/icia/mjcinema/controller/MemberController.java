@@ -109,7 +109,15 @@ public class MemberController {
 		model.addAttribute("mfile", mfile);
 		return "redirect:/Members/memberView";
 	}
-	
+
+	@RequestMapping (value = "/Members/memberInfo")
+	public String MemberListView(@RequestParam("username") String username , Model model){
+		UpdateMemberForm member = memberservice.memberListView(username);
+		model.addAttribute("member" , member);
+		return "/Members/MemberInfo";
+	}
+
+
 	
 	
 	
