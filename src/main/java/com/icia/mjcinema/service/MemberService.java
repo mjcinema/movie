@@ -49,7 +49,7 @@ public class MemberService {
 		MultipartFile mfile = image;
 		String mfilename = mfile.getOriginalFilename();
 		mfilename = System.currentTimeMillis() + "-" + mfilename;
-
+		String savePath ="";
 		
 		if(!mfile.isEmpty()) {
 			mfile.transferTo(new File(savePath));
