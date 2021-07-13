@@ -41,4 +41,7 @@ public class MemberDAO {
 	}
 
 
+	public Member memberListView(String username) {
+		return sql.selectOne("ms.memberlistview" , username);
+	}
 }
