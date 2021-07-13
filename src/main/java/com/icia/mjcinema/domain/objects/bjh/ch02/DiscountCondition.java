@@ -1,4 +1,4 @@
-package com.icia.mjcinema.domain.objects;
+package com.icia.mjcinema.domain.objects.bjh.ch02;
 
 public interface DiscountCondition {
 
