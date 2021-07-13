@@ -7,15 +7,13 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import com.icia.mjcinema.domain.User;
+import oracle.jdbc.proxy.annotation.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 
 import com.icia.mjcinema.dto.LoginForm;
@@ -32,19 +30,35 @@ public class UserController {
 	
 	@Autowired
 	private HttpSession session;
-	
-	@RequestMapping (value="/Members/Login")
+
+	@GetMapping(value="/login")
 	public String login() {
 		return "login/Login";
 	}
-	
-	@RequestMapping (value="/Members/MemberJoinForm")
+
+	@RequestMapping (value="/Members/memberLogin")
+	public String login (@ModelAttribute LoginForm loginForm , BindingResult result , HttpSession session) {
+		User user;
+
+		try {
+			user = userService.login(loginForm);
+		} catch (RuntimeException e) {
+			FieldError fieldError = new FieldError("loginForm" , "invalidIdOrPassword" , e.getMessage());
+			result.addError(fieldError);
+			return "login/Login";
+		}
+
+		session.setAttribute("loginMember", user);
+		return "redirect:/";
+	}
+
+	@GetMapping("/register")
 	public String joinform() {
 		return "Members/MemberJoinForm";
 	}
 	
-	@RequestMapping (value="/Members/memberJoin")
-	public String memberjoin(@ModelAttribute @Valid RegistrationForm joinMemberForm, BindingResult result, HttpSession session) throws IllegalStateException, IOException {
+	@PostMapping("/register")
+	public String join(@ModelAttribute @Valid RegistrationForm joinMemberForm, BindingResult result, HttpSession session) throws IllegalStateException, IOException {
 		
 		if (result.hasErrors()) {
 			
@@ -54,26 +68,8 @@ public class UserController {
 		session.setAttribute("loginMember", user);
 		return "redirect:/";
 	}
-	
-	@RequestMapping (value="/Members/memberLogin")
-	public String memberlogin (@ModelAttribute LoginForm loginForm , BindingResult result , HttpSession session) {
-		User user;
-		
-		try {
-			user = userService.login(loginForm);
-		} catch (RuntimeException e) {
-			FieldError fieldError = new FieldError("loginForm" , "invalidIdOrPassword" , e.getMessage());
-			result.addError(fieldError);
-			return "login/Login";
-		}
-		
-		session.setAttribute("loginMember", user);
-		return "redirect:/";
-	}
-	
-	
-		
-	@RequestMapping (value="/Members/memberLogout")
+
+	@GetMapping("/logout")
 	public String logout() {
 		session.invalidate();
 		return "MovieMain";
@@ -117,9 +113,10 @@ public class UserController {
 		return "/Members/MemberInfo";
 	}
 
+	@PostMapping("/users/{username}/delete")
+	public String leaveUser(@PathVariable("username") String username) {
+		userService.leaveUser(username);
 
-	
-	
-	
-	
+		return "redirect:/";
+	}
 }

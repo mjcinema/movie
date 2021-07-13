@@ -41,12 +41,16 @@ public class UserService {
 		String mfilename = mfile.getOriginalFilename();
 		mfilename = System.currentTimeMillis() + "-" + mfilename;
 		String savePath ="";
-		
+
 		if(!mfile.isEmpty()) {
 			mfile.transferTo(new File(savePath));
 		}
-		
+
 		return mfilename;
+	}
+
+	public List<User> getUsers() {
+		return userDao.selectUsers();
 	}
 
 	public User login(LoginForm loginForm) {
@@ -78,11 +82,19 @@ public class UserService {
 		return UpdateUserForm.fromMember(user);
 	}
 
-	public List<User> getUsers() {
-
-		return userDao.selectUsers();
+	public void leaveUser(String username) {
+		User user = userDao.selectUserByUsername(username);
+		if (user == null) {
+			throw new IllegalArgumentException("유저가 없습니다.");
+		}
+		userDao.deleteUser(username);
 	}
 
+	public UpdateUserForm memberListView(String username) {
+		User user = userDao.selectUserByUsername(username);
+		return UpdateUserForm.fromMember(user);
+
+	}
 
 	public void updateProfileImage(String username, MultipartFile file) throws IllegalStateException, IOException {
 		try {
@@ -97,12 +109,5 @@ public class UserService {
 		catch (Exception e) {
 
 		}
-	}
-
-
-	public UpdateUserForm memberListView(String username) {
-		User user = userDao.selectUserByUsername(username);
-		return UpdateUserForm.fromMember(user);
-
 	}
 }
