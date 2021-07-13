@@ -53,8 +53,8 @@ public class UserController {
 	}
 
 	@GetMapping("/register")
-	public String joinform() {
-		return "Members/MemberJoinForm";
+	public String registrationForm() {
+		return "register/register";
 	}
 	
 	@PostMapping("/register")
@@ -62,7 +62,7 @@ public class UserController {
 		
 		if (result.hasErrors()) {
 			
-			return "Members/MemberJoinForm";
+			return "register/register";
 		}
 		User user = userService.join(joinMemberForm);
 		session.setAttribute("loginMember", user);

@@ -27,8 +27,8 @@ public class UserService {
 
 		User user = registrationForm.toUser();
 
-		String imageName = saveImage(registrationForm.getFile());
-		user.setImageName(imageName);
+		//String imageName = saveImage(registrationForm.getFile());
+		user.setImageName("default-image.jpg");
 
 		userDao.save(user);
 

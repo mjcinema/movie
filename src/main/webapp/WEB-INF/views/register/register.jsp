@@ -65,12 +65,12 @@
                                     <div class="card-body">
                                     
                                     <!--  회원가입 -->
-                                        <form action="memberJoin" method="post" enctype="multipart/form-data" >
+                                        <form action="${pageContext.request.contextPath}/register" method="post" enctype="multipart/form-data" id="registrationForm">
                                         	
                                         	<div class="row mb-3">
                                         		<div class="col-md-9">
                                             	<div class="form-floating mb-3">
-                                               	 <input class="form-control" id="mId" name="mid" type="text" placeholder="아이디" />
+                                               	 <input class="form-control" id="mId" name="username" type="text" placeholder="아이디" />
                                                	 <label for="inputEmail">아이디</label>
                                                	 </div>
                                                	 </div>
@@ -91,27 +91,27 @@
                                             <div class="row mb-3">
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="mName" name="mname" type="text" placeholder="이름" />
+                                                        <input class="form-control" id="mName" name="name" type="text" placeholder="이름" />
                                                         <label for="inputPassword">이름</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="mBirth" name="mbirth" type="date" placeholder="생년월일" />
+                                                        <input class="form-control" id="mBirth" name="birth" type="date" placeholder="생년월일" />
                                                         <label for="inputPasswordConfirm">생년월일</label>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="mEmail" name="memail" type="email" placeholder="이메일" />
+                                                <input class="form-control" id="mEmail" name="email" type="email" placeholder="이메일" />
                                                 <label for="inputEmail">이메일</label>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="mAddr" name="maddr" type="text" placeholder="주소" />
+                                                <input class="form-control" id="mAddr" name="address" type="text" placeholder="주소" />
                                                 <label for="inputEmail">주소</label>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="mProfile" name="mfile" type="file" placeholder="프로필이미지" />
+                                                <input class="form-control" id="mProfile" name="file" type="file" placeholder="프로필이미지" />
                                                 <label for="inputEmail">프로필이미지</label>
                                             </div>
                                             <div class="mt-4 mb-0">
@@ -120,7 +120,7 @@
                                         </form>
                                     </div>
                                     <div class="card-footer text-center py-3">
-                                        <div class="small"><a href="Login">이미 가입이 되어있쥬?</a></div>
+                                        <div class="small"><a href="${pageContext.request.contextPath}/login">이미 가입이 되어있쥬?</a></div>
                                     </div>
                                 </div>
                             </div>
