@@ -14,25 +14,25 @@
 		<result property="enabled" column="enabled"/>
 	</resultMap>
 
-	<insert id="insertUser" parameterType="USER">
+	<insert id="insertUser" parameterType="User">
 		INSERT INTO Users (USERNAME, PASSWORD, NAME, birth, EMAIL, ADDRESS, IMAGE_NAME)
 		VALUES (#{username} , #{password} , #{name} , #{birth} , #{email} , #{address} , #{imageName})
 	</insert>
 
-	<select id="selectUsers" resultMap="USER">
+	<select id="selectUsers" resultMap="User">
 		SELECT * FROM Users
 	</select>
 
-	<select id="selectUserByUsername" parameterType="String" resultMap="USER">
-		SELECT username, password, enabled, name, birth_date, email, address, image_name,  FROM 'USERS'
+	<select id="selectUserByUsername" parameterType="String" resultMap="User">
+		SELECT username, password, enabled, name, birth, email, address, image_name FROM users WHERE username=#{username}
 	</select>
 
 	<delete id="deleteUser" parameterType="String">
 		DELETE FROM users where username = #{username}
 	</delete>
 
-	<update id="updateProfileImage" parameterType="USER">
-		UPDATE Users SET image_name=#{imageName} WHERE username = #{username}
+	<update id="updateProfileImage" parameterType="User">
+		UPDATE Users SET image_name=#{imageName} WHERE username=#{username}
 	</update>
  </mapper>
  

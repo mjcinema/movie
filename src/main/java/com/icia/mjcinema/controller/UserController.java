@@ -36,7 +36,7 @@ public class UserController {
 		return "login/Login";
 	}
 
-	@RequestMapping (value="/Members/memberLogin")
+	@PostMapping("/login")
 	public String login (@ModelAttribute LoginForm loginForm , BindingResult result , HttpSession session) {
 		User user;
 
@@ -69,10 +69,10 @@ public class UserController {
 		return "redirect:/";
 	}
 
-	@GetMapping("/logout")
+	@PostMapping("/logout")
 	public String logout() {
 		session.invalidate();
-		return "MovieMain";
+		return "redirect:/";
 	}
 	
 	@RequestMapping (value="/Members/idCheck")

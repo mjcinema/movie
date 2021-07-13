@@ -1,8 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>    
-    
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +10,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>MJ Moive</title>
+        <title>MJ Movie</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="${pageContext.request.contextPath}/resources/css/styles.css" rel="stylesheet" />
 
@@ -26,7 +24,7 @@
    		</style>
     </head>
     <body class="sb-nav-fixed">
-        
+
          <%@ include file = "../Include/TopBar.jsp" %>
          
         
@@ -48,15 +46,14 @@
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4 mt-4">로그인하라우!</h3></div>
                                     
                                     <div class="card-body" style="font-family: 'GmarketSansMedium';">
-                                        <form action="memberLogin" method="post" onsubmit="return loginCheck()">
+                                        <form action="${pageContext.request.contextPath}/login" method="post" onsubmit="return loginCheck()">
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="loginId" name="mid" type="text"  />
-                                                <label for="inputEmail" id="idLabel">아이디 입력</label>
-                                               
+                                                <input class="form-control" id="username" name="username" type="text"/>
+                                                <label for="username" id="idLabel">아이디 입력</label>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="loginPw" name="mpw" type="password" />
-                                                <label for="inputPassword" id="pwLabel">비밀번호 입력</label>
+                                                <input class="form-control" id="password" name="password" type="password" />
+                                                <label for="password" id="pwLabel">비밀번호 입력</label>
                                                 
                                             </div>
                                             <spring:hasBindErrors name="loginForm">
@@ -71,7 +68,7 @@
                                         </form>
                                     </div>
                                     <div class="card-footer text-center py-3">
-                                        <div class="small"><a href="MemberJoinForm">아직 회원이 아니쥬?</a></div>
+                                        <div class="small"><a href="/register">아직 회원이 아니쥬?</a></div>
                                     </div>
                                 </div>
                             </div>
@@ -82,7 +79,7 @@
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                          <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted" href="./">Copyright &copy; MJ Movie </div>
+                            <div class="text-muted" href="/">Copyright &copy; MJ Movie </div>
                        
                         </div>
                     </div>
@@ -99,8 +96,8 @@
     </body>
     <script>
     	function loginCheck(){
-    		var id = $("#loginId").val();
-    		var pw = $("#loginPw").val();
+    		var id = $("#username").val();
+    		var pw = $("#password").val();
     		if(id == ""){
     			$("#idLabel").css("color","red").text("아이디를 입력해 주세요");
     			return false;
