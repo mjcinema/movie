@@ -2,31 +2,30 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
- 
  <mapper namespace="ms"> 
-	<insert id="memberjoin" parameterType="Member">
-		INSERT INTO MJMEMBER (MID , MPW , MNAME , MBIRTH , MEMAIL , MADDR , MFILENAME)
+	<insert id="insertUser" parameterType="USER">
+		INSERT INTO Users (MID , MPW , MNAME , MBIRTH , MEMAIL , MADDR , MFILENAME)
 		VALUES (#{mid} , #{mpw} , #{mname} , #{mbirth} , #{memail} , #{maddr} , #{mfilename})
 	</insert>
 	
-	<select id="memberlogin" parameterType="String" resultType="Member">
-		SELECT MID , MPW , MNAME , MBIRTH , MEMAIL , MADDR , MFILENAME FROM MJMEMBER WHERE MID=#{mid}
+	<select id="selectUserByUsername" parameterType="String" resultType="Member">
+		SELECT username, password, enabled, name, birth_date, email, address, image_name,  FROM 'USERS'
 	</select>
 	
 	<select id="idcheck" parameterType="String" resultType="Member">
-		SELECT MID FROM MJMEMBER WHERE MID=#{mid}
+		SELECT MID FROM Users WHERE MID=#{mid}
 	</select>
 	
 	<select id="memberview" parameterType="String" resultType="Member">
-		SELECT * FROM MJMEMBER WHERE MID=#{mid}
+		SELECT * FROM Users WHERE MID=#{mid}
 	</select>
 	
 	<select id="memberlist" resultType="Member">
-		SELECT * FROM MJMEMBER
+		SELECT * FROM Users
 	</select>
 
 	<update id="updateProfileImage" parameterType="Member">
-		UPDATE MJMEMBER SET MFILENAME=#{mfilename} WHERE MID=#{mid}
+		UPDATE Users SET MFILENAME=#{mfilename} WHERE MID=#{mid}
 	</update>
  </mapper>
  

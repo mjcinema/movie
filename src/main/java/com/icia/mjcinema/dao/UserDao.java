@@ -2,25 +2,23 @@ package com.icia.mjcinema.dao;
 
 import java.util.List;
 
+import com.icia.mjcinema.domain.User;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.icia.mjcinema.domain.Member;
-import com.icia.mjcinema.dto.LoginForm;
-
 
 @Repository
-public class MemberDAO {
+public class UserDao {
 
 	@Autowired
 	private SqlSessionTemplate sql;
 	
-	public void memberjoin(Member member) {
-		sql.insert("ms.memberjoin" , member);		
+	public void memberjoin(User user) {
+		sql.insert("ms.memberjoin" , user);
 	}
 
-	public Member memberlogin(String username) {
+	public User memberlogin(String username) {
 		return sql.selectOne("ms.memberlogin" , username);
 	}
 
@@ -28,20 +26,20 @@ public class MemberDAO {
 		return sql.selectOne("ms.idcheck" , mid);
 	}
 
-	public Member memberview(String mid) {	
+	public User memberview(String mid) {
 		return sql.selectOne("ms.memberview" , mid);
 	}
 
-	public List<Member> memberlist() {
+	public List<User> memberlist() {
 		return sql.selectList("ms.memberlist");
 	}
 
-	public void updateProfileImage(Member member) {
-		sql.update("ms.updateProfileImage", member);
+	public void updateProfileImage(User user) {
+		sql.update("ms.updateProfileImage", user);
 	}
 
 
-	public Member memberListView(String username) {
+	public User memberListView(String username) {
 		return sql.selectOne("ms.memberlistview" , username);
 	}
 }

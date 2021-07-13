@@ -124,15 +124,15 @@
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                    	<c:forEach items="${memberlist}" var="member">
-                                        <tr onclick="movieInfo('${member.username}')">
+                                    	<c:forEach items="${memberlist}" var="user">
+                                        <tr onclick="movieInfo('${user.username}')">
                                         	<td>                              
-                                        	<span>${member.username}</span>
+                                        	<span>${user.username}</span>
                                         	</td>
-                                            <td>${member.mname}</td>
-                                            <td>${member.mbirth}</td>
-                                            <td>${member.memail}</td>
-                                            <td>${member.maddr}</td>
+                                            <td>${user.mname}</td>
+                                            <td>${user.mbirth}</td>
+                                            <td>${user.memail}</td>
+                                            <td>${user.maddr}</td>
                                         </tr>
                                         </c:forEach>
                                     </tbody>
