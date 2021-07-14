@@ -14,27 +14,32 @@ public class UserDao {
 	@Autowired
 	private SqlSessionTemplate sql;
 
+	public List<User> getUsers() {
+		return sql.selectList("UserMapper.getUsers");
+	}
+
+	public User getUserById(Long id) {
+		return sql.selectOne("UserMapper.getUserById", id);
+	}
+
+	public User getUserByUsername(String username) {
+		return sql.selectOne("UserMapper.getUserByUsername", username);
+	}
+
+
 	public void insertUser(User user) {
 		sql.insert("UserMapper.insertUser", user);
 	}
 
-	public User selectUserByUsername(String username) {
-		return sql.selectOne("UserMapper.selectUserByUsername", username);
-	}
-
-	public List<User> getUsersByUsername(String username) {
-		return sql.selectList("UserMapper.getUsersByUsername", username);
-	}
-
-	public List<User> selectUsers() {
-		return sql.selectList("UserMapper.selectUsers");
+	public void updateUser(User user) {
+		sql.update("UserMapper.updateUser", user);
 	}
 
 	public void deleteUser(String username) {
 		sql.delete("UserMapper.deleteUser", username);
 	}
 
-	public void updateProfileImage(User user) {
+	public void updateImage(User user) {
 		sql.update("ms.updateProfileImage", user);
 	}
 }

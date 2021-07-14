@@ -14,25 +14,41 @@
 		<result property="enabled" column="enabled"/>
 	</resultMap>
 
+	<select id="getUsers" resultMap="UserResultMap">
+		SELECT USERNAME, PASSWORD, NAME, BIRTH, EMAIL, ADDRESS, IMAGE_NAME FROM USERS
+	</select>
+
+	<select id="getUserById" parameterType="Long" resultMap="UserResultMap">
+		SELECT USERNAME, PASSWORD, NAME, BIRTH, EMAIL, ADDRESS, IMAGE_NAME FROM USERS WHERE ID = #{id}
+	</select>
+
+	<select id="getUserByUsername" parameterType="String" resultMap="UserResultMap">
+		SELECT USERNAME, PASSWORD, NAME, BIRTH, EMAIL, ADDRESS, IMAGE_NAME FROM USERS WHERE USERNAME = #{username}
+	</select>
+
 	<insert id="insertUser" parameterType="User">
-		INSERT INTO Users (USERNAME, PASSWORD, NAME, birth, EMAIL, ADDRESS, IMAGE_NAME)
+		INSERT INTO USERS (USERNAME, PASSWORD, NAME, birth, EMAIL, ADDRESS, IMAGE_NAME)
 		VALUES (#{username} , #{password} , #{name} , #{birth} , #{email} , #{address} , #{imageName})
 	</insert>
 
-	<select id="selectUsers" resultMap="UserResultMap">
-		SELECT * FROM Users
-	</select>
-
-	<select id="selectUserByUsername" parameterType="String" resultMap="UserResultMap">
-		SELECT username, password, enabled, name, birth, email, address, image_name FROM users WHERE username=#{username}
-	</select>
+	<update id="updateUser" parameterType="User">
+		UPDATE USERS SET
+			USERNAME = #{username},
+			PASSWORD = #{password},
+			NAME = #{name},
+			BIRTH = #{birth},
+			EMAIL = #{email},
+			ADDRESS = #{address},
+			IMAGE_NAME = #{imageName}
+		WHERE USERNAME = #{username}
+	</update>
 
 	<delete id="deleteUser" parameterType="String">
-		DELETE FROM users where username = #{username}
+		DELETE FROM USERS WHERE USERNAME = #{username}
 	</delete>
 
-	<update id="updateProfileImage" parameterType="User">
-		UPDATE Users SET image_name=#{imageName} WHERE username=#{username}
+	<update id="updateImage" parameterType="User">
+		UPDATE USERS SET IMAGE_NAME = #{imageName} WHERE USERNAME = #{username}
 	</update>
  </mapper>
  

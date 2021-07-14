@@ -1,6 +1,5 @@
 package com.icia.mjcinema.service;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -34,7 +33,7 @@ public class UserService {
 
 		userDao.insertUser(user);
 
-		return userDao.selectUserByUsername(user.getUsername());
+		return userDao.getUserByUsername(user.getUsername());
 
 	}
 
@@ -52,11 +51,11 @@ public class UserService {
 	}
 
 	public List<User> getUsers() {
-		return userDao.selectUsers();
+		return userDao.getUsers();
 	}
 
 	public User login(LoginForm loginForm) {
-		User user = userDao.selectUserByUsername(loginForm.getUsername());
+		User user = userDao.getUserByUsername(loginForm.getUsername());
 		if(user == null || !loginForm.getPassword().equals(user.getPassword())) {
 			throw new IllegalStateException("아이디나 비밀번호가 일치하지 않습니다.");
 		}
@@ -65,7 +64,7 @@ public class UserService {
 	}
 
 	public String idCheck(String username) {
-		User checkResult = userDao.selectUserByUsername(username);
+		User checkResult = userDao.getUserByUsername(username);
 		String result = "";
 		
 		if(checkResult == null) {
@@ -79,13 +78,13 @@ public class UserService {
 
 	public UpdateUserForm memberview(String username) {
 		
-		User user = userDao.selectUserByUsername(username);
+		User user = userDao.getUserByUsername(username);
 
 		return UpdateUserForm.fromMember(user);
 	}
 
 	public void leaveUser(String username) {
-		User user = userDao.selectUserByUsername(username);
+		User user = userDao.getUserByUsername(username);
 		if (user == null) {
 			throw new IllegalArgumentException("유저가 없습니다.");
 		}
@@ -93,7 +92,7 @@ public class UserService {
 	}
 
 	public UpdateUserForm memberListView(String username) {
-		User user = userDao.selectUserByUsername(username);
+		User user = userDao.getUserByUsername(username);
 		return UpdateUserForm.fromMember(user);
 
 	}
@@ -101,13 +100,13 @@ public class UserService {
 	public void updateProfileImage(String username, MultipartFile file) throws IllegalStateException, IOException {
 		try {
 			//1. 사용자 찾기
-			User user = userDao.selectUserByUsername(username);
+			User user = userDao.getUserByUsername(username);
 			//2. 이미지 저장
 			String filename = saveImage(file);
 			//3. 프로필 이미지 주소 변경
 			user.setImageName(filename);
 
-			userDao.updateProfileImage(user); }
+			userDao.updateImage(user); }
 		catch (Exception e) {
 
 		}
