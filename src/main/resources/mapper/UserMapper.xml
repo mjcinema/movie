@@ -3,7 +3,7 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
  <mapper namespace="UserMapper">
-	<resultMap id="User" type="com.icia.mjcinema.domain.User">
+	<resultMap id="UserResultMap" type="User">
 		<result property="username" column="username"/>
 		<result property="password" column="password"/>
 		<result property="email" column="email"/>
@@ -19,11 +19,11 @@
 		VALUES (#{username} , #{password} , #{name} , #{birth} , #{email} , #{address} , #{imageName})
 	</insert>
 
-	<select id="selectUsers" resultMap="User">
+	<select id="selectUsers" resultMap="UserResultMap">
 		SELECT * FROM Users
 	</select>
 
-	<select id="selectUserByUsername" parameterType="String" resultMap="User">
+	<select id="selectUserByUsername" parameterType="String" resultMap="UserResultMap">
 		SELECT username, password, enabled, name, birth, email, address, image_name FROM users WHERE username=#{username}
 	</select>
 

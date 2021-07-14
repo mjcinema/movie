@@ -14,12 +14,16 @@ public class UserDao {
 	@Autowired
 	private SqlSessionTemplate sql;
 
-	public void save(User user) {
-		sql.insert("UserMapper.save", user);
+	public void insertUser(User user) {
+		sql.insert("UserMapper.insertUser", user);
 	}
 
 	public User selectUserByUsername(String username) {
 		return sql.selectOne("UserMapper.selectUserByUsername", username);
+	}
+
+	public List<User> getUsersByUsername(String username) {
+		return sql.selectList("UserMapper.getUsersByUsername", username);
 	}
 
 	public List<User> selectUsers() {

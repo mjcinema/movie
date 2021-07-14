@@ -20,7 +20,7 @@ public class RegistrationForm {
 	private String birth;
 	private String address;
 
-	private MultipartFile file;
+	private MultipartFile imageFile;
 	
 	public User toUser() {
 		return User.builder()

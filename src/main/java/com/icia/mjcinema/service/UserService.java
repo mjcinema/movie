@@ -8,6 +8,7 @@ import java.util.List;
 import com.icia.mjcinema.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -18,6 +19,7 @@ import com.icia.mjcinema.dto.UpdateUserForm;
 
 
 @Service
+@Transactional
 public class UserService {
 
 	@Autowired
@@ -30,10 +32,10 @@ public class UserService {
 		//String imageName = saveImage(registrationForm.getFile());
 		user.setImageName("default-image.jpg");
 
-		userDao.save(user);
+		userDao.insertUser(user);
 
 		return userDao.selectUserByUsername(user.getUsername());
-		
+
 	}
 
 	private String saveImage(MultipartFile image) throws IllegalStateException, IOException {
