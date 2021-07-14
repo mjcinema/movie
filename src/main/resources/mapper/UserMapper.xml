@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <mapper namespace="UserMapper">
+	<resultMap id="UserResultMap" type="User">
+		<result property="username" column="username"/>
+		<result property="password" column="password"/>
+		<result property="email" column="email"/>
+		<result property="name" column="name"/>
+		<result property="birth" column="birth"/>
+		<result property="address" column="address"/>
+		<result property="imageName" column="image_name"/>
+		<result property="enabled" column="enabled"/>
+	</resultMap>
+
+	<select id="getUsers" resultMap="UserResultMap">
+		SELECT USERNAME, PASSWORD, NAME, BIRTH, EMAIL, ADDRESS, IMAGE_NAME FROM USERS
+	</select>
+
+	<select id="getUserById" parameterType="Long" resultMap="UserResultMap">
+		SELECT USERNAME, PASSWORD, NAME, BIRTH, EMAIL, ADDRESS, IMAGE_NAME FROM USERS WHERE ID = #{id}
+	</select>
+
+	<select id="getUserByUsername" parameterType="String" resultMap="UserResultMap">
+		SELECT USERNAME, PASSWORD, NAME, BIRTH, EMAIL, ADDRESS, IMAGE_NAME FROM USERS WHERE USERNAME = #{username}
+	</select>
+
+	<insert id="insertUser" parameterType="User">
+		INSERT INTO USERS (USERNAME, PASSWORD, NAME, birth, EMAIL, ADDRESS, IMAGE_NAME)
+		VALUES (#{username} , #{password} , #{name} , #{birth} , #{email} , #{address} , #{imageName})
+	</insert>
+
+	<update id="updateUser" parameterType="User">
+		UPDATE USERS SET
+			USERNAME = #{username},
+			PASSWORD = #{password},
+			NAME = #{name},
+			BIRTH = #{birth},
+			EMAIL = #{email},
+			ADDRESS = #{address},
+			IMAGE_NAME = #{imageName}
+		WHERE USERNAME = #{username}
+	</update>
+
+	<delete id="deleteUser" parameterType="String">
+		DELETE FROM USERS WHERE USERNAME = #{username}
+	</delete>
+
+	<update id="updateImage" parameterType="User">
+		UPDATE USERS SET IMAGE_NAME = #{imageName} WHERE USERNAME = #{username}
+	</update>
+ </mapper>
+ 

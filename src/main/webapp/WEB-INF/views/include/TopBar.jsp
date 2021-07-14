@@ -38,13 +38,14 @@
                     	<li><a class="dropdown-item" href="${pageContext.request.contextPath}/Members/memberView?mid=${sessionScope.loginMember.username}"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> 내정보</a></li>
                         <li><a class="dropdown-item" href="${pageContext.request.contextPath}/Movies/MovieReList?loginId=${sessionScope.loginMember}"> <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i> 예매 내역</a></li>
                         <li><hr class="dropdown-divider" /></li>
-                        <a class="dropdown-item" href="${pageContext.request.contextPath}/Members/memberLogout">
+                        <a class="dropdown-item" onclick="document.querySelector('#logoutForm').submit();">
+                        <form id="logoutForm" action="${pageContext.request.contextPath}/logout" method="post" style="visibility: hidden;"></form>
                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> 로그아웃</a>
                        	</c:when>
                        	
                        	<c:otherwise>
-                      	<li><a class="dropdown-item" href="${pageContext.request.contextPath}/Members/Login">로그인</a></li>
-                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/Members/MemberJoinForm">회원가입</a></li>
+                      	<li><a class="dropdown-item" href="${pageContext.request.contextPath}/login">로그인</a></li>
+                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/register">회원가입</a></li>
                         </c:otherwise>
                     </c:choose>    
                     </ul>

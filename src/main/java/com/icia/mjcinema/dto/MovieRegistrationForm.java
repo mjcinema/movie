@@ -2,7 +2,6 @@ package com.icia.mjcinema.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.icia.mjcinema.domain.Member;
 import com.icia.mjcinema.domain.Movie;
 
 import lombok.Data;

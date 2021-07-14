@@ -3,7 +3,7 @@
  "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias type="com.icia.mjcinema.domain.Member" alias="Member"/>
+		<typeAlias type="com.icia.mjcinema.domain.User" alias="User"/>
 		<typeAlias type="com.icia.mjcinema.domain.Movie" alias="Movie"/>
 		<typeAlias type="com.icia.mjcinema.dto.LoginForm" alias="loginForm"/>			
 	</typeAliases>

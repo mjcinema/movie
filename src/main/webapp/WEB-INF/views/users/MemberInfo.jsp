@@ -53,7 +53,7 @@
                                 <div class="card-body" style="text-align:center;">
                                     <div class="form-floating mb-3">
                                         <img style="height: 150px; width: 150px; border-radius: 50% !important;"
-                                             src="/resources/img/memProfile/${member.mfilename}">
+                                             src="/resources/img/memProfile/${user.mfilename}">
                                     </div>
                                     <div class="form-floating mb-3">
 
@@ -62,8 +62,8 @@
                                     <div class="form-floating mb-3 show-hide"  id="modifyPfArea">
                                         <form id="updateImage" action="modifyMemberProfile" method="post" enctype="multipart/form-data">
                                             <input type="file" name="mfile" class="form-control" id="inputProfile">
-                                            <input type="hidden" name="memberProfile" value="${member.mfile}">
-                                            <input type="hidden" name="mid" value="${member.mid}">
+                                            <input type="hidden" name="memberProfile" value="${user.mfile}">
+                                            <input type="hidden" name="mid" value="${user.mid}">
                                             <br>
 
                                         </form>
@@ -86,12 +86,12 @@
                                         <div class="row mb-6" >
                                             <div class="col-md-6" >
                                                 <div class="form-floating mb-3">
-                                                    <input class="form-control" style="height:40px;" type="text" name="mid" value="${member.mid}" disabled="disabled" />
+                                                    <input class="form-control" style="height:40px;" type="text" name="mid" value="${user.mid}" disabled="disabled" />
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3">
-                                                    <input class="form-control" style="height:40px;" type="text" value="${member.mpw}" disabled="disabled" />
+                                                    <input class="form-control" style="height:40px;" type="text" value="${user.mpw}" disabled="disabled" />
                                                 </div>
                                             </div>
                                         </div>
@@ -99,25 +99,25 @@
                                         <div class="row mb-3">
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3 mb-md-0">
-                                                    <input class="form-control" style="height:40px;" type="text" value="${member.mname}" disabled="disabled"  />
+                                                    <input class="form-control" style="height:40px;" type="text" value="${user.mname}" disabled="disabled"  />
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3 mb-md-0">
-                                                    <input class="form-control" style="height:40px;" type="text" value="${member.mbirth}" disabled="disabled" />
+                                                    <input class="form-control" style="height:40px;" type="text" value="${user.mbirth}" disabled="disabled" />
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row mb-3">
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" type="text" style="height:40px;" id="Memail" value="${member.memail}" disabled  />
+                                                <input class="form-control" type="text" style="height:40px;" id="Memail" value="${user.memail}" disabled  />
                                             </div>
                                             <div class="col-md-2">
 
                                             </div>
                                         </div>
                                         <div class="form-floating mb-3">
-                                            <input class="form-control" type="text" style="height:40px;" value="${member.maddr}" disabled="disabled"  />
+                                            <input class="form-control" type="text" style="height:40px;" value="${user.maddr}" disabled="disabled"  />
                                         </div>
 
                                     </form>
@@ -162,7 +162,7 @@
 
         $("#ModifyMemail").click(function(){
             var memId = "${sessionScope.loginMember }";
-            var newEmail = "${member.memail}";
+            var newEmail = "${user.memail}";
 
             $.ajax({
                 type : "get",
@@ -178,7 +178,7 @@
                         $("#ModifyMemail").css("display","none");
                     }else{
                         alert("이메일 수정 실패");
-                        $("#Memail").val("${member.memail}");
+                        $("#Memail").val("${user.memail}");
                     }
                 }
 

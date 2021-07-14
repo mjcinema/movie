@@ -6,89 +6,85 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import com.icia.mjcinema.domain.User;
+import oracle.jdbc.proxy.annotation.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 
-import com.icia.mjcinema.domain.Member;
 import com.icia.mjcinema.dto.LoginForm;
 import com.icia.mjcinema.dto.RegistrationForm;
-import com.icia.mjcinema.dto.UpdateMemberForm;
-import com.icia.mjcinema.service.MemberService;
+import com.icia.mjcinema.dto.UpdateUserForm;
+import com.icia.mjcinema.service.UserService;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
-public class MemberController {
+public class UserController {
 	
 	@Autowired
-	private MemberService memberservice;
+	private UserService userService;
 	
 	@Autowired
 	private HttpSession session;
-	
-	@RequestMapping (value="/Members/Login")
+
+	@GetMapping(value="/login")
 	public String login() {
 		return "login/Login";
 	}
-	
-	@RequestMapping (value="/Members/MemberJoinForm")
-	public String joinform() {
-		return "Members/MemberJoinForm";
-	}
-	
-	@RequestMapping (value="/Members/memberJoin")
-	public String memberjoin(@ModelAttribute @Valid RegistrationForm joinMemberForm, BindingResult result, HttpSession session) throws IllegalStateException, IOException {
-		
-		if (result.hasErrors()) {
-			
-			return "Members/MemberJoinForm";
-		}
-		Member member = memberservice.memberjoin(joinMemberForm);
-		session.setAttribute("loginMember", member);
-		return "redirect:/";
-	}
-	
-	@RequestMapping (value="/Members/memberLogin")
-	public String memberlogin (@ModelAttribute LoginForm loginForm , BindingResult result , HttpSession session) {
-		Member member;
-		
+
+	@PostMapping("/login")
+	public String login (@ModelAttribute LoginForm loginForm , BindingResult result , HttpSession session) {
+		User user;
+
 		try {
-			member = memberservice.memberlogin(loginForm);
+			user = userService.login(loginForm);
 		} catch (RuntimeException e) {
 			FieldError fieldError = new FieldError("loginForm" , "invalidIdOrPassword" , e.getMessage());
 			result.addError(fieldError);
 			return "login/Login";
 		}
-		
-		session.setAttribute("loginMember", member);
+
+		session.setAttribute("loginMember", user);
 		return "redirect:/";
 	}
+
+	@GetMapping("/register")
+	public String registrationForm() {
+		return "register/register";
+	}
 	
-	
+	@PostMapping("/register")
+	public String join(@ModelAttribute @Valid RegistrationForm joinMemberForm, BindingResult result, HttpSession session) throws IllegalStateException, IOException {
 		
-	@RequestMapping (value="/Members/memberLogout")
+		if (result.hasErrors()) {
+			
+			return "register/register";
+		}
+		User user = userService.join(joinMemberForm);
+		session.setAttribute("loginMember", user);
+		return "redirect:/";
+	}
+
+	@PostMapping("/logout")
 	public String logout() {
 		session.invalidate();
-		return "MovieMain";
+		return "redirect:/";
 	}
 	
 	@RequestMapping (value="/Members/idCheck")
 	public @ResponseBody String idCheck(@RequestParam("mid") String username) {
-		String result = memberservice.idCheck(username);
+		String result = userService.idCheck(username);
 		return result;
 	}
 		
 	
 	@RequestMapping (value="/Members/memberView")
 	public String memberview(@RequestParam("mid") String mid , Model model) {
-		UpdateMemberForm member = memberservice.memberview(mid);
+		UpdateUserForm member = userService.memberview(mid);
 		model.addAttribute("member", member);
 		
 		return "Members/MemberView";
@@ -96,15 +92,15 @@ public class MemberController {
 	
 	@RequestMapping (value="/Members/memberlist")
 	public String memberlist(Model model) {
-		List<Member> members = memberservice.memberlist();
-		model.addAttribute("memberlist", members);
+		List<User> users = userService.getUsers();
+		model.addAttribute("memberlist", users);
 		return "Members/memberlist";
 	}
 
 	@RequestMapping (value="/Members/modifyMemberProfile" )
 	public String profileModify(@RequestParam("mid") String mid, @RequestParam("mfile") MultipartFile mfile, Model model) throws IllegalStateException, IOException {
 
-		memberservice.updateProfileImage(mid, mfile);
+		userService.updateProfileImage(mid, mfile);
 		model.addAttribute("mid", mid);
 		model.addAttribute("mfile", mfile);
 		return "redirect:/Members/memberView";
@@ -112,14 +108,15 @@ public class MemberController {
 
 	@RequestMapping (value = "/Members/memberInfo")
 	public String MemberListView(@RequestParam("username") String username , Model model){
-		UpdateMemberForm member = memberservice.memberListView(username);
+		UpdateUserForm member = userService.memberListView(username);
 		model.addAttribute("member" , member);
 		return "/Members/MemberInfo";
 	}
 
+	@PostMapping("/users/{username}/delete")
+	public String leaveUser(@PathVariable("username") String username) {
+		userService.leaveUser(username);
 
-	
-	
-	
-	
+		return "redirect:/";
+	}
 }
