@@ -1,21 +1,12 @@
-package com.icia.mjcinema.domain.objects.bjh.ch04;
+package com.icia.mjcinema.domain.objects.bjh.ch05;
 
 import com.icia.mjcinema.domain.objects.bjh.ch02.Money;
-import lombok.Getter;
-import lombok.Setter;
+import com.icia.mjcinema.domain.objects.bjh.ch04.Customer;
 
 public class Reservation {
-    @Getter
-    @Setter
     private Customer customer;
-    @Getter
-    @Setter
     private Screening screening;
-    @Getter
-    @Setter
     private Money fee;
-    @Getter
-    @Setter
     private int audienceCount;
 
     public Reservation(Customer customer, Screening screening, Money fee, int audienceCount) {
@@ -24,6 +15,4 @@ public class Reservation {
         this.fee = fee;
         this.audienceCount = audienceCount;
     }
-
-
 }
