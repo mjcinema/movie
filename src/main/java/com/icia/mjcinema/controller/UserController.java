@@ -7,7 +7,6 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import com.icia.mjcinema.domain.User;
-import oracle.jdbc.proxy.annotation.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -82,12 +81,12 @@ public class UserController {
 	}
 		
 	
-	@RequestMapping (value="/Members/memberView")
-	public String memberview(@RequestParam("mid") String mid , Model model) {
-		UpdateUserForm member = userService.memberview(mid);
+	@RequestMapping ("/user")
+	public String memberview(@RequestParam("username") String username, Model model) {
+		UpdateUserForm member = userService.memberview(username);
 		model.addAttribute("member", member);
 		
-		return "Members/MemberView";
+		return "users/user";
 	}
 	
 	@RequestMapping (value="/Members/memberlist")
@@ -106,11 +105,11 @@ public class UserController {
 		return "redirect:/Members/memberView";
 	}
 
-	@RequestMapping (value = "/Members/memberInfo")
+	@RequestMapping ("/userList")
 	public String MemberListView(@RequestParam("username") String username , Model model){
 		UpdateUserForm member = userService.memberListView(username);
 		model.addAttribute("member" , member);
-		return "/Members/MemberInfo";
+		return "/users/userList";
 	}
 
 	@PostMapping("/users/{username}/delete")

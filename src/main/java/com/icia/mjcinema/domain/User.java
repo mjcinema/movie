@@ -16,6 +16,7 @@ public class User {
 	private String imageName;
 	private boolean enabled;
 
+
 	@Builder
 	public User(String username, String password, String email, String name, String birth, String address) {
 		this.username = username;

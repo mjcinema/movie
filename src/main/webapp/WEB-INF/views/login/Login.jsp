@@ -25,12 +25,12 @@
     </head>
     <body class="sb-nav-fixed">
 
-         <%@ include file = "../Include/TopBar.jsp" %>
+         <%@ include file = "../include/TopBar.jsp" %>
          
         
         <div id="layoutSidenav">
              
-             <%@ include file = "../Include/SideBar.jsp" %>
+             <%@ include file = "../include/SideBar.jsp" %>
              
             <div id="layoutSidenav_content">
                 <main>
