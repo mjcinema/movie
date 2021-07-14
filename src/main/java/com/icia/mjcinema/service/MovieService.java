@@ -7,9 +7,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.icia.mjcinema.dao.MovieDAO;
+import com.icia.mjcinema.mapper.MovieMapper;
 import com.icia.mjcinema.domain.Movie;
 import com.icia.mjcinema.dto.MovieRegistrationForm;
 
@@ -17,7 +16,7 @@ import com.icia.mjcinema.dto.MovieRegistrationForm;
 public class MovieService {
 
 	@Autowired
-	private MovieDAO Moviedao;
+	private MovieMapper moviedao;
 		
 	public Movie addmovie(MovieRegistrationForm movieRegistrationForm) throws IllegalStateException, IOException {
 		
@@ -33,7 +32,7 @@ public class MovieService {
 		
 		movie.setMvfilename(filename);
 		
-		Moviedao.addmovie(movie);
+		moviedao.insertMovie(movie);
 		
 		return movie;
 
@@ -53,7 +52,7 @@ public class MovieService {
 	}
 
 	public List<Movie> movielist() {
-		List<Movie> movies = Moviedao.movielist();
+		List<Movie> movies = moviedao.getMovies();
 		return movies;
 	}
 	
