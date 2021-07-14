@@ -13,8 +13,7 @@ import com.icia.mjcinema.domain.Movie;
 @Repository
 public interface MovieMapper {
 
-	public List<Movie> movielist();
+	List<Movie> getMovies();
 
-	public void addmovie(Movie movie);
-
+	void insertMovie(Movie movie);
 }

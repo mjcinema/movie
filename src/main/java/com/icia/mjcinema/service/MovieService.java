@@ -32,7 +32,7 @@ public class MovieService {
 		
 		movie.setMvfilename(filename);
 		
-		moviedao.addmovie(movie);
+		moviedao.insertMovie(movie);
 		
 		return movie;
 
@@ -52,7 +52,7 @@ public class MovieService {
 	}
 
 	public List<Movie> movielist() {
-		List<Movie> movies = moviedao.movielist();
+		List<Movie> movies = moviedao.getMovies();
 		return movies;
 	}
 	
