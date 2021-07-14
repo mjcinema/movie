@@ -49,7 +49,7 @@ public class MemberService {
 		MultipartFile mfile = image;
 		String mfilename = mfile.getOriginalFilename();
 		mfilename = System.currentTimeMillis() + "-" + mfilename;
-
+		String savePath = "D:\\source_BJH\\movie\\src\\main\\webapp\\resources\\img\\memProfile\\" + mfilename;
 		
 		if(!mfile.isEmpty()) {
 			mfile.transferTo(new File(savePath));

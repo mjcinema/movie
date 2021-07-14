@@ -44,12 +44,12 @@
                                 	</c:choose>
                                 </nav>
                             </div>
-
+                            <c:if test="${sessionScope.loginMember.username eq 'admin'}">
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                                 <div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>
                                 <span>관리</span>
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>                            
+                            </a>
                             </c:if>
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
@@ -57,6 +57,7 @@
                                         <span>영화 관리</span>
                                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                     </a>
+
                                     <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
                                             <a class="nav-link" href="${pageContext.request.contextPath}/Movies/AddMovieForm">영화등록</a>
@@ -80,7 +81,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="sb-sidenav-footer">
                         <div class="small">MJ Movie</div>
                         
