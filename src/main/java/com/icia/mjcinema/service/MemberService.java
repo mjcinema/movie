@@ -94,8 +94,7 @@ public class MemberService {
 		
 		return members;
 	}
-	
-	
+
 
 	public void updateProfileImage(String mid, MultipartFile file) throws IllegalStateException, IOException {
 		try {

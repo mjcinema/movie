@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ 
+ <mapper namespace="movie"> 	
+	<insert id="addmovie" parameterType="Movie">
+		INSERT INTO MJMOVIE (MCODE , MTITLE , MDIRECTOR , MDATE , MGENRE , MGRADE , MVFILENAME)
+		VALUES (MOVIE_SEQ.NEXTVAL , #{mtitle} , #{mdirector} , #{mdate} , #{mgenre} , #{mgrade} , #{mvfilename})
+	</insert>
+	
+	<select id="movielist" resultType="Movie">
+		SELECT * FROM MJMOVIE
+	</select>
+	
+ </mapper>
+ 
