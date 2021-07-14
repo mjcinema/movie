@@ -29,8 +29,8 @@ public class UserService {
 
 		User user = registrationForm.toUser();
 
-		//String imageName = saveImage(registrationForm.getFile());
-		user.setImageName("default-image.jpg");
+		String imageName = saveImage(registrationForm.getImageFile());
+		user.setImageName(imageName);
 
 		userDao.insertUser(user);
 
@@ -44,10 +44,10 @@ public class UserService {
 		mfilename = System.currentTimeMillis() + "-" + mfilename;
 		String savePath ="";
 
-		if(!mfile.isEmpty()) {
-			mfile.transferTo(new File(savePath));
-		}
-
+//		if(!mfile.isEmpty()) {
+//			mfile.transferTo(new File(savePath));
+//		}
+		mfilename = "default-image.jpg";
 		return mfilename;
 	}
 
