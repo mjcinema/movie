@@ -1,13 +1,13 @@
-package com.icia.mjcinema.dao;
+package com.icia.mjcinema.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.icia.mjcinema.domain.Movie;
-import com.icia.mjcinema.dto.MovieRegistrationForm;
 
 @Repository
 public class MovieDAO {

@@ -5,14 +5,13 @@ import java.util.List;
 
 
 import com.icia.mjcinema.domain.User;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 
-import com.icia.mjcinema.dao.UserDao;
+import com.icia.mjcinema.mapper.UserMapper;
 import com.icia.mjcinema.dto.LoginForm;
 import com.icia.mjcinema.dto.RegistrationForm;
 import com.icia.mjcinema.dto.UpdateUserForm;
@@ -23,7 +22,7 @@ import com.icia.mjcinema.dto.UpdateUserForm;
 public class UserService {
 
 	@Autowired
-	private UserDao userDao;
+	private UserMapper userMapper;
 
 	public User join(RegistrationForm registrationForm) throws IllegalStateException, IOException {
 
@@ -32,9 +31,9 @@ public class UserService {
 		String imageName = saveImage(registrationForm.getImageFile());
 		user.setImageName(imageName);
 
-		userDao.insertUser(user);
+		userMapper.insertUser(user);
 
-		return userDao.getUserById(user.getId());
+		return userMapper.getUserById(user.getId());
 
 	}
 
@@ -52,11 +51,11 @@ public class UserService {
 	}
 
 	public List<User> getUsers() {
-		return userDao.getUsers();
+		return userMapper.getUsers();
 	}
 
 	public User login(LoginForm loginForm) {
-		User user = userDao.getUserByUsername(loginForm.getUsername());
+		User user = userMapper.getUserByUsername(loginForm.getUsername());
 		if(user == null || !loginForm.getPassword().equals(user.getPassword())) {
 			throw new IllegalStateException("아이디나 비밀번호가 일치하지 않습니다.");
 		}
@@ -65,7 +64,7 @@ public class UserService {
 	}
 
 	public String idCheck(String username) {
-		User checkResult = userDao.getUserByUsername(username);
+		User checkResult = userMapper.getUserByUsername(username);
 		String result = "";
 		
 		if(checkResult == null) {
@@ -79,21 +78,21 @@ public class UserService {
 
 	public UpdateUserForm memberview(String username) {
 		
-		User user = userDao.getUserByUsername(username);
+		User user = userMapper.getUserByUsername(username);
 
 		return UpdateUserForm.fromMember(user);
 	}
 
 	public void leaveUser(String username) {
-		User user = userDao.getUserByUsername(username);
+		User user = userMapper.getUserByUsername(username);
 		if (user == null) {
 			throw new IllegalArgumentException("유저가 없습니다.");
 		}
-		userDao.deleteUser(username);
+		userMapper.deleteUser(username);
 	}
 
 	public UpdateUserForm memberListView(String username) {
-		User user = userDao.getUserByUsername(username);
+		User user = userMapper.getUserByUsername(username);
 		return UpdateUserForm.fromMember(user);
 
 	}
@@ -101,13 +100,13 @@ public class UserService {
 	public void updateProfileImage(String username, MultipartFile file) throws IllegalStateException, IOException {
 		try {
 			//1. 사용자 찾기
-			User user = userDao.getUserByUsername(username);
+			User user = userMapper.getUserByUsername(username);
 			//2. 이미지 저장
 			String filename = saveImage(file);
 			//3. 프로필 이미지 주소 변경
 			user.setImageName(filename);
 
-			userDao.updateImage(user); }
+			userMapper.updateImage(user); }
 		catch (Exception e) {
 
 		}
