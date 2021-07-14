@@ -9,18 +9,12 @@ import org.springframework.stereotype.Repository;
 
 import com.icia.mjcinema.domain.Movie;
 
+@Mapper
 @Repository
-public class MovieDAO {
-	
-	@Autowired
-	private SqlSessionTemplate sql;
-			
-	public void addmovie(Movie movie) {
-		sql.insert("movie.addmovie" , movie);
-	}
+public interface MovieMapper {
 
-	public List<Movie> movielist() {		
-		return sql.selectList("movie.movielist");
-	}
+	public List<Movie> movielist();
+
+	public void addmovie(Movie movie);
 
 }
