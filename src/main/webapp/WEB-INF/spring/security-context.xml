@@ -11,11 +11,11 @@
     </security:http>
 
     <security:authentication-manager>
-        <security:authentication-provider>
-            <security:user-service>
-                <security:user name="test" password="{noop}test" authorities="ROLE_USER"/>
-            </security:user-service>
+        <security:authentication-provider user-service-ref="customUserDetailsService">
+            <security:password-encoder ref="passwordEncoder"/>
         </security:authentication-provider>
     </security:authentication-manager>
 
+    <bean id="customUserDetailsService" class="com.icia.mjcinema.security.CustomUserDetailsService"/>
+    <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 </beans>
