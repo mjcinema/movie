@@ -34,7 +34,7 @@ public class MovieController {
 	// 영화 예약
 	@RequestMapping (value="/Movies/MovieReservation")
 	public String moviereservation () {
-		return "/Movies/MovieReservation";
+		return "/movies/MovieReservation";
 	}
 	
 	// 영화 추가

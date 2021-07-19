@@ -1,6 +1,7 @@
 package com.icia.mjcinema.controller;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -31,22 +32,7 @@ public class UserController {
 	public String login() {
 		return "login/Login";
 	}
-	//로그인
-	@PostMapping("/login")
-	public String login (@ModelAttribute LoginForm loginForm , BindingResult result , HttpSession session) {
-		User user;
 
-		try {
-			user = userService.login(loginForm);
-		} catch (RuntimeException e) {
-			FieldError fieldError = new FieldError("loginForm" , "invalidIdOrPassword" , e.getMessage());
-			result.addError(fieldError);
-			return "login/Login";
-		}
-
-		session.setAttribute("loginMember", user);
-		return "redirect:/";
-	}
 
 	@GetMapping("/register")
 	public String registrationForm() {
@@ -64,12 +50,7 @@ public class UserController {
 		session.setAttribute("loginMember", user);
 		return "redirect:/";
 	}
-	//로그아웃
-	@PostMapping("/logout")
-	public String logout(HttpSession session) {
-		session.invalidate();
-		return "redirect:/";
-	}
+
 	
 	@RequestMapping ("/idCheck")
 	public @ResponseBody String idCheck(@RequestParam("username") String username) {
@@ -102,9 +83,10 @@ public class UserController {
 	}
 	//내 정보 보기
 	@GetMapping("/profile")
-	public String userList( Model model, HttpSession session){
-		User sessionUser = (User) session.getAttribute("loginMember");
-		User user = userService.getUserByUsername(sessionUser.getUsername());
+	public String userList(Model model, Principal principal){
+
+		principal.getName();
+		User user = userService.getUserByUsername(principal.getName());
 		model.addAttribute("user" , UpdateUserForm.fromMember(user));
 		return "users/profile";
 	}

@@ -7,6 +7,7 @@ import java.util.List;
 import com.icia.mjcinema.domain.Authority;
 import com.icia.mjcinema.domain.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,9 +24,11 @@ import com.icia.mjcinema.dto.UpdateUserForm;
 public class UserService {
 
 	private final UserMapper userMapper;
+	private final PasswordEncoder passwordEncoder;
 
 	public User join(RegistrationForm registrationForm) {
-
+		String encodedPassword = passwordEncoder.encode(registrationForm.getPassword());
+		registrationForm.setPassword(encodedPassword);
 		User user = registrationForm.toUser();
 
 		userMapper.insertUser(user);
