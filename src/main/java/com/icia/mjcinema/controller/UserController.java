@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import com.icia.mjcinema.domain.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,20 +21,17 @@ import com.icia.mjcinema.dto.UpdateUserForm;
 import com.icia.mjcinema.service.UserService;
 import org.springframework.web.multipart.MultipartFile;
 
+@RequiredArgsConstructor
 @Controller
 public class UserController {
 	
-	@Autowired
-	private UserService userService;
-	
-	@Autowired
-	private HttpSession session;
+	private final UserService userService;
 
 	@GetMapping(value="/login")
 	public String login() {
 		return "login/Login";
 	}
-
+	//로그인
 	@PostMapping("/login")
 	public String login (@ModelAttribute LoginForm loginForm , BindingResult result , HttpSession session) {
 		User user;
@@ -55,7 +52,7 @@ public class UserController {
 	public String registrationForm() {
 		return "register/register";
 	}
-	
+	//회원가입
 	@PostMapping("/register")
 	public String join(@ModelAttribute @Valid RegistrationForm joinMemberForm, BindingResult result, HttpSession session) throws IllegalStateException, IOException {
 		
@@ -67,55 +64,77 @@ public class UserController {
 		session.setAttribute("loginMember", user);
 		return "redirect:/";
 	}
-
+	//로그아웃
 	@PostMapping("/logout")
-	public String logout() {
+	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/";
 	}
 	
-	@RequestMapping (value="/Members/idCheck")
-	public @ResponseBody String idCheck(@RequestParam("mid") String username) {
-		String result = userService.idCheck(username);
-		return result;
+	@RequestMapping ("/idCheck")
+	public @ResponseBody String idCheck(@RequestParam("username") String username) {
+		return userService.idCheck(username);
 	}
 		
-	
-	@RequestMapping ("/user")
-	public String memberview(@RequestParam("username") String username, Model model) {
-		UpdateUserForm member = userService.memberview(username);
-		model.addAttribute("member", member);
-		
+	//회원정보
+	@GetMapping ("/user")
+	public String user(@RequestParam("username") String username, Model model) {
+		UpdateUserForm user = userService.user(username);
+		model.addAttribute("user", user);
 		return "users/user";
 	}
-	
-	@RequestMapping (value="/Members/memberlist")
-	public String memberlist(Model model) {
+	//회원목록
+	@GetMapping ("/userList")
+	public String userlist(Model model) {
 		List<User> users = userService.getUsers();
-		model.addAttribute("memberlist", users);
-		return "Members/memberlist";
+		model.addAttribute("userlist", users);
+		return "users/userList";
 	}
 
+	// todo updateProfileImage
 	@RequestMapping (value="/Members/modifyMemberProfile" )
-	public String profileModify(@RequestParam("mid") String mid, @RequestParam("mfile") MultipartFile mfile, Model model) throws IllegalStateException, IOException {
+	public String profileModify(@RequestParam("username") String mid, @RequestParam("mfile") MultipartFile mfile, Model model) throws IllegalStateException, IOException {
 
 		userService.updateProfileImage(mid, mfile);
 		model.addAttribute("mid", mid);
 		model.addAttribute("mfile", mfile);
-		return "redirect:/Members/memberView";
+		return "redirect:/profile";
 	}
-
-	@RequestMapping ("/userList")
-	public String MemberListView(@RequestParam("username") String username , Model model){
-		UpdateUserForm member = userService.memberListView(username);
-		model.addAttribute("member" , member);
-		return "/users/userList";
+	//내 정보 보기
+	@GetMapping("/profile")
+	public String userList( Model model, HttpSession session){
+		User sessionUser = (User) session.getAttribute("loginMember");
+		User user = userService.getUserByUsername(sessionUser.getUsername());
+		model.addAttribute("user" , UpdateUserForm.fromMember(user));
+		return "users/profile";
 	}
-
+	//유저 삭제
 	@PostMapping("/users/{username}/delete")
-	public String leaveUser(@PathVariable("username") String username) {
+		public String leaveUser(@PathVariable("username") String username) {
 		userService.leaveUser(username);
 
-		return "redirect:/";
+		return "redirect:/userList";
 	}
+	//회원 수정 get
+	@GetMapping("/edit")
+	public String userEditForm(@RequestParam("username")String username, Model model)throws IllegalStateException, IOException{
+	model.addAttribute(username);
+	return "/users/edit";
+
+	}
+
+	//회원 수정 post
+	@PostMapping("/users/{username}/edit")
+	public String updateUser(@PathVariable("username")String username , UpdateUserForm form , Model model){
+		User user = UpdateUserForm.toUser(form);
+		// form -> User;
+		userService.updateUser(user); //dto User
+		return "redirect:/profile";
+
+
+	}
+
+
+
+
 }

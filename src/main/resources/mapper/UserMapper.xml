@@ -12,7 +12,6 @@
 		<result property="birth" column="birth"/>
 		<result property="address" column="address"/>
 		<result property="imageName" column="image_name"/>
-		<result property="enabled" column="enabled"/>
 	</resultMap>
 
 	<select id="getUsers" resultMap="UserResultMap">
@@ -28,8 +27,8 @@
 	</select>
 
 	<insert id="insertUser" parameterType="User" useGeneratedKeys="true" >
-		INSERT INTO USERS (ID, USERNAME, PASSWORD, NAME, birth, EMAIL, ADDRESS, IMAGE_NAME)
-		VALUES (USERS_SEQUENCE.NEXTVAL, #{username} , #{password} , #{name} , #{birth} , #{email} , #{address} , #{imageName})
+		INSERT INTO USERS (ID, USERNAME, PASSWORD, NAME, birth, EMAIL, ADDRESS)
+		VALUES (USERS_SEQUENCE.NEXTVAL, #{username} , #{password} , #{name} , #{birth} , #{email} , #{address})
 		<selectKey keyProperty="id" resultType="long" order="AFTER">
 			SELECT ID FROM USERS WHERE USERNAME = #{username}
 		</selectKey>
@@ -37,16 +36,15 @@
 
 	<update id="updateUser" parameterType="User">
 		UPDATE USERS SET
-			ID = #{id},
 			USERNAME = #{username},
 			PASSWORD = #{password},
 			NAME = #{name},
 			BIRTH = #{birth},
 			EMAIL = #{email},
-			ADDRESS = #{address},
-			IMAGE_NAME = #{imageName}
+			ADDRESS = #{address}
 		WHERE USERNAME = #{username}
 	</update>
+
 
 	<delete id="deleteUser" parameterType="String">
 		DELETE FROM USERS WHERE USERNAME = #{username}
@@ -55,5 +53,9 @@
 	<update id="updateImage" parameterType="User">
 		UPDATE USERS SET IMAGE_NAME = #{imageName} WHERE USERNAME = #{username}
 	</update>
+
+	<insert id="insertAuthority" parameterType="Authority">
+		INSERT INTO AUTHORITIES (USERNAME, AUTHORITY) VALUES (#{username}, #{authority})
+	</insert>
  </mapper>
  

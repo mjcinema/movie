@@ -2,6 +2,7 @@ package com.icia.mjcinema.mapper;
 
 import java.util.List;
 
+import com.icia.mjcinema.domain.Authority;
 import com.icia.mjcinema.domain.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -19,4 +20,6 @@ public interface UserMapper {
 	void deleteUser(String username);
 
 	void updateImage(User user);
+
+	void insertAuthority(Authority authority);
 }

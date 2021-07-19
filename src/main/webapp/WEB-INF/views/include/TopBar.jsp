@@ -35,7 +35,7 @@
                     
                     <c:choose>     
                     	<c:when test="${sessionScope.loginMember != null }">
-                    	<li><a class="dropdown-item" href="${pageContext.request.contextPath}/Members/memberView?mid=${sessionScope.loginMember.username}"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> 내정보</a></li>
+                    	<li><a class="dropdown-item" href="${pageContext.request.contextPath}/profile?username=${sessionScope.loginMember.username}"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> 내정보</a></li>
                         <li><a class="dropdown-item" href="${pageContext.request.contextPath}/Movies/MovieReList?loginId=${sessionScope.loginMember}"> <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i> 예매 내역</a></li>
                         <li><hr class="dropdown-divider" /></li>
                         <a class="dropdown-item" onclick="document.querySelector('#logoutForm').submit();">
@@ -56,7 +56,7 @@
         
         
         
-       <!-- Logout Modal 쌤이랑 다른 템플릿이라 안됨-->
+
     	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -70,7 +70,7 @@
                 <div class="modal-body">로그아웃 하시겠습니까?</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="${pageContext.request.contextPath}/Members/memberLogout">Logout</a>
+                    <a class="btn btn-primary" href="${pageContext.request.contextPath}/logout">Logout</a>
                 </div>
             </div>
        	 </div>

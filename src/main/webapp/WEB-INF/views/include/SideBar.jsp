@@ -32,24 +32,25 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                 	<c:choose>
                                 	<c:when test="${sessionScope.loginMember != null }">
-                                		<a class="nav-link" href="${pageContext.request.contextPath}/Members/memberView?mid=${sessionScope.loginMember.username}">내정보</a>
+                                		<a class="nav-link" href="${pageContext.request.contextPath}/profile?username=${sessionScope.loginMember.username}">내정보</a>
                                 		<a class="nav-link" href="${pageContext.request.contextPath}/Movies/MovieReList?loginId=${sessionScope.loginMember}">예매내역</a>
                                 	</c:when>
                                 	
                                 	<c:otherwise>
-                                	<a class="nav-link" href="${pageContext.request.contextPath}/Members/Login">로그인</a>
-                                    <a class="nav-link" href="${pageContext.request.contextPath}/Members/MemberJoinForm">회원가입</a>
+                                	<a class="nav-link" href="${pageContext.request.contextPath}/login">로그인</a>
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/register">회원가입</a>
                                 	</c:otherwise>
                                     
                                 	</c:choose>
                                 </nav>
                             </div>
-
+                            <c:if test="${sessionScope.loginMember.username eq 'admin'}">
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                                 <div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>
                                 <span>관리</span>
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
+                            </c:if>
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
@@ -70,7 +71,8 @@
                                     </a>
                                     <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="/Members/memberlist">회원목록</a>
+                                            <a class="nav-link" href="${pageContext.request.contextPath}/userList">회원목록</a>
+
                                             
                                             <a class="nav-link" href="#">회원삭제</a>
                                         </nav>

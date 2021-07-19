@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,11 +12,12 @@ import com.icia.mjcinema.mapper.MovieMapper;
 import com.icia.mjcinema.domain.Movie;
 import com.icia.mjcinema.dto.MovieRegistrationForm;
 
+@RequiredArgsConstructor
 @Service
 public class MovieService {
 
-	@Autowired
-	private MovieMapper moviedao;
+
+	private final MovieMapper movieMapper;
 		
 	public Movie addmovie(MovieRegistrationForm movieRegistrationForm) throws IllegalStateException, IOException {
 		
@@ -32,7 +33,7 @@ public class MovieService {
 		
 		movie.setMvfilename(filename);
 		
-		moviedao.insertMovie(movie);
+		movieMapper.insertMovie(movie);
 		
 		return movie;
 
@@ -52,7 +53,7 @@ public class MovieService {
 	}
 
 	public List<Movie> movielist() {
-		List<Movie> movies = moviedao.getMovies();
+		List<Movie> movies = movieMapper.getMovies();
 		return movies;
 	}
 	

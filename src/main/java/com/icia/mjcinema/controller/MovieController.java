@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,13 +19,11 @@ import com.icia.mjcinema.domain.Movie;
 import com.icia.mjcinema.dto.MovieRegistrationForm;
 import com.icia.mjcinema.service.MovieService;
 
+@RequiredArgsConstructor
 @Controller
 public class MovieController {
 	
-	@Autowired
-	private MovieService MovieService;
-	
-	
+	private  final MovieService MovieService;
 	
 	// 영화 추가화면
 	@RequestMapping(value="/Movies/AddMovieForm")
