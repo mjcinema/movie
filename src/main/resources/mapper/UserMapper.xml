@@ -12,18 +12,27 @@
 		<result property="birth" column="birth"/>
 		<result property="address" column="address"/>
 		<result property="imageName" column="image_name"/>
+		<collection property="authorities" ofType="Authority">
+			<result property="authority" column="authority"/>
+		</collection>
 	</resultMap>
 
 	<select id="getUsers" resultMap="UserResultMap">
-		SELECT ID, USERNAME, PASSWORD, NAME, BIRTH, EMAIL, ADDRESS, IMAGE_NAME FROM USERS
+		SELECT ID, USERS.USERNAME, PASSWORD, NAME, BIRTH, EMAIL, ADDRESS, AUTHORITY
+		FROM USERS LEFT OUTER JOIN AUTHORITIES A on USERS.USERNAME = A.USERNAME
+
 	</select>
 
 	<select id="getUserById" parameterType="Long" resultMap="UserResultMap">
-		SELECT ID,USERNAME, PASSWORD, NAME, BIRTH, EMAIL, ADDRESS, IMAGE_NAME FROM USERS WHERE ID = #{id}
+		SELECT ID, USERS.USERNAME, PASSWORD, NAME, BIRTH, EMAIL, ADDRESS, AUTHORITY
+		FROM USERS LEFT OUTER JOIN AUTHORITIES A on USERS.USERNAME = A.USERNAME
+		WHERE ID = #{id}
 	</select>
 
 	<select id="getUserByUsername" parameterType="String" resultMap="UserResultMap">
-		SELECT ID,USERNAME, PASSWORD, NAME, BIRTH, EMAIL, ADDRESS, IMAGE_NAME FROM USERS WHERE USERNAME = #{username}
+		SELECT ID, USERS.USERNAME, PASSWORD, NAME, BIRTH, EMAIL, ADDRESS, AUTHORITY
+		FROM USERS LEFT OUTER JOIN AUTHORITIES A on USERS.USERNAME = A.USERNAME
+		WHERE USERS.USERNAME = #{username}
 	</select>
 
 	<insert id="insertUser" parameterType="User" useGeneratedKeys="true" >

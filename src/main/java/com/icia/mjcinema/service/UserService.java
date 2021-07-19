@@ -24,12 +24,9 @@ public class UserService {
 
 	private final UserMapper userMapper;
 
-	public User join(RegistrationForm registrationForm) throws IllegalStateException, IOException {
+	public User join(RegistrationForm registrationForm) {
 
 		User user = registrationForm.toUser();
-
-		String imageName = saveImage(registrationForm.getImageFile());
-		user.setImageName(imageName);
 
 		userMapper.insertUser(user);
 		for (Authority authority : user.getAuthorities()) {
