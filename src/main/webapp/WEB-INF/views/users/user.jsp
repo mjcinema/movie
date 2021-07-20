@@ -86,12 +86,12 @@
                                         <div class="row mb-6" >
                                             <div class="col-md-6" >
                                                 <div class="form-floating mb-3">
-                                                    <input class="form-control" style="height:40px;" type="text" name="username" value="${user.username}" disabled="disabled" />
+                                                    <input class="form-control" style="height:40px;" type="text" name="username"  value="${user.username}" disabled="disabled"/>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3">
-                                                    <input class="form-control" style="height:40px;" type="text" value="${user.password}" disabled="disabled" />
+                                                    <input class="form-control" style="height:40px;" type="text" value="${user.password}" disabled="disabled" name="password"/>
                                                 </div>
                                             </div>
                                         </div>

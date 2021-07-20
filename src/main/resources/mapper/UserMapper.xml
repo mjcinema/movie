@@ -36,7 +36,7 @@
 	</select>
 
 	<insert id="insertUser" parameterType="User" useGeneratedKeys="true" >
-		INSERT INTO USERS (ID, USERNAME, PASSWORD, NAME, birth, EMAIL, ADDRESS)
+		INSERT INTO USERS (ID, USERNAME, PASSWORD, NAME, BIRTH, EMAIL, ADDRESS)
 		VALUES (USERS_SEQUENCE.NEXTVAL, #{username} , #{password} , #{name} , #{birth} , #{email} , #{address})
 		<selectKey keyProperty="id" resultType="long" order="AFTER">
 			SELECT ID FROM USERS WHERE USERNAME = #{username}

@@ -163,7 +163,7 @@
 <script>
     function movieInfo(username){
         console.log("username: "+username);
-        location.href="user?username="+username;
+        location.href="/users/"+username;
     }
 </script>
 </html>

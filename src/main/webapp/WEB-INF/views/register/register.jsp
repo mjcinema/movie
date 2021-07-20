@@ -66,7 +66,7 @@
                                     <div class="card-body">
                                     
                                     <!--  회원가입 -->
-                                        <form action="${pageContext.request.contextPath}/register" method="post" enctype="multipart/form-data" id="registrationForm">
+                                        <form action="${pageContext.request.contextPath}/users/new" method="post" enctype="multipart/form-data" id="registrationForm">
                                         	<sec:csrfInput/>
                                         	<div class="row mb-3">
                                         		<div class="col-md-9">

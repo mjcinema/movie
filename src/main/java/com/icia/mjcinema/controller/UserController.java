@@ -39,13 +39,14 @@ public class UserController {
 		return "register/register";
 	}
 	//회원가입
-	@PostMapping("/register")
+	@PostMapping("/users/new")
 	public String join(@ModelAttribute @Valid RegistrationForm joinMemberForm, BindingResult result, HttpSession session) throws IllegalStateException, IOException {
 		
 		if (result.hasErrors()) {
 			
 			return "register/register";
 		}
+
 		User user = userService.join(joinMemberForm);
 		session.setAttribute("loginMember", user);
 		return "redirect:/";
@@ -58,14 +59,15 @@ public class UserController {
 	}
 		
 	//회원정보
-	@GetMapping ("/user")
-	public String user(@RequestParam("username") String username, Model model) {
+	@GetMapping ("/users/{username}")
+	public String user(@PathVariable("username") String username, Model model) {
 		UpdateUserForm user = userService.user(username);
 		model.addAttribute("user", user);
 		return "users/user";
 	}
-	//회원목록
-	@GetMapping ("/userList")
+
+
+	@GetMapping ("/users")
 	public String userlist(Model model) {
 		List<User> users = userService.getUsers();
 		model.addAttribute("userlist", users);
@@ -95,7 +97,7 @@ public class UserController {
 		public String leaveUser(@PathVariable("username") String username) {
 		userService.leaveUser(username);
 
-		return "redirect:/userList";
+		return "redirect:/";
 	}
 	//회원 수정 get
 	@GetMapping("/edit")
