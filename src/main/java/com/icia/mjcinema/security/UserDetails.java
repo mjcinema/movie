@@ -5,14 +5,13 @@ import com.icia.mjcinema.domain.User;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 @Getter
-public class CustomerUserDetails implements UserDetails {
+public class UserDetails implements org.springframework.security.core.userdetails.UserDetails {
         private final Long id;
         private final String username;
         private final String password;
@@ -20,7 +19,7 @@ public class CustomerUserDetails implements UserDetails {
         private final String name;
         private final List<GrantedAuthority> authorities = new ArrayList<>();
 
-    public CustomerUserDetails(User user) {
+    public UserDetails(User user) {
         this.id = user.getId();
         this.username = user.getUsername();
         this.password = user.getPassword();

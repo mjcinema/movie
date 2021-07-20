@@ -10,6 +10,7 @@
         <security:intercept-url pattern="/assets/**" access="permitAll"/>
         <security:intercept-url pattern="/js/**" access="permitAll"/>
         <security:intercept-url pattern="/css/**" access="permitAll"/>
+        <security:intercept-url pattern="/resources/**" access="permitAll"/>
         <security:intercept-url pattern="/img/**" access="permitAll"/>
         <security:intercept-url pattern="/vendor/**" access="permitAll"/>
         <security:intercept-url pattern="/register" access="permitAll"/>
@@ -24,11 +25,11 @@
     </security:http>
 
     <security:authentication-manager>
-        <security:authentication-provider user-service-ref="customUserDetailsService">
+        <security:authentication-provider user-service-ref="userDetailsService">
             <security:password-encoder ref="passwordEncoder"/>
         </security:authentication-provider>
     </security:authentication-manager>
 
-    <bean id="customUserDetailsService" class="com.icia.mjcinema.security.CustomUserDetailsService"/>
+    <bean id="userDetailsService" class="com.icia.mjcinema.security.UserDetailsService"/>
     <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 </beans>
