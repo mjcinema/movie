@@ -18,7 +18,7 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-video"></i></div>
                                 <span>영화</span>
                             </a>
-                            <a class="nav-link" href="${pageContext.request.contextPath}/Movies/MovieReservation">
+                            <a class="nav-link" href="${pageContext.request.contextPath}/movies/MovieReservation">
                                 <div class="sb-nav-link-icon"><i class="fas fa-calendar-check"></i></div>
                                 <span>예매</span>
                             </a>
@@ -60,10 +60,10 @@
                                     </a>
                                     <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="${pageContext.request.contextPath}/Movies/AddMovieForm">영화등록</a>
+                                            <a class="nav-link" href="${pageContext.request.contextPath}/movies/AddMovieForm">영화등록</a>
                                             <a class="nav-link" href="#">영화관등록</a>
-                                            <a class="nav-link" href="/movies/MovieReList">영화목록</a>
-                                            <a class="nav-link" href="${pageContext.request.contextPath}/Movies/addScheduleForm">스케쥴등록</a>
+                                            <a class="nav-link" href="/movies">영화목록</a>
+
                                         </nav>
                                     </div>
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
@@ -75,7 +75,7 @@
                                             <a class="nav-link" href="${pageContext.request.contextPath}/users">회원목록</a>
 
                                             
-                                            <a class="nav-link" href="#">회원삭제</a>
+
                                         </nav>
                                     </div>
                                 </nav>

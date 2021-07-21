@@ -38,11 +38,11 @@
     </head>
     <body class="sb-nav-fixed">
         
-         <%@ include file = "../Include/TopBar.jsp" %>
+         <%@ include file = "../include/TopBar.jsp" %>
         
         <div id="layoutSidenav">
              
-             <%@ include file = "../Include/SideBar.jsp" %>
+             <%@ include file = "../include/SideBar.jsp" %>
              
             <div id="layoutSidenav_content">
                 <main>
@@ -60,22 +60,22 @@
                                     <div class="card-body">
                                     
                                    
-                                        <form action="addMovie" method="post" enctype="multipart/form-data" >
+                                        <form action="${pageContext.request.contextPath}/movies/new" method="post" enctype="multipart/form-data" >
                                         	<div class="form-floating mb-3">
-                                               	 <input class="form-control" id="addMvTitle" name="mtitle" type="text" placeholder="영화제목" />
+                                               	 <input class="form-control" id="addMvTitle" name="title" type="text" placeholder="영화제목" />
                                                	 <label for="addMvTitle">영화제목</label>
                                                	 </div>
                                                	 
                                             <div class="row mb-3">
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="addMvDirector" name="mdirector" type="text" placeholder="감독" />
+                                                        <input class="form-control" id="addMvDirector" name="director" type="text" placeholder="감독" />
                                                         <label for="addMvDirector">감독</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="addMvGenre" name="mgenre" type="text" placeholder="장르" />
+                                                        <input class="form-control" id="addMvGenre" name="genre" type="text" placeholder="장르" />
                                                         <label for="addMvGenre">장르</label>
                                                     </div>
                                                 </div>
@@ -84,20 +84,20 @@
                                                <div class="row mb-3">
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="addMvDate" name="mdate" type="date" placeholder="개봉일" />
+                                                        <input class="form-control" id="addMvDate" name="date" type="date" placeholder="개봉일" />
                                                         <label for="addMvDate">개봉일</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
                                                     <div class="form-control">
-                                                        <input type="radio" id="addMvGrade" name="mgrade" value="0" checked="checked">
+                                                        <input type="radio" id="addMvGrade" name="grade" value="0" checked="checked">
                                                         <label class="small" for="addMvGrade">전체관람가</label>
-                                                        <input type="radio" id="addMvGrade" name="mgrade" value="12" checked="checked">
+                                                        <input type="radio" id="addMvGrade" name="grade" value="12" checked="checked">
                                                         <label class="small" for="addMvGrade">12세 이상</label>
-                                                        <input type="radio" id="addMvGrade" name="mgrade" value="15" checked="checked">
+                                                        <input type="radio" id="addMvGrade" name="grade" value="15" checked="checked">
                                                         <label class="small" for="addMvGrade">15세 이상</label>
-                                                        <input type="radio" id="addMvGrade" name="mgrade" value="18" checked="checked">
+                                                        <input type="radio" id="addMvGrade" name="grade" value="18" checked="checked">
                                                         <label class="small" for="addMvGrade">청소년관람불가</label>
                                                     </div>
                                                     </div>

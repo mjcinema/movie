@@ -80,7 +80,7 @@
     	
     	$.ajax({
     		type : "get",
-    		url : "${pageContext.request.contextPath}/Movies/movieMain",
+    		url : "${pageContext.request.contextPath}/views/home",
     		dataType : 'json',
     		async : false,
     		success : function(movie){
@@ -92,16 +92,16 @@
     				output += "<div class='card-body'>";
     				output += "<div class='row no-gutters align-items-center'>";
     				
-    				output += "<a href='${pageContext.request.contextPath}/Movies/movieInfo?mvCode="+movie[i].mvcode+"'>";
-    				output += "<img src='${pageContext.request.contextPath}/img/mvPoster/"+movie[i].mvposter+"' style='width:100%;'></a>";
+    				output += "<a href='${pageContext.request.contextPath}/Movies/movieInfo?mvCode="+movie[i].code+"'>";
+    				output += "<img src='${pageContext.request.contextPath}/img/mvPoster/"+movie[i].poster+"' style='width:100%;'></a>";
     				output += "<div class='col mr-2'>";
     				output += "<div class='small text-primary text-uppercase mb-1' style='padding-top:5px;'>";
-    				output += "<span>"+movie[i].mvredate+"</span></div>";
+    				output += "<span>"+movie[i].date+"</span></div>";
     				output += "<div class='h5 mb-0 font-weight-bold text-gray-800'>";
-    				output += "<span>"+movie[i].mvtitle+"</span></div>";
+    				output += "<span>"+movie[i].title+"</span></div>";
     				output += "</div>";
     				output += "<div>";
-    				output += "<button class='btn btn-primary btn-block' onclick='moveReservation(\""+movie[i].mvcode+"\")'>예매하기</button>";
+    				output += "<button class='btn btn-primary btn-block' onclick='moveReservation(\""+movie[i].code+"\")'>예매하기</button>";
     				output += "</div></div></div></div></div>";
     			}$("#mainMovieArea").html(output);
     		}

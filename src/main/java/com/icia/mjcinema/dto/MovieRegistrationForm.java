@@ -1,33 +1,36 @@
 package com.icia.mjcinema.dto;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.icia.mjcinema.domain.Movie;
 
 import lombok.Data;
 
-@Data
+@Getter @Setter
 public class MovieRegistrationForm {
 
-	private String mcode;
-	private String mtitle;
-	private String mdirector;
-	private String mdate;
-	private String mgenre;
-	private String mgrade;
-	private String mvfilename;
+	private Long code;
+	private String title;
+	private String director;
+	private String date;
+	private String genre;
+	private String grade;
+	private String fee;
+	private String filename;
 	
-	private MultipartFile mvfile;
-	
+	private MultipartFile file;
+
 	public Movie toMovie() {
-		Movie movie = new Movie();
-		movie.setMcode(mcode);
-		movie.setMtitle(mtitle);
-		movie.setMdirector(mdirector);
-		movie.setMdate(mdate);
-		movie.setMgenre(mgenre);
-		movie.setMgrade(mgrade);
-		movie.setMvfilename(mvfilename);
-		return movie;
+		return Movie.builder()
+			.title(title)
+			.director(director)
+			.date(date)
+			.genre(genre)
+			.grade(grade)
+			.fee(fee)
+			.build();
+
 	}
 }

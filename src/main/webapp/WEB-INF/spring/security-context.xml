@@ -16,7 +16,13 @@
         <security:intercept-url pattern="/vendor/**" access="permitAll"/>
         <security:intercept-url pattern="/register/**" access="permitAll"/>
         <security:intercept-url pattern="/login" access="permitAll"/>
-        <security:intercept-url pattern="/movies/**" access="hasRole('ROLE_USER')"/>
+        <security:intercept-url pattern="/movies/MovieReservation" access="permitAll"/>
+        <security:intercept-url pattern="/movies/AddMovieForm" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/movies/new" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/movies/MoviesReList" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/movies" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/movies/MovieInfo" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/movies/**" access="hasRole('ROLE_ADMIN')"/>
         <security:intercept-url pattern="/profile/**" access="isAuthenticated()"/>
         <security:intercept-url pattern="/users/new" access="permitAll"/>
         <security:intercept-url pattern="/users/**" access="hasRole('ROLE_ADMIN')"/>

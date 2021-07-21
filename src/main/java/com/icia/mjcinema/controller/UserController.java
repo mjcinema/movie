@@ -100,7 +100,7 @@ public class UserController {
 		return "redirect:/";
 	}
 	//회원 수정 get
-	@GetMapping("/edit")
+	@GetMapping("/users/{username}/edit")
 	public String userEditForm(@RequestParam("username")String username, Model model)throws IllegalStateException, IOException{
 	model.addAttribute(username);
 	return "/users/edit";
