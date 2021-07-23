@@ -1,3 +1,4 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -65,8 +66,8 @@
                                     <div class="card-body">
                                     
                                     <!--  회원가입 -->
-                                        <form action="${pageContext.request.contextPath}/register" method="post" enctype="multipart/form-data" id="registrationForm">
-                                        	
+                                        <form action="${pageContext.request.contextPath}/users/new" method="post" enctype="multipart/form-data" id="registrationForm">
+                                        	<sec:csrfInput/>
                                         	<div class="row mb-3">
                                         		<div class="col-md-9">
                                             	<div class="form-floating mb-3">

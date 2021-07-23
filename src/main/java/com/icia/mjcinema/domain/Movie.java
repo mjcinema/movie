@@ -1,21 +1,33 @@
 package com.icia.mjcinema.domain;
 
-import org.springframework.web.multipart.MultipartFile;
+import lombok.*;
 
-import lombok.Data;
 
-@Data
+@NoArgsConstructor
+@Getter @Setter
 public class Movie {
 
-	private String mcode;
-	private String mtitle;
-	private String mdirector;
-	private String mdate;
-	private String mgenre;
-	private String mgrade;
-	private String mvfilename;
+	private Long code;
+	private String title;
+	private String director;
+	private String date;
+	private String genre;
+	private String grade;
+	private String fileName;
 	private String fee;
 	
-	private MultipartFile mvfile;
+	@Builder
+	public Movie(Long code, String title, String director, String date, String genre, String grade,  String fee) {
+		this.code = code;
+		this.title = title;
+		this.director = director;
+		this.date = date;
+		this.genre = genre;
+		this.grade = grade;
+		this.fee = fee;
+	}
 
+	public Money calculateMovieFee(Screening screening) {
+		return null;
+	}
 }

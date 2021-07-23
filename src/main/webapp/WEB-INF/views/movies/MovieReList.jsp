@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -87,11 +88,11 @@
     </head>
     <body class="sb-nav-fixed">
         
-         <%@ include file = "../Include/TopBar.jsp" %>
+         <%@ include file = "../include/TopBar.jsp" %>
         
         <div id="layoutSidenav">
              
-             <%@ include file = "../Include/SideBar.jsp" %>
+             <%@ include file = "../include/SideBar.jsp" %>
              
             <div id="layoutSidenav_content">
                 <main>
@@ -126,14 +127,14 @@
                                     </tfoot>
                                     <tbody>
                                     	<c:forEach items="${movielist}" var="movie">
-                                         <tr onclick="movieInfo('${reInfo[7]}')">
+                                         <tr onclick="movieInfo('${movie.title}')">
                                         	<td>                              
-                                        	<span>${movie.mtitle}</span>
+                                        	<span>${movie.title}</span>
                                         	</td>
-                                            <td>${movie.mdirector}</td>
-                                            <td>${movie.mdate}</td>
-                                            <td>${movie.mgenre}</td>
-                                            <td>${movie.mgrade}</td>
+                                            <td>${movie.director}</td>
+                                            <td>${movie.date}</td>
+                                            <td>${movie.genre}</td>
+                                            <td>${movie.grade}</td>
                                         </tr>
                                         </c:forEach>
                                     </tbody>
@@ -160,9 +161,11 @@
         <script src="${pageContext.request.contextPath}/resources/js/datatables-simple-demo.js"></script>
     </body>
 	<script>
-	function movieInfo(movCode){
-		console.log("movCode: "+movCode);
-		location.href="movieInfo?mvCode="+movCode;
+	function movieInfo(title){
+		console.log("title: "+title);
+		location.href="/movies/" + title;
 	}
+
+
 	</script>    
 </html>

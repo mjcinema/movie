@@ -4,39 +4,29 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.icia.mjcinema.dto.UpdateMovieForm;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.icia.mjcinema.mapper.MovieMapper;
 import com.icia.mjcinema.domain.Movie;
 import com.icia.mjcinema.dto.MovieRegistrationForm;
 
+@RequiredArgsConstructor
 @Service
+@Transactional
 public class MovieService {
 
-	@Autowired
-	private MovieMapper moviedao;
+	private final MovieMapper movieMapper;
 		
-	public Movie addmovie(MovieRegistrationForm movieRegistrationForm) throws IllegalStateException, IOException {
-		
-		String filename = uploadImage(movieRegistrationForm.getMvfile());
-		
-		Movie movie = new Movie();
-		movie.setMcode(movieRegistrationForm.getMcode());
-		movie.setMtitle(movieRegistrationForm.getMtitle());
-		movie.setMdirector(movieRegistrationForm.getMdirector());
-		movie.setMdate(movieRegistrationForm.getMdate());
-		movie.setMgenre(movieRegistrationForm.getMgenre());
-		movie.setMgrade(movieRegistrationForm.getMgrade());
-		
-		movie.setMvfilename(filename);
-		
-		moviedao.insertMovie(movie);
-		
-		return movie;
+	public Movie addMovie(MovieRegistrationForm movieRegistrationForm)  {
+		Movie movie = movieRegistrationForm.toMovie();
+		movieMapper.insertMovie(movie);
+		return movieMapper.getMovieByCode(movie.getCode());
 
-		}
+	}
 	
 	private String uploadImage(MultipartFile image) throws IllegalStateException, IOException {
 		MultipartFile mfile = image;
@@ -52,9 +42,28 @@ public class MovieService {
 	}
 
 	public List<Movie> movielist() {
-		List<Movie> movies = moviedao.getMovies();
-		return movies;
+		return movieMapper.getMovies();
 	}
-	
 
+
+	public UpdateMovieForm movie(String title) {
+
+		Movie movie = movieMapper.getMovieByTitle(title);
+
+		return UpdateMovieForm.fromMovie(movie);
+
+	}
+
+	public void leaveMovie(String title) {
+		Movie movie = movieMapper.getMovieByTitle(title);
+		if(movie == null){
+			throw new IllegalArgumentException("영화가 없습니다.");
+		}
+		movieMapper.deleteMovie(title);
+
+	}
+
+    public void updateMovie(Movie movie) {
+		movieMapper.updateMovie(movie);
+    }
 }

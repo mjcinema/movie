@@ -1,16 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
  <mapper namespace="com.icia.mjcinema.mapper.MovieMapper">
+	<resultMap id="MovieResultMap" type="Movie">
+		<id property="id" column="id"/>
+		<result property="code" column="code"/>
+		<result property="title" column="title"/>
+		<result property="director" column="director"/>
+		<result property="date" column="date"/>
+		<result property="genre" column="genre"/>
+		<result property="grade" column="grade"/>
+		<result property="fileName" column="fileName"/>
+	</resultMap>
+
 	<select id="getMovies" resultType="Movie">
-		SELECT * FROM MJMOVIE
+		SELECT TITLE , DIRECTOR , "DATE" , GENRE , GRADE
+		FROM MOVIES
 	</select>
 
-
-	<insert id="insertMovie" parameterType="Movie">
-		INSERT INTO MJMOVIE (MCODE , MTITLE , MDIRECTOR , MDATE , MGENRE , MGRADE , MVFILENAME)
-		VALUES (MOVIE_SEQ.NEXTVAL , #{mtitle} , #{mdirector} , #{mdate} , #{mgenre} , #{mgrade} , #{mvfilename})
+	<insert id="insertMovie" parameterType="Movie" useGeneratedKeys="true">
+		INSERT INTO MOVIES (TITLE , DIRECTOR , "DATE" , GENRE , GRADE , CODE)
+		VALUES (#{title} , #{director} , #{date} , #{genre} , #{grade} , MOVIES_SEQUENCE.NEXTVAL)
+		<selectKey keyProperty="code" resultType="long" order="AFTER">
+			SELECT CODE FROM MOVIES WHERE TITLE = #{title}
+		</selectKey>
 	</insert>
+
+	<select id="getMovieByCode" parameterType="Long" resultMap="MovieResultMap">
+		SELECT CODE, TITLE , DIRECTOR  , GENRE , GRADE
+		FROM MOVIES
+		WHERE CODE = #{code}
+	</select>
+
+	<select id="getMovieByTitle" parameterType="String" resultMap="MovieResultMap">
+		SELECT CODE , TITLE , DIRECTOR , GENRE , GRADE , "DATE"
+		FROM MOVIES
+		WHERE TITLE = #{title}
+	</select>
+
+	<delete id="deleteMovie" parameterType="String">
+		DELETE FROM MOVIES WHERE TITLE = #{title}
+	</delete>
+
+	<update id="updateMovie" parameterType="Movie">
+		UPDATE MOVIES SET
+			TITLE = #{title},
+			GENRE = #{genre},
+		    DIRECTOR = #{director},
+		    GRADE = #{grade},
+		    "DATE" = #{date}
+		WHERE TITLE = #{title}
+	</update>
 
 	
  </mapper>

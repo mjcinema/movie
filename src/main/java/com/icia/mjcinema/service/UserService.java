@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.util.List;
 
 
+import com.icia.mjcinema.domain.Authority;
 import com.icia.mjcinema.domain.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,22 +18,24 @@ import com.icia.mjcinema.dto.LoginForm;
 import com.icia.mjcinema.dto.RegistrationForm;
 import com.icia.mjcinema.dto.UpdateUserForm;
 
-
+@RequiredArgsConstructor
 @Service
 @Transactional
 public class UserService {
 
-	@Autowired
-	private UserMapper userMapper;
+	private final UserMapper userMapper;
+	private final PasswordEncoder passwordEncoder;
 
-	public User join(RegistrationForm registrationForm) throws IllegalStateException, IOException {
-
+	public User join(RegistrationForm registrationForm) {
+		String encodedPassword = passwordEncoder.encode(registrationForm.getPassword());
+		registrationForm.setPassword(encodedPassword);
 		User user = registrationForm.toUser();
 
-		String imageName = saveImage(registrationForm.getImageFile());
-		user.setImageName(imageName);
-
 		userMapper.insertUser(user);
+		for (Authority authority : user.getAuthorities()) {
+			System.out.println(authority.getUsername());
+			userMapper.insertAuthority(authority);
+		}
 
 		return userMapper.getUserById(user.getId());
 
@@ -76,12 +80,13 @@ public class UserService {
 		return result;
 	}
 
-	public UpdateUserForm memberview(String username) {
-		
+	public UpdateUserForm user(String username) {
+
 		User user = userMapper.getUserByUsername(username);
 
 		return UpdateUserForm.fromMember(user);
 	}
+
 
 	public void leaveUser(String username) {
 		User user = userMapper.getUserByUsername(username);
@@ -91,9 +96,8 @@ public class UserService {
 		userMapper.deleteUser(username);
 	}
 
-	public UpdateUserForm memberListView(String username) {
-		User user = userMapper.getUserByUsername(username);
-		return UpdateUserForm.fromMember(user);
+	public User getUserByUsername(String username) {
+		return userMapper.getUserByUsername(username);
 
 	}
 
@@ -110,5 +114,10 @@ public class UserService {
 		catch (Exception e) {
 
 		}
+	}
+
+    public void updateUser(User user) {
+		userMapper.updateUser(user);
+
 	}
 }

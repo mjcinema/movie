@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sce" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -36,11 +37,11 @@
     </head>
     <body class="sb-nav-fixed">
         
-         <%@ include file = "../Include/TopBar.jsp" %>
+         <%@ include file = "../include/TopBar.jsp" %>
         
         <div id="layoutSidenav">
              
-             <%@ include file = "../Include/SideBar.jsp" %>
+             <%@ include file = "../include/SideBar.jsp" %>
              
             <div id="layoutSidenav_content">
                <main>
@@ -48,6 +49,7 @@
                         <h1 class="mt-4">Movie Reservation</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active" style="font-family: 'GmarketSansMedium';"><i class="fas fa-bookmark"></i> 원하는 영화를 선택 하라우!</li>
+
                         </ol>
                         <div class="row" style="font-family: 'GmarketSansMedium';">
                      		<div class="col-lg-9">
@@ -57,25 +59,25 @@
 								
 										<div class="card shadow mb-4">
                               			  <div class="card-header bg-primary">
-                                 		 	  <h6 class="m-0 text-white" ><i class="fas fa-video"></i> 영화 선택 ${param.mvCode}</h6>
+                                 		 	  <h6 class="m-0 text-white" ><i class="fas fa-video"></i> 영화 선택 ${param.code}</h6>
                                 		  </div>
                                			    <div class="list-group list-group-flush small" id="movieListArea" style="height:200px;  overflow:auto;" >
-                                      		  <c:forEach items="${mvList}" var="movie">
+                                      		  <c:forEach items="${movielist}" var="movie">
                                       		  <c:choose>
-                                      		  <c:when test="${movie. mvcode == param.mvCode}">
+                                      		  <c:when test="${movie.code == param.Code}">
                                       		  <a class="list-group-item list-group-item-action" id="movieSel"
-                                      		  onclick="movieSelect(this,'${movie. mvcode}','${movie. mvtitle}','${movie. mvposter }')" href="#">
-                                        	    <i class="fas fa-caret-right"></i> ${movie.mvtitle }
+                                      		  onclick="movieSelect(this,'${movie.code}','${movie.title}')" href="#">
+                                        	    <i class="fas fa-caret-right"></i> ${movie.title}
                                        		  </a>
                                        		  </c:when>
                                        		  <c:otherwise>
                                        		  <a class="list-group-item list-group-item-action"
-                                      		  onclick="movieSelect(this,'${movie. mvcode}','${movie. mvtitle}','${movie. mvposter }')" href="#">
-                                        	    <i class="fas fa-caret-right"></i> ${movie.mvtitle }
+                                      		  onclick="movieSelect(this,'${movie.code}','${movie.title}','${movie.poster }')" href="#">
+                                        	    <i class="fas fa-caret-right"></i> ${movie.title}
                                        		  </a>
                                        		  </c:otherwise>
                                        		  </c:choose>
-                                        	  </c:forEach> 
+                                        	  </c:forEach>
                                   		    </div>
                           				  </div>
 									</div>
@@ -182,15 +184,7 @@
     
     <script type="text/javascript">
     
-    	$(document).ready(function(){
-    		if("${sessionScope.loginMember}" == ""){
-    			alert("로그인 후 이용해주세요");
-    			location.href = "${pageContext.request.contextPath}/Members/Login";
-    		}
-    			
-    		$("#movieSel").click();
-    		
-    	});
+
     
     	function movieSelect(obj, mv_code, mv_title, mv_poster){
     		console.log("선택한요소: "+ obj );

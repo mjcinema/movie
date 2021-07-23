@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <security:http auto-config="true" use-expressions="true">
+        <security:intercept-url pattern="/" access="permitAll"/>
+        <security:intercept-url pattern="/favicon.ico" access="permitAll"/>
+        <security:intercept-url pattern="/resources/**" access="permitAll"/>
+        <security:intercept-url pattern="/assets/**" access="permitAll"/>
+        <security:intercept-url pattern="/js/**" access="permitAll"/>
+        <security:intercept-url pattern="/css/**" access="permitAll"/>
+        <security:intercept-url pattern="/img/**" access="permitAll"/>
+        <security:intercept-url pattern="/vendor/**" access="permitAll"/>
+        <security:intercept-url pattern="/register/**" access="permitAll"/>
+        <security:intercept-url pattern="/login" access="permitAll"/>
+        <security:intercept-url pattern="/movies/MovieReservation" access="permitAll"/>
+        <security:intercept-url pattern="/movies/AddMovieForm" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/movies/new" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/movies/MoviesReList" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/movies" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/movies/MovieInfo" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/movies/**" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/profile/**" access="isAuthenticated()"/>
+        <security:intercept-url pattern="/users/new" access="permitAll"/>
+        <security:intercept-url pattern="/users/**" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/**" access="denyAll" />
+        <security:form-login  login-page="/login" login-processing-url="/login" username-parameter="username" password-parameter="password" default-target-url="/" always-use-default-target="true"/>
+        <security:logout logout-url="/logout" logout-success-url="/" delete-cookies="true" invalidate-session="true"/>
+        <security:csrf disabled="true"/>
+    </security:http>
+
+    <security:authentication-manager>
+        <security:authentication-provider user-service-ref="userDetailsService">
+            <security:password-encoder ref="passwordEncoder"/>
+        </security:authentication-provider>
+    </security:authentication-manager>
+
+    <bean id="userDetailsService" class="com.icia.mjcinema.security.UserDetailsService"/>
+    <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+</beans>

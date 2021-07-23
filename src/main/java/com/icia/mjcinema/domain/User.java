@@ -2,6 +2,9 @@ package com.icia.mjcinema.domain;
 
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @NoArgsConstructor
 @Getter @Setter
 public class User {
@@ -10,12 +13,11 @@ public class User {
 	private String username;
 	private String password;
 	private String email;
+	private String address;
 	private String name;
 	private String birth;
-	private String address;
 	private String imageName;
-	private boolean enabled;
-
+	private List<Authority> authorities = new ArrayList<>();
 
 	@Builder
 	public User(String username, String password, String email, String name, String birth, String address) {
@@ -25,5 +27,6 @@ public class User {
 		this.name = name;
 		this.birth = birth;
 		this.address = address;
-	}
+		authorities.add(new Authority(username, "ROLE_USER"));
+}
 }
