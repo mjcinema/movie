@@ -66,7 +66,7 @@
                                       		  <c:choose>
                                       		  <c:when test="${movie.code == param.Code}">
                                       		  <a class="list-group-item list-group-item-action" id="movieSel"
-                                      		  onclick="movieSelect(this,'${movie.code}','${movie.title}','${movie.poster }')" href="#">
+                                      		  onclick="movieSelect(this,'${movie.code}','${movie.title}')" href="#">
                                         	    <i class="fas fa-caret-right"></i> ${movie.title}
                                        		  </a>
                                        		  </c:when>
@@ -77,7 +77,7 @@
                                        		  </a>
                                        		  </c:otherwise>
                                        		  </c:choose>
-                                        	  </c:forEach> 
+                                        	  </c:forEach>
                                   		    </div>
                           				  </div>
 									</div>

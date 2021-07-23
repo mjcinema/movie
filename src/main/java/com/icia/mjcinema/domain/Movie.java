@@ -26,4 +26,8 @@ public class Movie {
 		this.grade = grade;
 		this.fee = fee;
 	}
+
+	public Money calculateMovieFee(Screening screening) {
+		return null;
+	}
 }

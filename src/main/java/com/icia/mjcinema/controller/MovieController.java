@@ -8,13 +8,10 @@ import javax.validation.Valid;
 
 import com.icia.mjcinema.dto.UpdateMovieForm;
 import lombok.RequiredArgsConstructor;
-import org.apache.ibatis.annotations.Update;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.icia.mjcinema.domain.Movie;
 import com.icia.mjcinema.dto.MovieRegistrationForm;
@@ -24,7 +21,7 @@ import com.icia.mjcinema.service.MovieService;
 @Controller
 public class MovieController {
 	
-	private final MovieService MovieService;
+	private final MovieService movieService;
 	
 	// 영화 추가화면
 	@RequestMapping(value="/movies/AddMovieForm")
@@ -38,6 +35,13 @@ public class MovieController {
 		return "/movies/MovieReservation";
 	}
 
+	// 영화 예약페이지 영화리스트
+	@GetMapping("/movies/MovieReservation")
+	public String MovieReservation(Model model) {
+		List<Movie> movies = movieService.movielist();
+		model.addAttribute("movielist" , movies);
+		return "/movies/MovieReservation";
+	}
 
 
 	// 영화 추가
@@ -47,17 +51,19 @@ public class MovieController {
 		if(result.hasErrors()) {
 			return "movies/AddMovieForm";
 		}
-		
-		Movie movie = MovieService.addMovie(joinmovieForm);
+
+
+		Movie movie = movieService.addMovie(joinmovieForm);
 		session.setAttribute("joinmovie", movie);
 		return "redirect:/";
 		
 	}
-	
+
+
 	// 영화 목록
 	@GetMapping("/movies")
 	public String MovieList(Model model) {
-		List<Movie> movies = MovieService.movielist();
+		List<Movie> movies = movieService.movielist();
 		model.addAttribute("movielist" , movies);
 		return "/movies/MovieReList";
 	}
@@ -65,7 +71,7 @@ public class MovieController {
 	//영화 정보
 	@GetMapping("/movies/{title}")
 	public String Movie(@PathVariable("title") String title , Model model){
-		UpdateMovieForm movie = MovieService.movie(title);
+		UpdateMovieForm movie = movieService.movie(title);
 		model.addAttribute("movie" , movie);
 		return "movies/MovieInfo";
 	}
@@ -73,7 +79,7 @@ public class MovieController {
 	// 영화 삭제
 	@PostMapping("/movies/{title}/delete")
 		public String leaveMovie(@PathVariable("title") String title){
-		MovieService.leaveMovie(title);
+		movieService.leaveMovie(title);
 		return "redirect:/";
 	}
 
@@ -88,7 +94,16 @@ public class MovieController {
 	@PostMapping("/movies/{title}/edit")
 		public String updateMovie(@PathVariable("title") String title , UpdateMovieForm form , Model model){
 		Movie movie = UpdateMovieForm.toMovie(form);
-		MovieService.updateMovie(movie);
+		movieService.updateMovie(movie);
 		return  "redirect:/";
 	}
+
+	// 홈화면 영화 리스트
+	@GetMapping("/views/home")
+	public String homeMovieList(Model model) {
+		List<Movie> movies = movieService.movielist();
+		model.addAttribute("movie" , movies);
+		return "/views/home";
+	}
+
 }
