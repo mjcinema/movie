@@ -6,15 +6,17 @@ import com.icia.mjcinema.domain.objects.bjh.ch02.Reservation;
 import java.time.LocalDateTime;
 
 public class Screening {
+    private final String location;
 
     private final Movie movie;
-    private int sequence;
-    private LocalDateTime whenScreened;
+    private final int sequence;
+    private final LocalDateTime whenScreened;
 
-    public Screening(Movie movie, int sequence, LocalDateTime whenScreened) {
+    public Screening(Movie movie, int sequence, LocalDateTime whenScreened , String location) {
         this.movie = movie;
         this.sequence = sequence;
         this.whenScreened = whenScreened;
+        this.location = location;
     }
 
     public LocalDateTime getStartTime(){
@@ -39,4 +41,7 @@ public class Screening {
     }
 
 
+    public String getLocation() {
+        return location;
+    }
 }

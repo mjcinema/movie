@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import com.icia.mjcinema.domain.Screening;
 import com.icia.mjcinema.dto.UpdateMovieForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -42,6 +43,9 @@ public class MovieController {
 		model.addAttribute("movielist" , movies);
 		return "/movies/MovieReservation";
 	}
+
+
+
 
 
 	// 영화 추가

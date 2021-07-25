@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import com.icia.mjcinema.domain.Screening;
 import com.icia.mjcinema.dto.UpdateMovieForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ import com.icia.mjcinema.dto.MovieRegistrationForm;
 public class MovieService {
 
 	private final MovieMapper movieMapper;
+
 		
 	public Movie addMovie(MovieRegistrationForm movieRegistrationForm)  {
 		Movie movie = movieRegistrationForm.toMovie();
@@ -66,4 +68,7 @@ public class MovieService {
     public void updateMovie(Movie movie) {
 		movieMapper.updateMovie(movie);
     }
+
+
+
 }
