@@ -39,139 +39,151 @@
         
          <%@ include file = "../include/TopBar.jsp" %>
         
-        <div id="layoutSidenav">
-             
-             <%@ include file = "../include/SideBar.jsp" %>
-             
-            <div id="layoutSidenav_content">
-               <main>
-                    <div class="container-fluid px-4">
-                        <h1 class="mt-4">Movie Reservation</h1>
-                        <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active" style="font-family: 'GmarketSansMedium';"><i class="fas fa-bookmark"></i> 원하는 영화를 선택 하라우!</li>
+			<div id="layoutSidenav">
 
-                        </ol>
-                        <div class="row" style="font-family: 'GmarketSansMedium';">
-                     		<div class="col-lg-9">
-								<div class="row">
-								<!-- 영화 목록 출력 -->
-									<div class="col-lg-4">
-								
-										<div class="card shadow mb-4">
-                              			  <div class="card-header bg-primary">
-                                 		 	  <h6 class="m-0 text-white" ><i class="fas fa-video"></i> 영화 선택 ${param.code}</h6>
-                                		  </div>
-                               			    <div class="list-group list-group-flush small" id="movieListArea" style="height:200px;  overflow:auto;" >
-                                      		  <c:forEach items="${movielist}" var="movie">
-                                      		  <c:choose>
-                                      		  <c:when test="${movie.code == param.Code}">
-                                      		  <a class="list-group-item list-group-item-action" id="movieSel"
-                                      		  onclick="movieSelect(this,'${movie.code}','${movie.title}')" href="#">
-                                        	    <i class="fas fa-caret-right"></i> ${movie.title}
-                                       		  </a>
-                                       		  </c:when>
-                                       		  <c:otherwise>
-                                       		  <a class="list-group-item list-group-item-action"
-                                      		  onclick="movieSelect(this,'${movie.code}','${movie.title}','${movie.poster }')" href="#">
-                                        	    <i class="fas fa-caret-right"></i> ${movie.title}
-                                       		  </a>
-                                       		  </c:otherwise>
-                                       		  </c:choose>
-                                        	  </c:forEach>
-                                  		    </div>
-                          				  </div>
-									</div>
-								<!-- 영화관 목록 출력 -->	
-									<div class="col-lg-4">
+				 <%@ include file = "../include/SideBar.jsp" %>
+
+				<div id="layoutSidenav_content">
+				   <main>
+						<div class="container-fluid px-4">
+							<h1 class="mt-4">Movie Reservation</h1>
+							<ol class="breadcrumb mb-4">
+								<li class="breadcrumb-item active" style="font-family: 'GmarketSansMedium';"><i class="fas fa-bookmark"></i> 원하는 영화를 선택 하라우!</li>
+
+							</ol>
+							<div class="row" style="font-family: 'GmarketSansMedium';">
+								<div class="col-lg-9">
+									<div class="row">
+									<!-- 영화 목록 출력 -->
+										<div class="col-lg-4">
+
 											<div class="card shadow mb-4">
-                              			  <div class="card-header bg-success">
-                                 		 	  <h6 class="m-0 text-white" ><i class="fas fa-couch"></i> 영화관 선택 </h6>
-                                		  </div>
-                               			    <div class="list-group list-group-flush small" style="height:200px; overflow:auto;" id="cinemaListArea">
-                                      		
-                                  		    </div>
-                          				  </div>
+											  <div class="card-header bg-primary">
+												  <h6 class="m-0 text-white" ><i class="fas fa-video"></i> 영화 선택 ${param.code}</h6>
+											  </div>
+												<div class="list-group list-group-flush small" id="movieListArea" style="height:200px;  overflow:auto;" >
+												  <c:forEach items="${movielist}" var="movie">
+												  <c:choose>
+												  <c:when test="${movie.code == param.Code}">
+												  <a class="list-group-item list-group-item-action" id="movieSel"
+												  onclick="movieSelect(this,'${movie.code}','${movie.title}')" href="#">
+													<i class="fas fa-caret-right"></i> ${movie.title}
+												  </a>
+												  </c:when>
+												  <c:otherwise>
+												  <a class="list-group-item list-group-item-action"
+												  onclick="movieSelect(this,'${movie.code}','${movie.title}','${movie.poster }')" href="#">
+													<i class="fas fa-caret-right"></i> ${movie.title}
+												  </a>
+												  </c:otherwise>
+												  </c:choose>
+												  </c:forEach>
+												</div>
+											  </div>
+										</div>
+									<!-- 영화관 목록 출력 -->
+										<div class="col-lg-4">
+												<div class="card shadow mb-4">
+											  <div class="card-header bg-success">
+												  <h6 class="m-0 text-white" ><i class="fas fa-couch"></i> 영화관 선택 </h6>
+											  </div>
+												<div class="list-group list-group-flush small" style="height:200px; overflow:auto;" id="cinemaListArea">
+													<c:forEach items="${screenlist}" var="movie">
+
+
+																<a class="list-group-item list-group-item-action" id="cinemaSelect"
+																   onclick="cinemaSelect(this,'${movie.location}')" href="#">
+																	<i class="fas fa-caret-right"></i> ${movie.location}
+																</a>
+
+
+
+
+
+													</c:forEach>
+												</div>
+											  </div>
+										</div>
+										<div class="col-lg-4">
+											<div class="card shadow mb-4">
+											  <div class="card-header bg-warning">
+												  <h6 class="m-0 text-white" ><i class="fas fa-calendar-check"></i> 날짜 선택</h6>
+											  </div>
+												<div class="list-group list-group-flush small" style="height:200px; overflow:auto;" id="scDateListArea">
+
+												</div>
+											  </div>
+										</div>
 									</div>
-									<div class="col-lg-4">
-										<div class="card shadow mb-4">
-                              			  <div class="card-header bg-warning">
-                                 		 	  <h6 class="m-0 text-white" ><i class="fas fa-calendar-check"></i> 날짜 선택</h6>
-                                		  </div>
-                               			    <div class="list-group list-group-flush small" style="height:200px; overflow:auto;" id="scDateListArea">
-                                      		  
-                                  		    </div>
-                          				  </div>
+									<div class="row">
+										<div class="col-lg-8">
+											<div class="card shadow mb-4">
+											  <div class="card-header bg-danger">
+												  <h6 class="m-0 text-white" ><i class="fas fa-clock"></i> 상영 시간표</h6>
+											  </div>
+												<div class="list-group list-group-flush small" style="height:200px; overflow:auto;" id="scTimeListArea">
+
+												</div>
+											  </div>
+										</div>
+										<div class="col-lg-4">
+											<div class="card shadow mb-4">
+											  <div class="card-header bg-info">
+												  <h6 class="m-0 text-white" ><i class="fas fa-users"></i> 인원 선택</h6>
+											  </div>
+
+												 <div id="selectPeopleArea" style="padding : 10px;  text-align : center;">
+													<button class="btn btn-outline-dark" onclick="selectPeople(this,1)">1</button>
+													<button class="btn btn-outline-dark" onclick="selectPeople(this,2)">2</button>
+													<button class="btn btn-outline-dark" onclick="selectPeople(this,3)">3</button>
+													<button class="btn btn-outline-dark" onclick="selectPeople(this,4)">4</button>
+													<button class="btn btn-outline-dark" onclick="selectPeople(this,5)">5</button>
+												 </div>
+
+											  </div>
+										</div>
 									</div>
-								</div>  
-								<div class="row">
-									<div class="col-lg-8">
-										<div class="card shadow mb-4">
-                              			  <div class="card-header bg-danger">
-                                 		 	  <h6 class="m-0 text-white" ><i class="fas fa-clock"></i> 상영 시간표</h6>
-                                		  </div>
-                               			    <div class="list-group list-group-flush small" style="height:200px; overflow:auto;" id="scTimeListArea">
-                                      		 
-                                  		    </div>
-                          				  </div>
-									</div>
-									<div class="col-lg-4">
-										<div class="card shadow mb-4">
-                              			  <div class="card-header bg-info">
-                                 		 	  <h6 class="m-0 text-white" ><i class="fas fa-users"></i> 인원 선택</h6>
-                                		  </div>
-                               			    
-                                      		 <div id="selectPeopleArea" style="padding : 10px;  text-align : center;">
-                                      		 	<button class="btn btn-outline-dark" onclick="selectPeople(this,1)">1</button>
-                                      		 	<button class="btn btn-outline-dark" onclick="selectPeople(this,2)">2</button>
-                                      		 	<button class="btn btn-outline-dark" onclick="selectPeople(this,3)">3</button>
-                                      		 	<button class="btn btn-outline-dark" onclick="selectPeople(this,4)">4</button>
-                                      		 	<button class="btn btn-outline-dark" onclick="selectPeople(this,5)">5</button>
-                                      		 </div>
-                                  		   
-                          				  </div>
-									</div>
-								</div>                   		
-                     		</div>
-                     		
-                     		<div class="col-lg-3">
-                     			<div class="card shadow mb-4">
-                              			  <div class="card-header bg-dark">
-                                 		 	  <h6 class="m-0 text-white" >예매 정보</h6>
-                                		  </div>
-                               			    <div class="list-group list-group-flush small" style="padding-top : 20px; height:500px; text-align : center; overflow:auto;" 
-                               			     id="reservationArea">
-                               			      <img  src="" id="mvPoster"  onclick="">
-                                      		  <h6 id="selectMvTilte">영화를 선택 하라우~!</h6>
-                                      		  <h6 id="selectCinema"></h6>
-                                      		  <h6 id="selectDate"></h6>
-                                      		  <h6 id="selectTheater"></h6>
-                                      		  <h6 id="selectNum" ></h6> 
-                                      		  <form action="reservationForm" method="post" onsubmit="return checkRev()">
-                                      		  	<input type="hidden" name="re_cicode" id="re_cicode">
-                                      		  	<input type="hidden" name="re_thname" id="re_thname">
-                                      		  	<input type="hidden" name="re_start" id="re_start">
-                                      		  	<input type="hidden" name="re_number" id="re_number">
-                                      		  	<input type="hidden" name="re_id" id="re_id" value="${sessionScope.loginId }">
-                                      		  <button class="btn btn-dark">예매하기</button>
-                                      		  </form>
-                                  		    </div>
-                          				  </div>
-                     		</div>
-                     
-                        </div>
-                       
-                        
-                    </div>
-                </main>
-                <footer class="py-4 bg-light mt-auto">
-                    <div class="container-fluid px-4">
-                        <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; MJ Movie </div>
-                       
-                        </div>
-                    </div>
-                </footer>
-            </div>
+								</div>
+
+								<div class="col-lg-3">
+									<div class="card shadow mb-4">
+											  <div class="card-header bg-dark">
+												  <h6 class="m-0 text-white" >예매 정보</h6>
+											  </div>
+												<div class="list-group list-group-flush small" style="padding-top : 20px; height:500px; text-align : center; overflow:auto;"
+												 id="reservationArea">
+												  <img  src="" id="mvPoster"  onclick="">
+												  <h6 id="selectMvTilte">영화를 선택 하라우~!</h6>
+												  <h6 id="selectCinema"></h6>
+												  <h6 id="selectDate"></h6>
+												  <h6 id="selectTheater"></h6>
+												  <h6 id="selectNum" ></h6>
+												  <form action="reservationForm" method="post" onsubmit="return checkRev()">
+													<input type="hidden" name="re_cicode" id="re_cicode">
+													<input type="hidden" name="re_thname" id="re_thname">
+													<input type="hidden" name="re_start" id="re_start">
+													<input type="hidden" name="re_number" id="re_number">
+													<input type="hidden" name="re_id" id="re_id" value="${sessionScope.loginId }">
+												  <button class="btn btn-dark">예매하기</button>
+												  </form>
+												</div>
+											  </div>
+								</div>
+
+							</div>
+
+
+						</div>
+					</main>
+					<footer class="py-4 bg-light mt-auto">
+						<div class="container-fluid px-4">
+							<div class="d-flex align-items-center justify-content-between small">
+								<div class="text-muted">Copyright &copy; MJ Movie </div>
+
+							</div>
+						</div>
+					</footer>
+				</div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="${pageContext.request.contextPath}/js/scripts.js"></script>
